@@ -18,7 +18,7 @@ public class Blockhole
     
     //Ideas
     //Blockhole Teleporter
-    //Bitreader
+    //Bitreader -- redstone repeater style?
     
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event)
