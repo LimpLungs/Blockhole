@@ -1,7 +1,10 @@
 package com.limplungs.blockhole;
 
+import com.limplungs.blockhole.items.ItemList;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -24,7 +27,7 @@ public class Blockhole
 	public void preInit(FMLPreInitializationEvent event)
 	{
     	//BlockList.registerBlocks();
-    	//ItemList.registerItems();
+    	ItemList.registerItems();
 	}
 
 	@EventHandler
@@ -32,10 +35,10 @@ public class Blockhole
 	{
 		if(event.getSide() == Side.CLIENT)
 		{
-			//RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
+			RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
 
 			//BlockList.renderBlocks(renderer);
-			//ItemList.renderItems(renderer);
+			ItemList.renderItems(renderer);
 		}
 	}
 	
@@ -45,7 +48,7 @@ public class Blockhole
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem()
 		{
-			return Items.ENDER_PEARL; //ItemList.item;
+			return ItemList.TUNER;
 		}
 	};
 }
