@@ -1,0 +1,16 @@
+[
+{
+  "modid": "blockhole",
+  "name": "Blockhole",
+  "description": "Filling in holes in the fabric of the universe.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["LimpLungs"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
