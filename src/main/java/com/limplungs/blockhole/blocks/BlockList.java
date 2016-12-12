@@ -14,6 +14,7 @@ public class BlockList
 	 */
 	private static BlockData DATA_TELEPORTER = new BlockData(5F, 5F, "pickaxe", 2, "teleporter", Material.ROCK, Blockhole.tabBlockhole);
 	
+	
 	/**
 	 *  Blocks
 	 */
