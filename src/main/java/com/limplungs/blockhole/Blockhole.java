@@ -1,5 +1,6 @@
 package com.limplungs.blockhole;
 
+import com.limplungs.blockhole.blocks.BlockList;
 import com.limplungs.blockhole.items.ItemList;
 
 import net.minecraft.client.Minecraft;
@@ -26,7 +27,7 @@ public class Blockhole
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-    	//BlockList.registerBlocks();
+    	BlockList.registerBlocks();
     	ItemList.registerItems();
 	}
 
@@ -37,7 +38,7 @@ public class Blockhole
 		{
 			RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
 
-			//BlockList.renderBlocks(renderer);
+			BlockList.renderBlocks(renderer);
 			ItemList.renderItems(renderer);
 		}
 	}
@@ -48,7 +49,7 @@ public class Blockhole
 		@SideOnly(Side.CLIENT)
 		public Item getTabIconItem()
 		{
-			return ItemList.TUNER;
+			return Item.getItemFromBlock(BlockList.TELEPORTER);
 		}
 	};
 }

@@ -1,3 +1,5 @@
 itemGroup.tabBlockhole=Blockhole
 
 item.blockhole_tuner.name=Tuning Stick
+
+tile.blockhole_teleporter.name=Blockhole Teleportation Device

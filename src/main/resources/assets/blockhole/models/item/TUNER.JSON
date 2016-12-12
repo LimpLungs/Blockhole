@@ -1,7 +1,7 @@
 {
 	"parent": "builtin/generated",
 	"textures": {
-		"layer0": "blockhole:items/TUNER"
+		"layer0": "blockhole:items/tuner"
 	},
 	"display": {
 		"thirdperson": {
