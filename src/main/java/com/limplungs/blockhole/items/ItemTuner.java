@@ -10,8 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 
-public class ItemTuner extends ItemBasic{
-
+public class ItemTuner extends ItemBasic
+{
 	public ItemTuner(ItemData itemdata) 
 	{
 		super(itemdata);
