@@ -1,6 +1,7 @@
 package com.limplungs.blockhole.tileentities;
 
-import net.minecraft.block.Block;
+import com.limplungs.blockhole.DoubleLinkedQueue;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -13,7 +14,7 @@ public class TileEntityTeleporter extends TileEntity
 	public int tp_y = this.getPos().getY();  
 	public int tp_z = this.getPos().getZ();
 	public BlockPos loc = new BlockPos(0,0,0);
-	// public BlockQueue queue;
+	public DoubleLinkedQueue queue = new DoubleLinkedQueue();
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
@@ -25,7 +26,7 @@ public class TileEntityTeleporter extends TileEntity
 		compound.setInteger("loc_y", loc.getY());
 		compound.setInteger("loc_z", loc.getZ());
 		
-		// ADD BLOCK WRITE
+		queue.writeNBT(compound);
 		
 		return super.writeToNBT(compound);
 	}
@@ -40,7 +41,7 @@ public class TileEntityTeleporter extends TileEntity
 		tp_z = compound.getInteger("tp_z");
 		loc = new BlockPos(compound.getInteger("loc_x"), compound.getInteger("loc_y"), compound.getInteger("loc_z"));
 		
-		// ADD BLOCK READ
+		queue.readNBT(compound);
 	}
 	
 	public void setCoordinate(int xyz, int value)

@@ -1,5 +1,6 @@
 package com.limplungs.blockhole.blocks;
 
+import com.limplungs.blockhole.DoubleLinkedQueue;
 import com.limplungs.blockhole.items.ItemList;
 import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
 
@@ -75,21 +76,15 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 							// front of queue comes out first on teleport location
 							// front of queue comes out last on origin location		
 		
-		/**
 		if (heldItem != null && heldItem.getItem() instanceof ItemBlock)
 		{
-			if (world.isBlockIndirectlyGettingPowered(pos) > 0)
-			{
-				if (world.getBlockState(tploc) != null && world.getBlockState(tploc).getBlock() != null && world.getBlockState(tploc).getBlock() == Blocks.AIR)
-				{
-					world.setBlockState(tploc, Block.getBlockFromItem(heldItem.getItem()).getStateFromMeta(heldItem.getMetadata()));
-					heldItem.stackSize--;
-				}
-			}
-
+			tile.queue.insert(Block.getBlockFromItem(heldItem.getItem()));
+			heldItem.stackSize--;
+			
 			return true;
 		}
-		
+
+		/**
 		if (world.isBlockIndirectlyGettingPowered(pos) == 0 )
 		{
 			if (heldItem == null || (heldItem != null && heldItem.getItem() != ItemList.TUNER))

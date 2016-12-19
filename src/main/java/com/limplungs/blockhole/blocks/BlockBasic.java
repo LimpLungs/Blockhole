@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BlockBasic extends Block 
 {
 	private final String name;
+	private final BlockData data;
 	
 	@SuppressWarnings("deprecation")
 	public BlockBasic(BlockData blockdata) 
@@ -14,6 +15,7 @@ public class BlockBasic extends Block
 		
 		// Block Data
 		this.name = blockdata.name;
+		this.data = blockdata;
 		this.setHardness(blockdata.hardness);
 		this.setResistance(blockdata.resistance);
 		this.setHarvestLevel(blockdata.tool, blockdata.level);
@@ -32,6 +34,11 @@ public class BlockBasic extends Block
 	public String getName()
 	{
 		return name;
+	}
+
+	public BlockData getData() 
+	{
+		return data;
 	}
 
 }

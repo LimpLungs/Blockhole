@@ -3,7 +3,6 @@ package com.limplungs.blockhole;
 import com.limplungs.blockhole.blocks.BlockList;
 import com.limplungs.blockhole.items.ItemList;
 import com.limplungs.blockhole.tileentities.TileEntityList;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.creativetab.CreativeTabs;
