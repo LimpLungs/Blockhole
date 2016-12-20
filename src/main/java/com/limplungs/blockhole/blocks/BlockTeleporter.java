@@ -1,7 +1,5 @@
 package com.limplungs.blockhole.blocks;
 
-import com.limplungs.blockhole.DoubleLinkedQueue;
-import com.limplungs.blockhole.items.ItemList;
 import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
 
 import net.minecraft.block.Block;
@@ -9,7 +7,6 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -30,6 +27,12 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	}
 
 	@Override
+    public TileEntity createNewTileEntity(World world, int meta)
+    {
+        return new TileEntityTeleporter();
+    }
+
+	@Override
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
@@ -37,6 +40,12 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean canProvidePower(IBlockState state) 
 	{
 		return false;
 	}
@@ -52,70 +61,134 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	{
 		return BOUNDING_BOX;
 	}
-
-	@Override
-    public TileEntity createNewTileEntity(World world, int meta)
-    {
-        return new TileEntityTeleporter();
-    }
 	
-	@SuppressWarnings({ "deprecation", "unused" })
+	@SuppressWarnings({ "unused" })
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
 		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
 		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
 		
-		// CHANGE SO IF YOU RIGHT CLICK WITH BLOCK YOU ADD ONE TO THE INTERNAL BUFFER (BLOCKHOLE)
-		// THEN WHEN IT IS POWERED, IT ATTEMPTS TO PLACE THE BLOCK (flag the TE for placing)
-		// THEN WHEN IT IS UNPOWER, IT ATTEMPTS TO REMOVE THE BLOCK (flag the TE for remove)
-		// UPON REMOVE, PUT BLOCK AT THE FRONT/BACK (decide) OF THE QUEUE
-		                // Double Linked Queue 
-							// back of queue comes out first on origin location
-							// back of queue comes out last on teleport location
-							// front of queue comes out first on teleport location
-							// front of queue comes out last on origin location		
-		
-		if (heldItem != null && heldItem.getItem() instanceof ItemBlock)
+		if (heldItem != null && heldItem.getItem() instanceof ItemBlock )
 		{
-			tile.queue.insert(Block.getBlockFromItem(heldItem.getItem()));
+			tile.queue.insert_back(new ItemStack(heldItem.getItem(), 1, heldItem.getMetadata()));
 			heldItem.stackSize--;
+			
+			if (world.isRemote)
+			{
+				System.out.println("ADDING TO QUEUE");
+				for (int test = 1; test < tile.queue.getSize() + 1; test++)
+				{
+					System.out.println(tile.queue.getStackAtNode(test));
+				}
+			}
 			
 			return true;
 		}
-
-		/**
-		if (world.isBlockIndirectlyGettingPowered(pos) == 0 )
+		
+		if (heldItem == null)
 		{
-			if (heldItem == null || (heldItem != null && heldItem.getItem() != ItemList.TUNER))
+			if (tile.queue.getBack() != null)
 			{
-				if (world.getBlockState(tploc) != null && world.getBlockState(tploc).getBlock() != null && world.getBlockState(tploc).getBlock() != BlockList.TELEPORTER && world.getBlockState(tploc).getBlock() != Blocks.AIR)
+				for (int i = 0; i < player.inventory.getSizeInventory(); i++)
 				{
-					int meta = world.getBlockState(tploc).getBlock().getMetaFromState(world.getBlockState(tploc));
-					
-					for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+					if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() == tile.queue.getBack().getItem())
 					{
-						if (player.inventory.getStackInSlot(i) == null) 
+						tile.queue.pop_back();
+						player.inventory.getStackInSlot(i).stackSize++;
+
+						if (world.isRemote)
 						{
-							player.inventory.setInventorySlotContents(i, new ItemStack(Item.getItemFromBlock(world.getBlockState(tploc).getBlock()), 1, meta));
-							world.setBlockState(tploc, Blocks.AIR.getDefaultState());
-							return true;
-						}
-						if (player.inventory.getStackInSlot(i).getItem() == new ItemStack(Item.getItemFromBlock(world.getBlockState(tploc).getBlock()), 1, meta).getItem());
-						{
-							if ( player.inventory.getStackInSlot(i).stackSize < player.inventory.getStackInSlot(i).getMaxStackSize())
+							System.out.println("ADDING TO INVENTORY - STACK");
+							for (int test = 1; test < tile.queue.getSize() + 1; test++)
 							{
-								player.inventory.setInventorySlotContents(i, new ItemStack(Item.getItemFromBlock(world.getBlockState(tploc).getBlock()), player.inventory.getStackInSlot(i).stackSize + 1, meta));
-								world.setBlockState(tploc, Blocks.AIR.getDefaultState());
-								return true;
+								System.out.println(tile.queue.getStackAtNode(test));
 							}
 						}
+						
+						return true;
+					}
+				}
+			
+				for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+				{
+					if (player.inventory.getStackInSlot(i) == null)
+					{
+						player.inventory.setInventorySlotContents(i, tile.queue.pop_back());
+
+						if (world.isRemote)
+						{
+							System.out.println("ADDING TO INVENTORY - NULL");
+							for (int test = 1; test < tile.queue.getSize() + 1; test++)
+							{
+								System.out.println(tile.queue.getStackAtNode(test));
+							}
+						}
+						
+						return true;
 					}
 				}
 			}
 		}
-		**/
 		
 		return false;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) 
+	{
+		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
+		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
+		
+		if (pos != tploc)
+		{
+			if (world.isBlockIndirectlyGettingPowered(pos) > 0)
+			{
+				if (tile.isOn == false)
+				{
+					if ((world.getBlockState(tploc) == null || world.getBlockState(tploc).getBlock() == Blocks.AIR) && tile.queue.getFront() != null)
+					{
+						ItemStack stack = tile.queue.pop_front();
+						
+						world.setBlockState(tploc, Block.getBlockFromItem(stack.getItem()).getStateFromMeta(stack.getMetadata()));
+						
+						if (world.isRemote)
+						{
+							System.out.println("PLACED BLOCK IN WORLD");
+							for (int test = 1; test < tile.queue.getSize() + 1; test++)
+							{
+								System.out.println(tile.queue.getStackAtNode(test));
+							}
+						}
+					}
+
+					tile.isOn = true;
+				}
+			}
+			else if (world.isBlockIndirectlyGettingPowered(pos) == 0)
+			{
+				if (tile.isOn == true)
+				{
+					if (world.getBlockState(tploc) != null && world.getBlockState(tploc).getBlock() != Blocks.AIR)
+					{
+						tile.queue.insert_front(new ItemStack(world.getBlockState(tploc).getBlock(), 1, world.getBlockState(tploc).getBlock().getMetaFromState(world.getBlockState(tploc))));
+
+						world.setBlockState(tploc, Blocks.AIR.getDefaultState());
+						
+						if (world.isRemote)
+						{
+							System.out.println("PLACED BLOCK IN QUEUE");
+							for (int test = 1; test < tile.queue.getSize() + 1; test++)
+							{
+								System.out.println(tile.queue.getStackAtNode(test));
+							}
+						}
+					}
+					
+					tile.isOn = false;
+				}
+			}
+		}
 	}
 }

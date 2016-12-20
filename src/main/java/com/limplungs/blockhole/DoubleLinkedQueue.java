@@ -1,6 +1,5 @@
 package com.limplungs.blockhole;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -12,21 +11,18 @@ public class DoubleLinkedQueue
 	
 	public DoubleLinkedQueue()
 	{
-		headptr = new Node();
-		headptr.block = null;
-		headptr.next = null;
-		headptr.back = null;
+		headptr = null;
 		tailptr = headptr;
 		size = 0;
 	}
 
-	public Node insert(Block block)
+	public Node insert_back(ItemStack item)
 	{
 		Node temp = new Node();
-		temp.block = block;
+		temp.item = item;
 		
 		// empty list
-		if (headptr.block == null && tailptr.block == null)
+		if (headptr == null && tailptr == null)
 		{
 			temp.next = null;
 			temp.back = null;
@@ -34,10 +30,11 @@ public class DoubleLinkedQueue
 			tailptr = headptr;
 		}
 		// one or more
-		else if (headptr.block != null && tailptr.block != null)
+		else if (headptr != null && tailptr != null)
 		{
 			temp.next = null;
 			temp.back = tailptr;
+			
 			tailptr.next = temp;
 			tailptr = temp;
 		}
@@ -46,49 +43,173 @@ public class DoubleLinkedQueue
 		
 		return tailptr;
 	}
+	
+	public Node insert_front(ItemStack item)
+	{
+		Node temp = new Node();
+		temp.item = item;
+		
+		// empty list
+		if (headptr == null && tailptr == null)
+		{
+			temp.back = null;
+			temp.next = null;
+			tailptr = temp;
+			headptr = tailptr;
+		}
+		// one or more
+		else if (headptr != null && tailptr != null)
+		{
+			temp.next = headptr;
+			temp.back = null;
+			
+			headptr.back = temp;
+			headptr = temp;
+		}
+	
+		size += 1;
+		
+		return headptr;
+	}
+	
+	public ItemStack pop_front()
+	{
+		if (headptr == null)
+		{
+			return null;
+		}
+		
+		Node temp = headptr;
+		
+		headptr = headptr.next;
+		
+		if (headptr != null)
+		{
+			headptr.back = null;
+		}
+		
+		if (headptr == null)
+		{
+			tailptr = headptr;
+		}
+		
+		size--;
+		
+		return temp.item;
+	}
+	
+	public ItemStack pop_back()
+	{
+		if (tailptr == null)
+		{
+			return null;
+		}
+		
+		Node temp = tailptr;
+		
+		tailptr = tailptr.back;
+		
+		if (tailptr != null)
+		{
+			tailptr.next = null;
+		}
+		
+		if (tailptr == null)
+		{
+			headptr = tailptr;
+		}
+		
+		size--;
+		
+		return temp.item;
+	}
+	
+	public ItemStack getFront()
+	{
+		if (headptr == null)
+		{
+			return null;
+		}
+		
+		return headptr.item;
+	}
+	
+
+	
+	public ItemStack getBack()
+	{
+		if (tailptr == null)
+		{
+			return null;
+		}
+		
+		return tailptr.item;
+	}
+	
 
 	public void writeNBT(NBTTagCompound compound) 
 	{
-		System.out.println("NODE DATA STARTING SAVE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		
 		compound.setInteger("size", size);
 		
 		Node node = headptr;
 		
-		for (int i = 0; i < size; i++)
+		if (headptr != null)
 		{
-			compound.setTag("block" + i, new ItemStack(node.block).writeToNBT(new NBTTagCompound()));
-			System.out.println(node.block + "   .write.");
-			node = node.next;
+			for (int i = 0; i < getSize(); i++)
+			{
+				compound.setTag("item" + i, node.item.writeToNBT(new NBTTagCompound()));
+			
+				node = node.next;
+			}
 		}
-		
-		System.out.println("NODE DATA STOPPING SAVE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 	
 	public void readNBT(NBTTagCompound compound)
 	{
-		System.out.println("NODE DATA STARTING READ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		int tempsize = compound.getInteger("size");
 		
-		size = compound.getInteger("size");
-		
-		for (int i = 0; i < size; i++)
+		for (int i = 0; i < tempsize; i++)
 		{
-			NBTTagCompound tag = compound.getCompoundTag("block" + i);
+			NBTTagCompound tag = compound.getCompoundTag("item" + i);
 			
 			if(tag != null && !tag.hasNoTags())
 			{
-				insert(Block.getBlockFromItem(ItemStack.loadItemStackFromNBT(tag).getItem()));
-				System.out.println("read a block.");
+				insert_back(ItemStack.loadItemStackFromNBT(tag));
 			}
 		}
+	}
+
+	public int getSize() 
+	{
+		return size;
+	}
+
+	public ItemStack getStackAtNode(int i) 
+	{
+		if (headptr == null)
+		{
+			return null;
+		}
 		
-		System.out.println("NODE DATA STOPPING READ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		if (i > getSize())
+		{
+			return null;
+		}
+		
+		Node temp = headptr;
+		
+		for (int j = 1; j < i; j++)
+		{
+			temp = temp.next;
+		}
+		
+		return temp.item;
 	}
 }
 
 class Node
 {
-	Block block;
+	ItemStack item;
 	Node next;
 	Node back;
 }

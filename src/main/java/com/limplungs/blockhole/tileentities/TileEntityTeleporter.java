@@ -6,15 +6,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityTeleporter extends TileEntity
+public class TileEntityTeleporter extends TileEntity implements ITickable
 {
 	public int tp_x = this.getPos().getX();
 	public int tp_y = this.getPos().getY();  
 	public int tp_z = this.getPos().getZ();
 	public BlockPos loc = new BlockPos(0,0,0);
 	public DoubleLinkedQueue queue = new DoubleLinkedQueue();
+	public boolean isOn = false;
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
@@ -25,6 +27,7 @@ public class TileEntityTeleporter extends TileEntity
 		compound.setInteger("loc_x", loc.getX());
 		compound.setInteger("loc_y", loc.getY());
 		compound.setInteger("loc_z", loc.getZ());
+		compound.setBoolean("isOn", isOn);
 		
 		queue.writeNBT(compound);
 		
@@ -40,6 +43,7 @@ public class TileEntityTeleporter extends TileEntity
 		tp_y = compound.getInteger("tp_y");
 		tp_z = compound.getInteger("tp_z");
 		loc = new BlockPos(compound.getInteger("loc_x"), compound.getInteger("loc_y"), compound.getInteger("loc_z"));
+		isOn = compound.getBoolean("isOn");
 		
 		queue.readNBT(compound);
 	}
@@ -100,4 +104,10 @@ public class TileEntityTeleporter extends TileEntity
         readFromNBT(pkt.getNbtCompound());
       }
     }
+
+	@Override
+	public void update() 
+	{
+		this.getUpdateTag();
+	}
 }
