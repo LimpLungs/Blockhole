@@ -1,5 +1,7 @@
 package com.limplungs.blockhole.blocks;
 
+import com.limplungs.blockhole.DoubleLinkedQueue;
+import com.limplungs.blockhole.items.ItemList;
 import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
 
 import net.minecraft.block.Block;
@@ -9,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -66,70 +69,43 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
-		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
-		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
-		
-		if (heldItem != null && heldItem.getItem() instanceof ItemBlock )
-		{
-			tile.queue.insert_back(new ItemStack(heldItem.getItem(), 1, heldItem.getMetadata()));
-			heldItem.stackSize--;
+			TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
+			BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
 			
-			if (world.isRemote)
+			if (heldItem != null && heldItem.getItem() instanceof ItemBlock )
 			{
-				System.out.println("ADDING TO QUEUE");
-				for (int test = 1; test < tile.queue.getSize() + 1; test++)
-				{
-					System.out.println(tile.queue.getStackAtNode(test));
-				}
+				tile.queue.insert_back(new ItemStack(heldItem.getItem(), 1, heldItem.getMetadata()));
+				heldItem.stackSize--;
+			
+				return true;
 			}
-			
-			return true;
-		}
 		
-		if (heldItem == null)
-		{
-			if (tile.queue.getBack() != null)
+			if (heldItem == null || (!(heldItem.getItem() instanceof ItemBlock) && heldItem.getItem() != ItemList.TUNER))
 			{
-				for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+				if (tile.queue.getBack() != null)
 				{
-					if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() == tile.queue.getBack().getItem())
+					for (int i = 0; i < player.inventory.getSizeInventory(); i++)
 					{
-						tile.queue.pop_back();
-						player.inventory.getStackInSlot(i).stackSize++;
-
-						if (world.isRemote)
+						if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() == tile.queue.getBack().getItem())
 						{
-							System.out.println("ADDING TO INVENTORY - STACK");
-							for (int test = 1; test < tile.queue.getSize() + 1; test++)
-							{
-								System.out.println(tile.queue.getStackAtNode(test));
-							}
+							player.inventory.getStackInSlot(i).stackSize += tile.queue.pop_back().stackSize;
+							
+							return true;
 						}
-						
-						return true;
 					}
-				}
 			
-				for (int i = 0; i < player.inventory.getSizeInventory(); i++)
-				{
-					if (player.inventory.getStackInSlot(i) == null)
+					for (int i = 0; i < player.inventory.getSizeInventory(); i++)
 					{
-						player.inventory.setInventorySlotContents(i, tile.queue.pop_back());
-
-						if (world.isRemote)
+						if (player.inventory.getStackInSlot(i) == null)
 						{
-							System.out.println("ADDING TO INVENTORY - NULL");
-							for (int test = 1; test < tile.queue.getSize() + 1; test++)
-							{
-								System.out.println(tile.queue.getStackAtNode(test));
-							}
-						}
+							player.inventory.setInventorySlotContents(i, tile.queue.pop_back());
 						
-						return true;
+							return true;
+						}
 					}
 				}
 			}
-		}
+		
 		
 		return false;
 	}
@@ -153,7 +129,7 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 						
 						world.setBlockState(tploc, Block.getBlockFromItem(stack.getItem()).getStateFromMeta(stack.getMetadata()));
 						
-						if (world.isRemote)
+						if (!world.isRemote)
 						{
 							System.out.println("PLACED BLOCK IN WORLD");
 							for (int test = 1; test < tile.queue.getSize() + 1; test++)
@@ -176,7 +152,7 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 
 						world.setBlockState(tploc, Blocks.AIR.getDefaultState());
 						
-						if (world.isRemote)
+						if (!world.isRemote)
 						{
 							System.out.println("PLACED BLOCK IN QUEUE");
 							for (int test = 1; test < tile.queue.getSize() + 1; test++)

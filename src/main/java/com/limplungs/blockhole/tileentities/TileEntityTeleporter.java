@@ -6,16 +6,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 
-public class TileEntityTeleporter extends TileEntity implements ITickable
+public class TileEntityTeleporter extends TileEntity
 {
 	public int tp_x = this.getPos().getX();
 	public int tp_y = this.getPos().getY();  
 	public int tp_z = this.getPos().getZ();
 	public BlockPos loc = new BlockPos(0,0,0);
-	public DoubleLinkedQueue queue = new DoubleLinkedQueue();
+	public DoubleLinkedQueue queue = new DoubleLinkedQueue(this);
 	public boolean isOn = false;
 	
 	@Override
@@ -99,15 +98,15 @@ public class TileEntityTeleporter extends TileEntity implements ITickable
     public final void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
     {
       super.onDataPacket(net, pkt);
+      
       if(worldObj.isRemote)
       {
         readFromNBT(pkt.getNbtCompound());
       }
     }
 
-	@Override
-	public void update() 
+	public void updateQueueClientServer() 
 	{
-		this.getUpdateTag();
+		this.markDirty();
 	}
 }

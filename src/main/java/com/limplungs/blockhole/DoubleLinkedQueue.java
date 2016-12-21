@@ -1,5 +1,7 @@
 package com.limplungs.blockhole;
 
+import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -8,12 +10,15 @@ public class DoubleLinkedQueue
 	private Node headptr;
 	private Node tailptr;
 	private int size;
+	TileEntityTeleporter tile;
 	
-	public DoubleLinkedQueue()
+	public DoubleLinkedQueue(TileEntityTeleporter tile)
 	{
 		headptr = null;
 		tailptr = headptr;
 		size = 0;
+		
+		this.tile = tile;
 	}
 
 	public Node insert_back(ItemStack item)
@@ -40,6 +45,8 @@ public class DoubleLinkedQueue
 		}
 		
 		size += 1;
+		
+		this.tile.markDirty();
 		
 		return tailptr;
 	}
@@ -69,6 +76,8 @@ public class DoubleLinkedQueue
 	
 		size += 1;
 		
+		this.tile.markDirty();
+		
 		return headptr;
 	}
 	
@@ -95,6 +104,8 @@ public class DoubleLinkedQueue
 		
 		size--;
 		
+		this.tile.markDirty();
+		
 		return temp.item;
 	}
 	
@@ -120,6 +131,8 @@ public class DoubleLinkedQueue
 		}
 		
 		size--;
+		
+		this.tile.markDirty();
 		
 		return temp.item;
 	}
@@ -209,7 +222,7 @@ public class DoubleLinkedQueue
 
 class Node
 {
-	ItemStack item;
-	Node next;
-	Node back;
+	ItemStack item = null;
+	Node next = null;
+	Node back = null;
 }
