@@ -1,6 +1,5 @@
 package com.limplungs.blockhole.blocks;
 
-import com.limplungs.blockhole.DoubleLinkedQueue;
 import com.limplungs.blockhole.items.ItemList;
 import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
 
@@ -11,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
