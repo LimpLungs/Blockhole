@@ -17,11 +17,12 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public class TileEntityTeleporter extends TileEntity implements IInventory
 {
+	private DoubleLinkedQueue queue = new DoubleLinkedQueue(this);
+	private static int STORAGE_SIZE = 2048;
 	public int tp_x = this.getPos().getX();
 	public int tp_y = this.getPos().getY();  
 	public int tp_z = this.getPos().getZ();
 	public BlockPos loc = new BlockPos(0,0,0);
-	public DoubleLinkedQueue queue = new DoubleLinkedQueue(this);
 	public boolean isOn = false;
 	
 	public TileEntityTeleporter()
@@ -46,7 +47,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 		compound.setInteger("loc_z", loc.getZ());
 		compound.setBoolean("isOn", isOn);
 		
-		queue.writeNBT(compound);
+		getQueue().writeNBT(compound);
 		
 		return super.writeToNBT(compound);
 	}
@@ -62,7 +63,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 		loc = new BlockPos(compound.getInteger("loc_x"), compound.getInteger("loc_y"), compound.getInteger("loc_z"));
 		isOn = compound.getBoolean("isOn");
 		
-		queue.readNBT(compound);
+		getQueue().readNBT(compound);
 	}
 	
 	public void setCoordinate(int xyz, int value)
@@ -131,33 +132,33 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	@Override
 	public int getSizeInventory() 
 	{
-		return queue.getSize() + 1;
+		return getQueue().getSize() + 1;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int index) 
 	{
-		if (index != queue.getSize() || queue.getSize() == 0)
+		if (index >= this.getQueue().getSize() || this.getQueue().getSize() == 0)
 		{
 			return null;
 		}
 
 		this.markDirty();
 
-		return queue.getStackAtNode(index);
+		return getQueue().getBack();
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count) 
 	{
-		if (index != queue.getSize() || queue.getSize() == 0)
+		if (index == this.getQueue().getSize() || this.getQueue().getSize() == 0)
 		{
 			return null;
 		}
 		
 		this.markDirty();
 	
-		return queue.pop_back();
+		return getQueue().pop_back();
 	}
 
 	/**
@@ -166,14 +167,14 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	@Override
 	public ItemStack removeStackFromSlot(int index) 
 	{
-		if (index != queue.getSize() || queue.getSize() == 0)
+		if (index == this.getQueue().getSize() || this.getQueue().getSize() == 0)
 		{
 			return null;
 		}
 		
 		this.markDirty();
 		
-		return queue.pop_back();
+		return getQueue().pop_back();
 	}
 
 	/**
@@ -182,25 +183,18 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) 
 	{
-		// index == size addresses when an item gets pulled to be put into a new inventory 
-		// but is found out to be invalid for new inventory, ie hoppers
-		if (index == this.getSizeInventory())
+		if (this.isItemValidForSlot(this.getQueue().getSize(), stack))
 		{
-			index -= 1;
+			getQueue().insert_back(new ItemStack(stack.getItem(), 1, stack.getMetadata()), stack.getTagCompound());
+			
+			this.markDirty();
 		}
-		
-		if (this.isItemValidForSlot(index, stack))
-		{
-			queue.insert_back(new ItemStack(stack.getItem(), 1, stack.getMetadata()), stack.getTagCompound());
-		}
-		
-		this.markDirty();
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) 
 	{
-		return (stack.getItem() instanceof ItemBlock && index + 1 == this.getSizeInventory()) ? true : false;
+		return (stack.getItem() instanceof ItemBlock && index + 1 == this.getSizeInventory() && this.getSizeInventory() <= STORAGE_SIZE) ? true : false;
 	}
 
 	@Override
@@ -297,6 +291,16 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	public void clear() 
 	{
 		
+	}
+
+	public DoubleLinkedQueue getQueue() 
+	{
+		return queue;
+	}
+
+	public void setQueue(DoubleLinkedQueue queue) 
+	{
+		this.queue = queue;
 	}
 	
 }

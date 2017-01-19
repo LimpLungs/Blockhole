@@ -2,7 +2,6 @@ package com.limplungs.blockhole;
 
 import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -21,43 +20,16 @@ public class DoubleLinkedQueue
 		
 		this.tile = tile;
 	}
-
-	public Node insert_back(ItemStack item, NBTTagCompound compound)
-	{
-		Node temp = new Node();
-		temp.item = item;
-		temp.nbt = compound;
-		
-		// empty list
-		if (headptr == null && tailptr == null)
-		{
-			temp.next = null;
-			temp.back = null;
-			headptr = temp;
-			tailptr = headptr;
-		}
-		// one or more
-		else if (headptr != null && tailptr != null)
-		{
-			temp.next = null;
-			temp.back = tailptr;
-			
-			tailptr.next = temp;
-			tailptr = temp;
-		}
-		
-		size += 1;
-		
-		this.tile.markDirty();
-		
-		return tailptr;
-	}
 	
 	public Node insert_front(ItemStack item, NBTTagCompound compound)
 	{
 		Node temp = new Node();
 		temp.item = item;
-		temp.nbt = compound;
+		
+		if (item.hasTagCompound())
+			temp.nbt = item.getTagCompound();
+		else
+			temp.nbt = compound;
 		
 		// empty list
 		if (headptr == null && tailptr == null)
@@ -82,6 +54,41 @@ public class DoubleLinkedQueue
 		this.tile.markDirty();
 		
 		return headptr;
+	}
+
+	public Node insert_back(ItemStack item, NBTTagCompound compound)
+	{
+		Node temp = new Node();
+		temp.item = item;
+		
+		if (item.hasTagCompound())
+			temp.nbt = item.getTagCompound();
+		else
+			temp.nbt = compound;
+		
+		// empty list
+		if (headptr == null && tailptr == null)
+		{
+			temp.next = null;
+			temp.back = null;
+			headptr = temp;
+			tailptr = headptr;
+		}
+		// one or more
+		else if (headptr != null && tailptr != null)
+		{
+			temp.next = null;
+			temp.back = tailptr;
+			
+			tailptr.next = temp;
+			tailptr = temp;
+		}
+		
+		size += 1;
+		
+		this.tile.markDirty();
+		
+		return tailptr;
 	}
 	
 	public ItemStack pop_front()
@@ -164,6 +171,8 @@ public class DoubleLinkedQueue
 			temp.item.setTagCompound(temp.nbt);
 		}
 		
+		this.tile.markDirty();
+		
 		return headptr.item;
 	}
 	
@@ -182,6 +191,8 @@ public class DoubleLinkedQueue
 		{
 			temp.item.setTagCompound(temp.nbt);
 		}
+
+		this.tile.markDirty();
 		
 		return temp.item;
 	}
@@ -266,6 +277,13 @@ public class DoubleLinkedQueue
 			temp = temp.next;
 		}
 		
+		if (temp.nbt != null)
+		{
+			temp.item.setTagCompound(temp.nbt);
+		}
+
+		this.tile.markDirty();
+		
 		return temp.item;
 	}
 	
@@ -295,6 +313,8 @@ public class DoubleLinkedQueue
 		{
 			temp = temp.next;
 		}
+
+		this.tile.markDirty();
 		
 		return temp;
 	}
@@ -311,7 +331,9 @@ public class DoubleLinkedQueue
 	public ItemStack removeStackAtNode(int i)
 	{
 		Node remove = this.getNodeAtNode(i);
-		
+
+
+		this.tile.markDirty();
 		
 		return remove.item;
 	}

@@ -1,5 +1,6 @@
 package com.limplungs.blockhole.blocks;
 
+import com.limplungs.blockhole.BlockholeDefinitions;
 import com.limplungs.blockhole.items.ItemList;
 import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
 
@@ -7,12 +8,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -77,25 +76,33 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 		}	
 		
 		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
-		ItemStack tstack = tile.queue.getBack();
+		ItemStack tstack = tile.getQueue().getBack();
 			
 		if (heldItem != null)
 		{
-			if(tile.isItemValidForSlot(tile.queue.getSize(), heldItem))
+			if(tile.isItemValidForSlot(tile.getQueue().getSize(), heldItem))
 			{
-				tile.setInventorySlotContents(tile.queue.getSize(), heldItem);
+				tile.setInventorySlotContents(tile.getQueue().getSize(), heldItem);
 				heldItem.stackSize -= 1;
-				player.attackEntityFrom(DamageSource.generic, 1);
+				player.attackEntityFrom(BlockholeDefinitions.teleporter, 1);
 				
 				return true;
 			}
 			
 			if (heldItem.getItem() == Items.ENDER_PEARL)
 			{
-				if (player.attemptTeleport(tile.tp_x + (tile.tp_x / Math.abs(tile.tp_x) * .5), tile.tp_y, tile.tp_z + (tile.tp_z / Math.abs(tile.tp_z) * .5)))
+				double fin_x = .5; 
+				double fin_z = .5; 
+				
+				if (tile.tp_x != 0)
+					fin_x = tile.tp_x + (tile.tp_x / Math.abs(tile.tp_x) * .5);
+				if (tile.tp_z != 0)
+					fin_z = tile.tp_z + (tile.tp_z / Math.abs(tile.tp_z) * .5);
+					
+				if (player.attemptTeleport(fin_x, tile.tp_y, fin_z))
 				{
 					heldItem.stackSize -= 1;
-					player.attackEntityFrom(DamageSource.generic, 6);
+					player.attackEntityFrom(BlockholeDefinitions.teleporter, 6);
 					
 					return true;
 				}
@@ -113,9 +120,9 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 					if (!world.isRemote)
 					if (pstack != null && pstack.stackSize < pstack.getMaxStackSize() && pstack.getItem() == tstack.getItem() && pstack.getMetadata() == tstack.getMetadata() && pstack.getTagCompound() == tstack.getTagCompound())
 					{
-						tile.removeStackFromSlot(tile.queue.getSize());
+						tile.removeStackFromSlot(tile.getSizeInventory());
 						pstack.stackSize += 1;
-						player.attackEntityFrom(DamageSource.generic, 1);
+						player.attackEntityFrom(BlockholeDefinitions.teleporter, 1);
 							
 						return true;
 					}
@@ -128,8 +135,8 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 					if (!world.isRemote)	
 					if (pstack == null)
 					{
-						player.inventory.setInventorySlotContents(i, tile.removeStackFromSlot(tile.queue.getSize()));
-						player.attackEntityFrom(DamageSource.generic, 1);
+						player.inventory.setInventorySlotContents(i, tile.removeStackFromSlot(tile.getSizeInventory()));
+						player.attackEntityFrom(BlockholeDefinitions.teleporter, 1);
 						
 						return true;
 					}
