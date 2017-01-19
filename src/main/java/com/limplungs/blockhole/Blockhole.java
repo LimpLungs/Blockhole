@@ -59,7 +59,6 @@ public class Blockhole
 			
 			RenderManager factory = Minecraft.getMinecraft().getRenderManager();
 			RenderingRegistry.registerEntityRenderingHandler(EntityPowderKeg.class, new RenderPowderKeg(factory));
-			
 		}
 	}
 	

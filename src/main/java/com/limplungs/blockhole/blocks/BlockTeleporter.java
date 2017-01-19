@@ -8,9 +8,11 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -67,52 +69,89 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
-			TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
-			BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
+		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
+		
+		if (!world.isRemote)
+		{
+			tile = (TileEntityTeleporter)world.getTileEntity(pos);
+		}	
+		
+		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
+		ItemStack tstack = tile.queue.getBack();
 			
-			if (heldItem != null && heldItem.getItem() instanceof ItemBlock )
+		if (heldItem != null)
+		{
+			if(tile.isItemValidForSlot(tile.queue.getSize(), heldItem))
 			{
-				tile.queue.insert_back(new ItemStack(heldItem.getItem(), 1, heldItem.getMetadata()));
-				heldItem.stackSize--;
-			
+				tile.setInventorySlotContents(tile.queue.getSize(), heldItem);
+				heldItem.stackSize -= 1;
+				player.attackEntityFrom(DamageSource.generic, 1);
+				
 				return true;
 			}
-		
-			if (heldItem == null || (!(heldItem.getItem() instanceof ItemBlock) && heldItem.getItem() != ItemList.TUNER))
-			{
-				if (tile.queue.getBack() != null)
-				{
-					for (int i = 0; i < player.inventory.getSizeInventory(); i++)
-					{
-						if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() == tile.queue.getBack().getItem())
-						{
-							player.inventory.getStackInSlot(i).stackSize += tile.queue.pop_back().stackSize;
-							
-							return true;
-						}
-					}
 			
-					for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+			if (heldItem.getItem() == Items.ENDER_PEARL)
+			{
+				if (player.attemptTeleport(tile.tp_x + (tile.tp_x / Math.abs(tile.tp_x) * .5), tile.tp_y, tile.tp_z + (tile.tp_z / Math.abs(tile.tp_z) * .5)))
+				{
+					heldItem.stackSize -= 1;
+					player.attackEntityFrom(DamageSource.generic, 6);
+					
+					return true;
+				}
+			}
+		}
+		
+		if (heldItem == null || (!(heldItem.getItem() instanceof ItemBlock) && heldItem.getItem() != ItemList.TUNER))
+		{
+			if (tstack != null)
+			{
+				for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+				{
+					ItemStack pstack = player.inventory.getStackInSlot(i);
+					
+					if (!world.isRemote)
+					if (pstack != null && pstack.stackSize < pstack.getMaxStackSize() && pstack.getItem() == tstack.getItem() && pstack.getMetadata() == tstack.getMetadata() && pstack.getTagCompound() == tstack.getTagCompound())
 					{
-						if (player.inventory.getStackInSlot(i) == null)
-						{
-							player.inventory.setInventorySlotContents(i, tile.queue.pop_back());
+						tile.removeStackFromSlot(tile.queue.getSize());
+						pstack.stackSize += 1;
+						player.attackEntityFrom(DamageSource.generic, 1);
+							
+						return true;
+					}
+				}
+			
+				for (int i = 0; i < player.inventory.getSizeInventory(); i++)
+				{
+					ItemStack pstack = player.inventory.getStackInSlot(i);
+
+					if (!world.isRemote)	
+					if (pstack == null)
+					{
+						player.inventory.setInventorySlotContents(i, tile.removeStackFromSlot(tile.queue.getSize()));
+						player.attackEntityFrom(DamageSource.generic, 1);
 						
-							return true;
-						}
+						return true;
 					}
 				}
 			}
-		
+		}
 		
 		return false;
 	}
 	
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) 
 	{
 		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
+		
+		if (!world.isRemote)
+		{
+			tile = (TileEntityTeleporter)world.getTileEntity(pos);
+		}	
+		
+		
 		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
 		
 		if (pos != tploc)
@@ -121,22 +160,8 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 			{
 				if (tile.isOn == false)
 				{
-					if ((world.getBlockState(tploc) == null || world.getBlockState(tploc).getBlock() == Blocks.AIR) && tile.queue.getFront() != null)
-					{
-						ItemStack stack = tile.queue.pop_front();
-						
-						world.setBlockState(tploc, Block.getBlockFromItem(stack.getItem()).getStateFromMeta(stack.getMetadata()));
-						
-						if (!world.isRemote)
-						{
-							System.out.println("PLACED BLOCK IN WORLD");
-							for (int test = 1; test < tile.queue.getSize() + 1; test++)
-							{
-								System.out.println(tile.queue.getStackAtNode(test));
-							}
-						}
-					}
-
+					//world.setBlockState(tploc, Block.getBlockFromItem(stack.getItem()).getStateFromMeta(stack.getMetadata()));
+					
 					tile.isOn = true;
 				}
 			}
@@ -144,22 +169,6 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 			{
 				if (tile.isOn == true)
 				{
-					if (world.getBlockState(tploc) != null && world.getBlockState(tploc).getBlock() != Blocks.AIR)
-					{
-						tile.queue.insert_front(new ItemStack(world.getBlockState(tploc).getBlock(), 1, world.getBlockState(tploc).getBlock().getMetaFromState(world.getBlockState(tploc))));
-
-						world.setBlockState(tploc, Blocks.AIR.getDefaultState());
-						
-						if (!world.isRemote)
-						{
-							System.out.println("PLACED BLOCK IN QUEUE");
-							for (int test = 1; test < tile.queue.getSize() + 1; test++)
-							{
-								System.out.println(tile.queue.getStackAtNode(test));
-							}
-						}
-					}
-					
 					tile.isOn = false;
 				}
 			}

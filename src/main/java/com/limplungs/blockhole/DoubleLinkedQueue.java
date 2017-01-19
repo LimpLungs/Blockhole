@@ -2,6 +2,7 @@ package com.limplungs.blockhole;
 
 import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -21,10 +22,11 @@ public class DoubleLinkedQueue
 		this.tile = tile;
 	}
 
-	public Node insert_back(ItemStack item)
+	public Node insert_back(ItemStack item, NBTTagCompound compound)
 	{
 		Node temp = new Node();
 		temp.item = item;
+		temp.nbt = compound;
 		
 		// empty list
 		if (headptr == null && tailptr == null)
@@ -51,10 +53,11 @@ public class DoubleLinkedQueue
 		return tailptr;
 	}
 	
-	public Node insert_front(ItemStack item)
+	public Node insert_front(ItemStack item, NBTTagCompound compound)
 	{
 		Node temp = new Node();
 		temp.item = item;
+		temp.nbt = compound;
 		
 		// empty list
 		if (headptr == null && tailptr == null)
@@ -104,6 +107,11 @@ public class DoubleLinkedQueue
 		
 		size--;
 		
+		if (temp.nbt != null)
+		{
+			temp.item.setTagCompound(temp.nbt);
+		}
+		
 		this.tile.markDirty();
 		
 		return temp.item;
@@ -132,6 +140,11 @@ public class DoubleLinkedQueue
 		
 		size--;
 		
+		if (temp.nbt != null)
+		{
+			temp.item.setTagCompound(temp.nbt);
+		}
+		
 		this.tile.markDirty();
 		
 		return temp.item;
@@ -142,6 +155,13 @@ public class DoubleLinkedQueue
 		if (headptr == null)
 		{
 			return null;
+		}
+		
+		Node temp = headptr;
+
+		if (temp.nbt != null)
+		{
+			temp.item.setTagCompound(temp.nbt);
 		}
 		
 		return headptr.item;
@@ -156,10 +176,21 @@ public class DoubleLinkedQueue
 			return null;
 		}
 		
-		return tailptr.item;
+		Node temp = tailptr;
+
+		if (temp.nbt != null)
+		{
+			temp.item.setTagCompound(temp.nbt);
+		}
+		
+		return temp.item;
 	}
 	
 
+	/**
+	 * 
+	 * @param compound - NBTTagCompound used for storing queue NBT data for writing in the Tile Entity.
+	 */
 	public void writeNBT(NBTTagCompound compound) 
 	{
 		compound.setInteger("size", size);
@@ -171,35 +202,54 @@ public class DoubleLinkedQueue
 			for (int i = 0; i < getSize(); i++)
 			{
 				compound.setTag("item" + i, node.item.writeToNBT(new NBTTagCompound()));
+				compound.setTag("nbt" + i, node.item.writeToNBT(new NBTTagCompound()));
 			
 				node = node.next;
 			}
 		}
 	}
 	
+	/**
+	 * 
+	 * @param compound - NBTTagCompound used for storing queue NBT data for reading in the Tile Entity.
+	 */
 	public void readNBT(NBTTagCompound compound)
 	{
 		int tempsize = compound.getInteger("size");
 		
 		for (int i = 0; i < tempsize; i++)
 		{
-			NBTTagCompound tag = compound.getCompoundTag("item" + i);
+			NBTTagCompound itemtag = compound.getCompoundTag("item" + i);
+			NBTTagCompound nbttag = compound.getCompoundTag("nbt" + i);
 			
-			if(tag != null && !tag.hasNoTags())
+			if(itemtag != null && !itemtag.hasNoTags())
 			{
-				insert_back(ItemStack.loadItemStackFromNBT(tag));
+				insert_back(ItemStack.loadItemStackFromNBT(itemtag), nbttag);
 			}
 		}
 	}
+	
 
+	/**
+	 * Gets the size of the queue.
+	 * @return size - size of queue.
+	 */
 	public int getSize() 
 	{
 		return size;
 	}
 
+	
+	/**
+	 * 
+	 * Used to retrieve the ItemStack at a specific node.
+	 * 
+	 * @param i - node you wish to remove stack from
+	 * @return
+	 */
 	public ItemStack getStackAtNode(int i) 
 	{
-		if (headptr == null)
+		if (getSize() == 0)
 		{
 			return null;
 		}
@@ -218,11 +268,59 @@ public class DoubleLinkedQueue
 		
 		return temp.item;
 	}
+	
+	/**
+	 * 
+	 * Use getStackAtNode(int i) for stack retrieval.
+	 * 
+	 * @param i - node you wish to remove stack from
+	 * @return
+	 */
+	@Deprecated
+	public Node getNodeAtNode(int i) 
+	{
+		if (getSize() == 0)
+		{
+			return null;
+		}
+		
+		if (i > getSize())
+		{
+			return null;
+		}
+		
+		Node temp = headptr;
+		
+		for (int j = 1; j < i; j++)
+		{
+			temp = temp.next;
+		}
+		
+		return temp;
+	}
+	
+	/**
+	 * 
+	 * NOT FULLY CODED, DO NOT USE!
+	 * Currently not useful, but changes may occur.
+	 * 
+	 * @param i - node you wish to remove stack from
+	 * @return
+	 */
+	@Deprecated
+	public ItemStack removeStackAtNode(int i)
+	{
+		Node remove = this.getNodeAtNode(i);
+		
+		
+		return remove.item;
+	}
 }
 
 class Node
 {
 	ItemStack item = null;
+	NBTTagCompound nbt = null;
 	Node next = null;
 	Node back = null;
 }
