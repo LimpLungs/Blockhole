@@ -97,7 +97,7 @@ public class WorldProviderSingularity extends WorldProvider
     @Override
     public double getVoidFogYFactor() 
     {
-    	return 1;
+    	return 0.03125;
     }
     
     @Override
@@ -116,5 +116,18 @@ public class WorldProviderSingularity extends WorldProvider
     public float getCloudHeight()
     {
         return 200.0F;
+    }
+    
+    @Override
+    protected void generateLightBrightnessTable() 
+    {
+    	float f = 0.0F;
+
+    	for (int i = 0; i <= 15; ++i)
+    	{
+    		float f1 = 1.0F - (float)i / 15.0F;
+    		this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 1.0F + 0.0F;
+    		this.lightBrightnessTable[i] *= .99F;
+    	}
     }
 }
