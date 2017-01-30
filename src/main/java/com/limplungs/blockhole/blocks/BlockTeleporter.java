@@ -28,17 +28,20 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 		super(blockdata);
 	}
 
+	
 	@Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
         return new TileEntityTeleporter();
     }
 
+	
 	@Override
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
+	
 	
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
@@ -46,11 +49,13 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 		return false;
 	}
 	
+	
 	@Override
 	public boolean canProvidePower(IBlockState state) 
 	{
 		return false;
 	}
+	
 	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess blockAccess, BlockPos pos) 
@@ -58,11 +63,13 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 		return BOUNDING_BOX;
 	}
 	
+	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos) 
 	{
 		return BOUNDING_BOX;
 	}
+	
 	
 	@SuppressWarnings({ "unused" })
 	@Override
@@ -70,14 +77,11 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	{
 		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
 		
-		if (!world.isRemote)
-		{
-			tile = (TileEntityTeleporter)world.getTileEntity(pos);
-		}	
-		
 		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
 		ItemStack tstack = tile.getQueue().getBack();
-			
+		
+		
+		// Item Held
 		if (heldItem != null)
 		{
 			if(tile.isItemValidForSlot(tile.getQueue().getSize(), heldItem))
@@ -102,13 +106,14 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 				if (player.attemptTeleport(fin_x, tile.tp_y, fin_z))
 				{
 					heldItem.stackSize -= 1;
-					player.attackEntityFrom(BlockholeDefinitions.teleporter, 6);
+					player.attackEntityFrom(BlockholeDefinitions.teleporter, 15);
 					
 					return true;
 				}
 			}
 		}
 		
+		// Item Not Held
 		if (heldItem == null || (!(heldItem.getItem() instanceof ItemBlock) && heldItem.getItem() != ItemList.TUNER))
 		{
 			if (tstack != null)
@@ -146,6 +151,7 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 		
 		return false;
 	}
+	
 	
 	//@SuppressWarnings("deprecation")
 	@Override

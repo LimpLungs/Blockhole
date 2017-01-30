@@ -12,5 +12,7 @@ public class TileEntityList
 	public static void registerTileEntities()
 	{
 		GameRegistry.registerTileEntity(TileEntityTeleporter.class, "teTeleporter");
+		GameRegistry.registerTileEntity(TileEntityBlockhole.class, "teBlockhole");
+		GameRegistry.registerTileEntity(TileEntityBlockholeWall.class, "teBlockholeWall");
 	}
 }

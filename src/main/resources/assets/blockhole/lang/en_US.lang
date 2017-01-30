@@ -4,3 +4,5 @@ item.blockhole_tuner.name=Tuning Stick
 
 tile.blockhole_teleporter.name=Blockhole Teleportation Device
 tile.blockhole_powderkeg.name=Block Powder Keg
+tile.blockhole_blockhole.name=Blockhole Singularity
+tile.blockhole_blockholewall.name=Blockhole Singularity Wall

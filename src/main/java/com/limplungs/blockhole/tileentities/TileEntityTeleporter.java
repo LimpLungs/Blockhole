@@ -1,7 +1,6 @@
 package com.limplungs.blockhole.tileentities;
 
 import com.limplungs.blockhole.DoubleLinkedQueue;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemBlock;
@@ -30,7 +29,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 		if (loc.getX() != pos.getX() || loc.getY() != pos.getY() || loc.getZ() != pos.getZ())
 		{
 			tp_x = this.getPos().getX();
-			tp_y = this.getPos().getY();
+			tp_y = this.getPos().getY() + 1;
 			tp_z = this.getPos().getZ();
 			loc  = this.getPos();
 		}
@@ -301,6 +300,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	public void setQueue(DoubleLinkedQueue queue) 
 	{
 		this.queue = queue;
+		this.markDirty();
 	}
 	
 }
