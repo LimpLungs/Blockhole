@@ -14,7 +14,6 @@ public class TileEntityBlockholeWall extends TileEntity
 	
 	public TileEntityBlockholeWall()
 	{
-		
 	}
 	
 	@Override
@@ -30,7 +29,7 @@ public class TileEntityBlockholeWall extends TileEntity
 	{
 		super.readFromNBT(compound);
 		
-		dimID = compound.getInteger("dimID");
+		this.dimID = compound.getInteger("dimID");
 	}
     
     @Override
@@ -67,15 +66,15 @@ public class TileEntityBlockholeWall extends TileEntity
 
 	public int getDimensionID() 
 	{
-		return dimID;
+		return this.dimID;
 	}
 
 	public void setDimensionID(int id) 
 	{
-		dimID = id;
+		this.dimID = id;
 		this.markDirty();
 	}
-
+	
 	@Override
 	public void markDirty() 
 	{

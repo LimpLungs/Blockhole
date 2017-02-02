@@ -1,5 +1,2566 @@
 {
-	"variants": {
-		"normal": { "model": "blockhole:blockholewall" }
+	"forge_marker": 1,
+    "defaults": 
+    {
+        "textures":
+		{
+			 "particle": "blockhole:blocks/black"
+		},
+        "model": "minecraft:cube",
+        "uvlock": true
+    },
+	"variants":
+	{
+		"index":
+		{
+			"0":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_001",
+					"east": "blockhole:blocks/walls/1/image_part_001",
+					"south": "blockhole:blocks/walls/2/image_part_001",
+					"west": "blockhole:blocks/walls/3/image_part_001",
+					"up": "blockhole:blocks/walls/4/image_part_001",
+					"down": "blockhole:blocks/walls/5/image_part_001"
+					
+				}
+			},
+			"1":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_002",
+					"east": "blockhole:blocks/walls/1/image_part_002",
+					"south": "blockhole:blocks/walls/2/image_part_002",
+					"west": "blockhole:blocks/walls/3/image_part_002",
+					"up": "blockhole:blocks/walls/4/image_part_002",
+					"down": "blockhole:blocks/walls/5/image_part_002"
+					
+				}
+			},
+			"2":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_003",
+					"east": "blockhole:blocks/walls/1/image_part_003",
+					"south": "blockhole:blocks/walls/2/image_part_003",
+					"west": "blockhole:blocks/walls/3/image_part_003",
+					"up": "blockhole:blocks/walls/4/image_part_003",
+					"down": "blockhole:blocks/walls/5/image_part_003"
+					
+				}
+			},
+			"3":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_004",
+					"east": "blockhole:blocks/walls/1/image_part_004",
+					"south": "blockhole:blocks/walls/2/image_part_004",
+					"west": "blockhole:blocks/walls/3/image_part_004",
+					"up": "blockhole:blocks/walls/4/image_part_004",
+					"down": "blockhole:blocks/walls/5/image_part_004"
+					 
+				}
+			},
+			"4":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_005",
+					"east": "blockhole:blocks/walls/1/image_part_005",
+					"south": "blockhole:blocks/walls/2/image_part_005",
+					"west": "blockhole:blocks/walls/3/image_part_005",
+					"up": "blockhole:blocks/walls/4/image_part_005",
+					"down": "blockhole:blocks/walls/5/image_part_005"
+					 
+				}
+			},
+			"5":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_006",
+					"east": "blockhole:blocks/walls/1/image_part_006",
+					"south": "blockhole:blocks/walls/2/image_part_006",
+					"west": "blockhole:blocks/walls/3/image_part_006",
+					"up": "blockhole:blocks/walls/4/image_part_006",
+					"down": "blockhole:blocks/walls/5/image_part_006"
+					 
+				}
+			},
+			"6":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_007",
+					"east": "blockhole:blocks/walls/1/image_part_007",
+					"south": "blockhole:blocks/walls/2/image_part_007",
+					"west": "blockhole:blocks/walls/3/image_part_007",
+					"up": "blockhole:blocks/walls/4/image_part_007",
+					"down": "blockhole:blocks/walls/5/image_part_007"
+					 
+				}
+			},
+			"7":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_008",
+					"east": "blockhole:blocks/walls/1/image_part_008",
+					"south": "blockhole:blocks/walls/2/image_part_008",
+					"west": "blockhole:blocks/walls/3/image_part_008",
+					"up": "blockhole:blocks/walls/4/image_part_008",
+					"down": "blockhole:blocks/walls/5/image_part_008"
+					 
+				}
+			},
+			"8":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_009",
+					"east": "blockhole:blocks/walls/1/image_part_009",
+					"south": "blockhole:blocks/walls/2/image_part_009",
+					"west": "blockhole:blocks/walls/3/image_part_009",
+					"up": "blockhole:blocks/walls/4/image_part_009",
+					"down": "blockhole:blocks/walls/5/image_part_009"
+					 
+				}
+			},
+			"9":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_010",
+					"east": "blockhole:blocks/walls/1/image_part_010",
+					"south": "blockhole:blocks/walls/2/image_part_010",
+					"west": "blockhole:blocks/walls/3/image_part_010",
+					"up": "blockhole:blocks/walls/4/image_part_010",
+					"down": "blockhole:blocks/walls/5/image_part_010"
+					 
+				}
+			},
+			"10":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_011",
+					"east": "blockhole:blocks/walls/1/image_part_011",
+					"south": "blockhole:blocks/walls/2/image_part_011",
+					"west": "blockhole:blocks/walls/3/image_part_011",
+					"up": "blockhole:blocks/walls/4/image_part_011",
+					"down": "blockhole:blocks/walls/5/image_part_011"
+					 
+				}
+			},
+			"11":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_012",
+					"east": "blockhole:blocks/walls/1/image_part_012",
+					"south": "blockhole:blocks/walls/2/image_part_012",
+					"west": "blockhole:blocks/walls/3/image_part_012",
+					"up": "blockhole:blocks/walls/4/image_part_012",
+					"down": "blockhole:blocks/walls/5/image_part_012"
+					 
+				}
+			},
+			"12":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_013",
+					"east": "blockhole:blocks/walls/1/image_part_013",
+					"south": "blockhole:blocks/walls/2/image_part_013",
+					"west": "blockhole:blocks/walls/3/image_part_013",
+					"up": "blockhole:blocks/walls/4/image_part_013",
+					"down": "blockhole:blocks/walls/5/image_part_013"
+					 
+				}
+			},
+			"13":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_014",
+					"east": "blockhole:blocks/walls/1/image_part_014",
+					"south": "blockhole:blocks/walls/2/image_part_014",
+					"west": "blockhole:blocks/walls/3/image_part_014",
+					"up": "blockhole:blocks/walls/4/image_part_014",
+					"down": "blockhole:blocks/walls/5/image_part_014"
+					 
+				}
+			},
+			"14":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_015",
+					"east": "blockhole:blocks/walls/1/image_part_015",
+					"south": "blockhole:blocks/walls/2/image_part_015",
+					"west": "blockhole:blocks/walls/3/image_part_015",
+					"up": "blockhole:blocks/walls/4/image_part_015",
+					"down": "blockhole:blocks/walls/5/image_part_015"
+					 
+				}
+			},
+			"15":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_016",
+					"east": "blockhole:blocks/walls/1/image_part_016",
+					"south": "blockhole:blocks/walls/2/image_part_016",
+					"west": "blockhole:blocks/walls/3/image_part_016",
+					"up": "blockhole:blocks/walls/4/image_part_016",
+					"down": "blockhole:blocks/walls/5/image_part_016"
+					 
+				}
+			},
+			"16":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_017",
+					"east": "blockhole:blocks/walls/1/image_part_017",
+					"south": "blockhole:blocks/walls/2/image_part_017",
+					"west": "blockhole:blocks/walls/3/image_part_017",
+					"up": "blockhole:blocks/walls/4/image_part_017",
+					"down": "blockhole:blocks/walls/5/image_part_017"
+					 
+				}
+			},
+			"17":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_018",
+					"east": "blockhole:blocks/walls/1/image_part_018",
+					"south": "blockhole:blocks/walls/2/image_part_018",
+					"west": "blockhole:blocks/walls/3/image_part_018",
+					"up": "blockhole:blocks/walls/4/image_part_018",
+					"down": "blockhole:blocks/walls/5/image_part_018"
+					 
+				}
+			},
+			"18":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_019",
+					"east": "blockhole:blocks/walls/1/image_part_019",
+					"south": "blockhole:blocks/walls/2/image_part_019",
+					"west": "blockhole:blocks/walls/3/image_part_019",
+					"up": "blockhole:blocks/walls/4/image_part_019",
+					"down": "blockhole:blocks/walls/5/image_part_019"
+					 
+				}
+			},
+			"19":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_020",
+					"east": "blockhole:blocks/walls/1/image_part_020",
+					"south": "blockhole:blocks/walls/2/image_part_020",
+					"west": "blockhole:blocks/walls/3/image_part_020",
+					"up": "blockhole:blocks/walls/4/image_part_020",
+					"down": "blockhole:blocks/walls/5/image_part_020"
+					 
+				}
+			},
+			"20":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_021",
+					"east": "blockhole:blocks/walls/1/image_part_021",
+					"south": "blockhole:blocks/walls/2/image_part_021",
+					"west": "blockhole:blocks/walls/3/image_part_021",
+					"up": "blockhole:blocks/walls/4/image_part_021",
+					"down": "blockhole:blocks/walls/5/image_part_021"
+					 
+				}
+			},
+			"21":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_022",
+					"east": "blockhole:blocks/walls/1/image_part_022",
+					"south": "blockhole:blocks/walls/2/image_part_022",
+					"west": "blockhole:blocks/walls/3/image_part_022",
+					"up": "blockhole:blocks/walls/4/image_part_022",
+					"down": "blockhole:blocks/walls/5/image_part_022"
+					 
+				}
+			},
+			"22":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_023",
+					"east": "blockhole:blocks/walls/1/image_part_023",
+					"south": "blockhole:blocks/walls/2/image_part_023",
+					"west": "blockhole:blocks/walls/3/image_part_023",
+					"up": "blockhole:blocks/walls/4/image_part_023",
+					"down": "blockhole:blocks/walls/5/image_part_023"
+					 
+				}
+			},
+			"23":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_024",
+					"east": "blockhole:blocks/walls/1/image_part_024",
+					"south": "blockhole:blocks/walls/2/image_part_024",
+					"west": "blockhole:blocks/walls/3/image_part_024",
+					"up": "blockhole:blocks/walls/4/image_part_024",
+					"down": "blockhole:blocks/walls/5/image_part_024"
+					 
+				}
+			},
+			"24":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_025",
+					"east": "blockhole:blocks/walls/1/image_part_025",
+					"south": "blockhole:blocks/walls/2/image_part_025",
+					"west": "blockhole:blocks/walls/3/image_part_025",
+					"up": "blockhole:blocks/walls/4/image_part_025",
+					"down": "blockhole:blocks/walls/5/image_part_025"
+					 
+				}
+			},
+			"25":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_026",
+					"east": "blockhole:blocks/walls/1/image_part_026",
+					"south": "blockhole:blocks/walls/2/image_part_026",
+					"west": "blockhole:blocks/walls/3/image_part_026",
+					"up": "blockhole:blocks/walls/4/image_part_026",
+					"down": "blockhole:blocks/walls/5/image_part_026"
+					 
+				}
+			},
+			"26":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_027",
+					"east": "blockhole:blocks/walls/1/image_part_027",
+					"south": "blockhole:blocks/walls/2/image_part_027",
+					"west": "blockhole:blocks/walls/3/image_part_027",
+					"up": "blockhole:blocks/walls/4/image_part_027",
+					"down": "blockhole:blocks/walls/5/image_part_027"
+					 
+				}
+			},
+			"27":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_028",
+					"east": "blockhole:blocks/walls/1/image_part_028",
+					"south": "blockhole:blocks/walls/2/image_part_028",
+					"west": "blockhole:blocks/walls/3/image_part_028",
+					"up": "blockhole:blocks/walls/4/image_part_028",
+					"down": "blockhole:blocks/walls/5/image_part_028"
+					 
+				}
+			},
+			"28":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_029",
+					"east": "blockhole:blocks/walls/1/image_part_029",
+					"south": "blockhole:blocks/walls/2/image_part_029",
+					"west": "blockhole:blocks/walls/3/image_part_029",
+					"up": "blockhole:blocks/walls/4/image_part_029",
+					"down": "blockhole:blocks/walls/5/image_part_029"
+					 
+				}
+			},
+			"29":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_030",
+					"east": "blockhole:blocks/walls/1/image_part_030",
+					"south": "blockhole:blocks/walls/2/image_part_030",
+					"west": "blockhole:blocks/walls/3/image_part_030",
+					"up": "blockhole:blocks/walls/4/image_part_030",
+					"down": "blockhole:blocks/walls/5/image_part_030"
+					 
+				}
+			},
+			"30":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_031",
+					"east": "blockhole:blocks/walls/1/image_part_031",
+					"south": "blockhole:blocks/walls/2/image_part_031",
+					"west": "blockhole:blocks/walls/3/image_part_031",
+					"up": "blockhole:blocks/walls/4/image_part_031",
+					"down": "blockhole:blocks/walls/5/image_part_031"
+					 
+				}
+			},
+			"31":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_032",
+					"east": "blockhole:blocks/walls/1/image_part_032",
+					"south": "blockhole:blocks/walls/2/image_part_032",
+					"west": "blockhole:blocks/walls/3/image_part_032",
+					"up": "blockhole:blocks/walls/4/image_part_032",
+					"down": "blockhole:blocks/walls/5/image_part_032"
+					 
+				}
+			},
+			"32":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_033",
+					"east": "blockhole:blocks/walls/1/image_part_033",
+					"south": "blockhole:blocks/walls/2/image_part_033",
+					"west": "blockhole:blocks/walls/3/image_part_033",
+					"up": "blockhole:blocks/walls/4/image_part_033",
+					"down": "blockhole:blocks/walls/5/image_part_033"
+					 
+				}
+			},
+			"33":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_034",
+					"east": "blockhole:blocks/walls/1/image_part_034",
+					"south": "blockhole:blocks/walls/2/image_part_034",
+					"west": "blockhole:blocks/walls/3/image_part_034",
+					"up": "blockhole:blocks/walls/4/image_part_034",
+					"down": "blockhole:blocks/walls/5/image_part_034"
+					 
+				}
+			},
+			"34":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_035",
+					"east": "blockhole:blocks/walls/1/image_part_035",
+					"south": "blockhole:blocks/walls/2/image_part_035",
+					"west": "blockhole:blocks/walls/3/image_part_035",
+					"up": "blockhole:blocks/walls/4/image_part_035",
+					"down": "blockhole:blocks/walls/5/image_part_035"
+					 
+				}
+			},
+			"35":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_036",
+					"east": "blockhole:blocks/walls/1/image_part_036",
+					"south": "blockhole:blocks/walls/2/image_part_036",
+					"west": "blockhole:blocks/walls/3/image_part_036",
+					"up": "blockhole:blocks/walls/4/image_part_036",
+					"down": "blockhole:blocks/walls/5/image_part_036"
+					 
+				}
+			},
+			"36":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_037",
+					"east": "blockhole:blocks/walls/1/image_part_037",
+					"south": "blockhole:blocks/walls/2/image_part_037",
+					"west": "blockhole:blocks/walls/3/image_part_037",
+					"up": "blockhole:blocks/walls/4/image_part_037",
+					"down": "blockhole:blocks/walls/5/image_part_037"
+					 
+				}
+			},
+			"37":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_038",
+					"east": "blockhole:blocks/walls/1/image_part_038",
+					"south": "blockhole:blocks/walls/2/image_part_038",
+					"west": "blockhole:blocks/walls/3/image_part_038",
+					"up": "blockhole:blocks/walls/4/image_part_038",
+					"down": "blockhole:blocks/walls/5/image_part_038"
+					 
+				}
+			},
+			"38":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_039",
+					"east": "blockhole:blocks/walls/1/image_part_039",
+					"south": "blockhole:blocks/walls/2/image_part_039",
+					"west": "blockhole:blocks/walls/3/image_part_039",
+					"up": "blockhole:blocks/walls/4/image_part_039",
+					"down": "blockhole:blocks/walls/5/image_part_039"
+					 
+				}
+			},
+			"39":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_040",
+					"east": "blockhole:blocks/walls/1/image_part_040",
+					"south": "blockhole:blocks/walls/2/image_part_040",
+					"west": "blockhole:blocks/walls/3/image_part_040",
+					"up": "blockhole:blocks/walls/4/image_part_040",
+					"down": "blockhole:blocks/walls/5/image_part_040"
+					 
+				}
+			},
+			"40":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_041",
+					"east": "blockhole:blocks/walls/1/image_part_041",
+					"south": "blockhole:blocks/walls/2/image_part_041",
+					"west": "blockhole:blocks/walls/3/image_part_041",
+					"up": "blockhole:blocks/walls/4/image_part_041",
+					"down": "blockhole:blocks/walls/5/image_part_041"
+					 
+				}
+			},
+			"41":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_042",
+					"east": "blockhole:blocks/walls/1/image_part_042",
+					"south": "blockhole:blocks/walls/2/image_part_042",
+					"west": "blockhole:blocks/walls/3/image_part_042",
+					"up": "blockhole:blocks/walls/4/image_part_042",
+					"down": "blockhole:blocks/walls/5/image_part_042"
+					 
+				}
+			},
+			"42":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_043",
+					"east": "blockhole:blocks/walls/1/image_part_043",
+					"south": "blockhole:blocks/walls/2/image_part_043",
+					"west": "blockhole:blocks/walls/3/image_part_043",
+					"up": "blockhole:blocks/walls/4/image_part_043",
+					"down": "blockhole:blocks/walls/5/image_part_043"
+					 
+				}
+			},
+			"43":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_044",
+					"east": "blockhole:blocks/walls/1/image_part_044",
+					"south": "blockhole:blocks/walls/2/image_part_044",
+					"west": "blockhole:blocks/walls/3/image_part_044",
+					"up": "blockhole:blocks/walls/4/image_part_044",
+					"down": "blockhole:blocks/walls/5/image_part_044"
+					 
+				}
+			},
+			"44":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_045",
+					"east": "blockhole:blocks/walls/1/image_part_045",
+					"south": "blockhole:blocks/walls/2/image_part_045",
+					"west": "blockhole:blocks/walls/3/image_part_045",
+					"up": "blockhole:blocks/walls/4/image_part_045",
+					"down": "blockhole:blocks/walls/5/image_part_045"
+					 
+				}
+			},
+			"45":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_046",
+					"east": "blockhole:blocks/walls/1/image_part_046",
+					"south": "blockhole:blocks/walls/2/image_part_046",
+					"west": "blockhole:blocks/walls/3/image_part_046",
+					"up": "blockhole:blocks/walls/4/image_part_046",
+					"down": "blockhole:blocks/walls/5/image_part_046"
+					 
+				}
+			},
+			"46":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_047",
+					"east": "blockhole:blocks/walls/1/image_part_047",
+					"south": "blockhole:blocks/walls/2/image_part_047",
+					"west": "blockhole:blocks/walls/3/image_part_047",
+					"up": "blockhole:blocks/walls/4/image_part_047",
+					"down": "blockhole:blocks/walls/5/image_part_047"
+					 
+				}
+			},
+			"47":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_048",
+					"east": "blockhole:blocks/walls/1/image_part_048",
+					"south": "blockhole:blocks/walls/2/image_part_048",
+					"west": "blockhole:blocks/walls/3/image_part_048",
+					"up": "blockhole:blocks/walls/4/image_part_048",
+					"down": "blockhole:blocks/walls/5/image_part_048"
+					 
+				}
+			},
+			"48":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_049",
+					"east": "blockhole:blocks/walls/1/image_part_049",
+					"south": "blockhole:blocks/walls/2/image_part_049",
+					"west": "blockhole:blocks/walls/3/image_part_049",
+					"up": "blockhole:blocks/walls/4/image_part_049",
+					"down": "blockhole:blocks/walls/5/image_part_049"
+					 
+				}
+			},
+			"49":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_050",
+					"east": "blockhole:blocks/walls/1/image_part_050",
+					"south": "blockhole:blocks/walls/2/image_part_050",
+					"west": "blockhole:blocks/walls/3/image_part_050",
+					"up": "blockhole:blocks/walls/4/image_part_050",
+					"down": "blockhole:blocks/walls/5/image_part_050"
+					 
+				}
+			},
+			"50":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_051",
+					"east": "blockhole:blocks/walls/1/image_part_051",
+					"south": "blockhole:blocks/walls/2/image_part_051",
+					"west": "blockhole:blocks/walls/3/image_part_051",
+					"up": "blockhole:blocks/walls/4/image_part_051",
+					"down": "blockhole:blocks/walls/5/image_part_051"
+					 
+				}
+			},
+			"51":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_052",
+					"east": "blockhole:blocks/walls/1/image_part_052",
+					"south": "blockhole:blocks/walls/2/image_part_052",
+					"west": "blockhole:blocks/walls/3/image_part_052",
+					"up": "blockhole:blocks/walls/4/image_part_052",
+					"down": "blockhole:blocks/walls/5/image_part_052"
+					 
+				}
+			},
+			"52":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_053",
+					"east": "blockhole:blocks/walls/1/image_part_053",
+					"south": "blockhole:blocks/walls/2/image_part_053",
+					"west": "blockhole:blocks/walls/3/image_part_053",
+					"up": "blockhole:blocks/walls/4/image_part_053",
+					"down": "blockhole:blocks/walls/5/image_part_053"
+					 
+				}
+			},
+			"53":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_054",
+					"east": "blockhole:blocks/walls/1/image_part_054",
+					"south": "blockhole:blocks/walls/2/image_part_054",
+					"west": "blockhole:blocks/walls/3/image_part_054",
+					"up": "blockhole:blocks/walls/4/image_part_054",
+					"down": "blockhole:blocks/walls/5/image_part_054"
+					 
+				}
+			},
+			"54":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_055",
+					"east": "blockhole:blocks/walls/1/image_part_055",
+					"south": "blockhole:blocks/walls/2/image_part_055",
+					"west": "blockhole:blocks/walls/3/image_part_055",
+					"up": "blockhole:blocks/walls/4/image_part_055",
+					"down": "blockhole:blocks/walls/5/image_part_055"
+					 
+				}
+			},
+			"55":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_056",
+					"east": "blockhole:blocks/walls/1/image_part_056",
+					"south": "blockhole:blocks/walls/2/image_part_056",
+					"west": "blockhole:blocks/walls/3/image_part_056",
+					"up": "blockhole:blocks/walls/4/image_part_056",
+					"down": "blockhole:blocks/walls/5/image_part_056"
+					 
+				}
+			},
+			"56":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_057",
+					"east": "blockhole:blocks/walls/1/image_part_057",
+					"south": "blockhole:blocks/walls/2/image_part_057",
+					"west": "blockhole:blocks/walls/3/image_part_057",
+					"up": "blockhole:blocks/walls/4/image_part_057",
+					"down": "blockhole:blocks/walls/5/image_part_057"
+					 
+				}
+			},
+			"57":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_058",
+					"east": "blockhole:blocks/walls/1/image_part_058",
+					"south": "blockhole:blocks/walls/2/image_part_058",
+					"west": "blockhole:blocks/walls/3/image_part_058",
+					"up": "blockhole:blocks/walls/4/image_part_058",
+					"down": "blockhole:blocks/walls/5/image_part_058"
+					 
+				}
+			},
+			"58":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_059",
+					"east": "blockhole:blocks/walls/1/image_part_059",
+					"south": "blockhole:blocks/walls/2/image_part_059",
+					"west": "blockhole:blocks/walls/3/image_part_059",
+					"up": "blockhole:blocks/walls/4/image_part_059",
+					"down": "blockhole:blocks/walls/5/image_part_059"
+					 
+				}
+			},
+			"59":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_060",
+					"east": "blockhole:blocks/walls/1/image_part_060",
+					"south": "blockhole:blocks/walls/2/image_part_060",
+					"west": "blockhole:blocks/walls/3/image_part_060",
+					"up": "blockhole:blocks/walls/4/image_part_060",
+					"down": "blockhole:blocks/walls/5/image_part_060"
+					 
+				}
+			},
+			"60":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_061",
+					"east": "blockhole:blocks/walls/1/image_part_061",
+					"south": "blockhole:blocks/walls/2/image_part_061",
+					"west": "blockhole:blocks/walls/3/image_part_061",
+					"up": "blockhole:blocks/walls/4/image_part_061",
+					"down": "blockhole:blocks/walls/5/image_part_061"
+					 
+				}
+			},
+			"61":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_062",
+					"east": "blockhole:blocks/walls/1/image_part_062",
+					"south": "blockhole:blocks/walls/2/image_part_062",
+					"west": "blockhole:blocks/walls/3/image_part_062",
+					"up": "blockhole:blocks/walls/4/image_part_062",
+					"down": "blockhole:blocks/walls/5/image_part_062"
+					 
+				}
+			},
+			"62":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_063",
+					"east": "blockhole:blocks/walls/1/image_part_063",
+					"south": "blockhole:blocks/walls/2/image_part_063",
+					"west": "blockhole:blocks/walls/3/image_part_063",
+					"up": "blockhole:blocks/walls/4/image_part_063",
+					"down": "blockhole:blocks/walls/5/image_part_063"
+					 
+				}
+			},
+			"63":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_064",
+					"east": "blockhole:blocks/walls/1/image_part_064",
+					"south": "blockhole:blocks/walls/2/image_part_064",
+					"west": "blockhole:blocks/walls/3/image_part_064",
+					"up": "blockhole:blocks/walls/4/image_part_064",
+					"down": "blockhole:blocks/walls/5/image_part_064"
+					 
+				}
+			},
+			"64":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_065",
+					"east": "blockhole:blocks/walls/1/image_part_065",
+					"south": "blockhole:blocks/walls/2/image_part_065",
+					"west": "blockhole:blocks/walls/3/image_part_065",
+					"up": "blockhole:blocks/walls/4/image_part_065",
+					"down": "blockhole:blocks/walls/5/image_part_065"
+					 
+				}
+			},
+			"65":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_066",
+					"east": "blockhole:blocks/walls/1/image_part_066",
+					"south": "blockhole:blocks/walls/2/image_part_066",
+					"west": "blockhole:blocks/walls/3/image_part_066",
+					"up": "blockhole:blocks/walls/4/image_part_066",
+					"down": "blockhole:blocks/walls/5/image_part_066"
+					 
+				}
+			},
+			"66":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_067",
+					"east": "blockhole:blocks/walls/1/image_part_067",
+					"south": "blockhole:blocks/walls/2/image_part_067",
+					"west": "blockhole:blocks/walls/3/image_part_067",
+					"up": "blockhole:blocks/walls/4/image_part_067",
+					"down": "blockhole:blocks/walls/5/image_part_067"
+					 
+				}
+			},
+			"67":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_068",
+					"east": "blockhole:blocks/walls/1/image_part_068",
+					"south": "blockhole:blocks/walls/2/image_part_068",
+					"west": "blockhole:blocks/walls/3/image_part_068",
+					"up": "blockhole:blocks/walls/4/image_part_068",
+					"down": "blockhole:blocks/walls/5/image_part_068"
+					 
+				}
+			},
+			"68":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_069",
+					"east": "blockhole:blocks/walls/1/image_part_069",
+					"south": "blockhole:blocks/walls/2/image_part_069",
+					"west": "blockhole:blocks/walls/3/image_part_069",
+					"up": "blockhole:blocks/walls/4/image_part_069",
+					"down": "blockhole:blocks/walls/5/image_part_069"
+					 
+				}
+			},
+			"69":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_070",
+					"east": "blockhole:blocks/walls/1/image_part_070",
+					"south": "blockhole:blocks/walls/2/image_part_070",
+					"west": "blockhole:blocks/walls/3/image_part_070",
+					"up": "blockhole:blocks/walls/4/image_part_070",
+					"down": "blockhole:blocks/walls/5/image_part_070"
+					 
+				}
+			},
+			"70":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_071",
+					"east": "blockhole:blocks/walls/1/image_part_071",
+					"south": "blockhole:blocks/walls/2/image_part_071",
+					"west": "blockhole:blocks/walls/3/image_part_071",
+					"up": "blockhole:blocks/walls/4/image_part_071",
+					"down": "blockhole:blocks/walls/5/image_part_071"
+					 
+				}
+			},
+			"71":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_072",
+					"east": "blockhole:blocks/walls/1/image_part_072",
+					"south": "blockhole:blocks/walls/2/image_part_072",
+					"west": "blockhole:blocks/walls/3/image_part_072",
+					"up": "blockhole:blocks/walls/4/image_part_072",
+					"down": "blockhole:blocks/walls/5/image_part_072"
+					 
+				}
+			},
+			"72":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_073",
+					"east": "blockhole:blocks/walls/1/image_part_073",
+					"south": "blockhole:blocks/walls/2/image_part_073",
+					"west": "blockhole:blocks/walls/3/image_part_073",
+					"up": "blockhole:blocks/walls/4/image_part_073",
+					"down": "blockhole:blocks/walls/5/image_part_073"
+					 
+				}
+			},
+			"73":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_074",
+					"east": "blockhole:blocks/walls/1/image_part_074",
+					"south": "blockhole:blocks/walls/2/image_part_074",
+					"west": "blockhole:blocks/walls/3/image_part_074",
+					"up": "blockhole:blocks/walls/4/image_part_074",
+					"down": "blockhole:blocks/walls/5/image_part_074"
+					 
+				}
+			},
+			"74":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_075",
+					"east": "blockhole:blocks/walls/1/image_part_075",
+					"south": "blockhole:blocks/walls/2/image_part_075",
+					"west": "blockhole:blocks/walls/3/image_part_075",
+					"up": "blockhole:blocks/walls/4/image_part_075",
+					"down": "blockhole:blocks/walls/5/image_part_075"
+					 
+				}
+			},
+			"75":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_076",
+					"east": "blockhole:blocks/walls/1/image_part_076",
+					"south": "blockhole:blocks/walls/2/image_part_076",
+					"west": "blockhole:blocks/walls/3/image_part_076",
+					"up": "blockhole:blocks/walls/4/image_part_076",
+					"down": "blockhole:blocks/walls/5/image_part_076"
+					 
+				}
+			},
+			"76":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_077",
+					"east": "blockhole:blocks/walls/1/image_part_077",
+					"south": "blockhole:blocks/walls/2/image_part_077",
+					"west": "blockhole:blocks/walls/3/image_part_077",
+					"up": "blockhole:blocks/walls/4/image_part_077",
+					"down": "blockhole:blocks/walls/5/image_part_077"
+					 
+				}
+			},
+			"77":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_078",
+					"east": "blockhole:blocks/walls/1/image_part_078",
+					"south": "blockhole:blocks/walls/2/image_part_078",
+					"west": "blockhole:blocks/walls/3/image_part_078",
+					"up": "blockhole:blocks/walls/4/image_part_078",
+					"down": "blockhole:blocks/walls/5/image_part_078"
+					 
+				}
+			},
+			"78":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_079",
+					"east": "blockhole:blocks/walls/1/image_part_079",
+					"south": "blockhole:blocks/walls/2/image_part_079",
+					"west": "blockhole:blocks/walls/3/image_part_079",
+					"up": "blockhole:blocks/walls/4/image_part_079",
+					"down": "blockhole:blocks/walls/5/image_part_079"
+					 
+				}
+			},
+			"79":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_080",
+					"east": "blockhole:blocks/walls/1/image_part_080",
+					"south": "blockhole:blocks/walls/2/image_part_080",
+					"west": "blockhole:blocks/walls/3/image_part_080",
+					"up": "blockhole:blocks/walls/4/image_part_080",
+					"down": "blockhole:blocks/walls/5/image_part_080"
+					 
+				}
+			},
+			"80":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_081",
+					"east": "blockhole:blocks/walls/1/image_part_081",
+					"south": "blockhole:blocks/walls/2/image_part_081",
+					"west": "blockhole:blocks/walls/3/image_part_081",
+					"up": "blockhole:blocks/walls/4/image_part_081",
+					"down": "blockhole:blocks/walls/5/image_part_081"
+					 
+				}
+			},
+			"81":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_082",
+					"east": "blockhole:blocks/walls/1/image_part_082",
+					"south": "blockhole:blocks/walls/2/image_part_082",
+					"west": "blockhole:blocks/walls/3/image_part_082",
+					"up": "blockhole:blocks/walls/4/image_part_082",
+					"down": "blockhole:blocks/walls/5/image_part_082"
+					 
+				}
+			},
+			"82":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_083",
+					"east": "blockhole:blocks/walls/1/image_part_083",
+					"south": "blockhole:blocks/walls/2/image_part_083",
+					"west": "blockhole:blocks/walls/3/image_part_083",
+					"up": "blockhole:blocks/walls/4/image_part_083",
+					"down": "blockhole:blocks/walls/5/image_part_083"
+					 
+				}
+			},
+			"83":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_084",
+					"east": "blockhole:blocks/walls/1/image_part_084",
+					"south": "blockhole:blocks/walls/2/image_part_084",
+					"west": "blockhole:blocks/walls/3/image_part_084",
+					"up": "blockhole:blocks/walls/4/image_part_084",
+					"down": "blockhole:blocks/walls/5/image_part_084"
+					 
+				}
+			},
+			"84":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_085",
+					"east": "blockhole:blocks/walls/1/image_part_085",
+					"south": "blockhole:blocks/walls/2/image_part_085",
+					"west": "blockhole:blocks/walls/3/image_part_085",
+					"up": "blockhole:blocks/walls/4/image_part_085",
+					"down": "blockhole:blocks/walls/5/image_part_085"
+					 
+				}
+			},
+			"85":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_086",
+					"east": "blockhole:blocks/walls/1/image_part_086",
+					"south": "blockhole:blocks/walls/2/image_part_086",
+					"west": "blockhole:blocks/walls/3/image_part_086",
+					"up": "blockhole:blocks/walls/4/image_part_086",
+					"down": "blockhole:blocks/walls/5/image_part_086"
+					 
+				}
+			},
+			"86":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_087",
+					"east": "blockhole:blocks/walls/1/image_part_087",
+					"south": "blockhole:blocks/walls/2/image_part_087",
+					"west": "blockhole:blocks/walls/3/image_part_087",
+					"up": "blockhole:blocks/walls/4/image_part_087",
+					"down": "blockhole:blocks/walls/5/image_part_087"
+					 
+				}
+			},
+			"87":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_088",
+					"east": "blockhole:blocks/walls/1/image_part_088",
+					"south": "blockhole:blocks/walls/2/image_part_088",
+					"west": "blockhole:blocks/walls/3/image_part_088",
+					"up": "blockhole:blocks/walls/4/image_part_088",
+					"down": "blockhole:blocks/walls/5/image_part_088"
+					 
+				}
+			},
+			"88":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_089",
+					"east": "blockhole:blocks/walls/1/image_part_089",
+					"south": "blockhole:blocks/walls/2/image_part_089",
+					"west": "blockhole:blocks/walls/3/image_part_089",
+					"up": "blockhole:blocks/walls/4/image_part_089",
+					"down": "blockhole:blocks/walls/5/image_part_089"
+					 
+				}
+			},
+			"89":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_090",
+					"east": "blockhole:blocks/walls/1/image_part_090",
+					"south": "blockhole:blocks/walls/2/image_part_090",
+					"west": "blockhole:blocks/walls/3/image_part_090",
+					"up": "blockhole:blocks/walls/4/image_part_090",
+					"down": "blockhole:blocks/walls/5/image_part_090"
+					 
+				}
+			},
+			"90":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_091",
+					"east": "blockhole:blocks/walls/1/image_part_091",
+					"south": "blockhole:blocks/walls/2/image_part_091",
+					"west": "blockhole:blocks/walls/3/image_part_091",
+					"up": "blockhole:blocks/walls/4/image_part_091",
+					"down": "blockhole:blocks/walls/5/image_part_091"
+					 
+				}
+			},
+			"91":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_092",
+					"east": "blockhole:blocks/walls/1/image_part_092",
+					"south": "blockhole:blocks/walls/2/image_part_092",
+					"west": "blockhole:blocks/walls/3/image_part_092",
+					"up": "blockhole:blocks/walls/4/image_part_092",
+					"down": "blockhole:blocks/walls/5/image_part_092"
+					 
+				}
+			},
+			"92":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_093",
+					"east": "blockhole:blocks/walls/1/image_part_093",
+					"south": "blockhole:blocks/walls/2/image_part_093",
+					"west": "blockhole:blocks/walls/3/image_part_093",
+					"up": "blockhole:blocks/walls/4/image_part_093",
+					"down": "blockhole:blocks/walls/5/image_part_093"
+					 
+				}
+			},
+			"93":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_094",
+					"east": "blockhole:blocks/walls/1/image_part_094",
+					"south": "blockhole:blocks/walls/2/image_part_094",
+					"west": "blockhole:blocks/walls/3/image_part_094",
+					"up": "blockhole:blocks/walls/4/image_part_094",
+					"down": "blockhole:blocks/walls/5/image_part_094"
+					 
+				}
+			},
+			"94":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_095",
+					"east": "blockhole:blocks/walls/1/image_part_095",
+					"south": "blockhole:blocks/walls/2/image_part_095",
+					"west": "blockhole:blocks/walls/3/image_part_095",
+					"up": "blockhole:blocks/walls/4/image_part_095",
+					"down": "blockhole:blocks/walls/5/image_part_095"
+					 
+				}
+			},
+			"95":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_096",
+					"east": "blockhole:blocks/walls/1/image_part_096",
+					"south": "blockhole:blocks/walls/2/image_part_096",
+					"west": "blockhole:blocks/walls/3/image_part_096",
+					"up": "blockhole:blocks/walls/4/image_part_096",
+					"down": "blockhole:blocks/walls/5/image_part_096"
+					 
+				}
+			},
+			"96":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_097",
+					"east": "blockhole:blocks/walls/1/image_part_097",
+					"south": "blockhole:blocks/walls/2/image_part_097",
+					"west": "blockhole:blocks/walls/3/image_part_097",
+					"up": "blockhole:blocks/walls/4/image_part_097",
+					"down": "blockhole:blocks/walls/5/image_part_097"
+					 
+				}
+			},
+			"97":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_098",
+					"east": "blockhole:blocks/walls/1/image_part_098",
+					"south": "blockhole:blocks/walls/2/image_part_098",
+					"west": "blockhole:blocks/walls/3/image_part_098",
+					"up": "blockhole:blocks/walls/4/image_part_098",
+					"down": "blockhole:blocks/walls/5/image_part_098"
+					 
+				}
+			},
+			"98":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_099",
+					"east": "blockhole:blocks/walls/1/image_part_099",
+					"south": "blockhole:blocks/walls/2/image_part_099",
+					"west": "blockhole:blocks/walls/3/image_part_099",
+					"up": "blockhole:blocks/walls/4/image_part_099",
+					"down": "blockhole:blocks/walls/5/image_part_099"
+					 
+				}
+			},
+			"99":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_100",
+					"east": "blockhole:blocks/walls/1/image_part_100",
+					"south": "blockhole:blocks/walls/2/image_part_100",
+					"west": "blockhole:blocks/walls/3/image_part_100",
+					"up": "blockhole:blocks/walls/4/image_part_100",
+					"down": "blockhole:blocks/walls/5/image_part_100"
+					 
+				}
+			},
+			"100":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_101",
+					"east": "blockhole:blocks/walls/1/image_part_101",
+					"south": "blockhole:blocks/walls/2/image_part_101",
+					"west": "blockhole:blocks/walls/3/image_part_101",
+					"up": "blockhole:blocks/walls/4/image_part_101",
+					"down": "blockhole:blocks/walls/5/image_part_101"
+					 
+				}
+			},
+			"101":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_102",
+					"east": "blockhole:blocks/walls/1/image_part_102",
+					"south": "blockhole:blocks/walls/2/image_part_102",
+					"west": "blockhole:blocks/walls/3/image_part_102",
+					"up": "blockhole:blocks/walls/4/image_part_102",
+					"down": "blockhole:blocks/walls/5/image_part_102"
+					 
+				}
+			},
+			"102":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_103",
+					"east": "blockhole:blocks/walls/1/image_part_103",
+					"south": "blockhole:blocks/walls/2/image_part_103",
+					"west": "blockhole:blocks/walls/3/image_part_103",
+					"up": "blockhole:blocks/walls/4/image_part_103",
+					"down": "blockhole:blocks/walls/5/image_part_103"
+					 
+				}
+			},
+			"103":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_104",
+					"east": "blockhole:blocks/walls/1/image_part_104",
+					"south": "blockhole:blocks/walls/2/image_part_104",
+					"west": "blockhole:blocks/walls/3/image_part_104",
+					"up": "blockhole:blocks/walls/4/image_part_104",
+					"down": "blockhole:blocks/walls/5/image_part_104"
+					 
+				}
+			},
+			"104":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_105",
+					"east": "blockhole:blocks/walls/1/image_part_105",
+					"south": "blockhole:blocks/walls/2/image_part_105",
+					"west": "blockhole:blocks/walls/3/image_part_105",
+					"up": "blockhole:blocks/walls/4/image_part_105",
+					"down": "blockhole:blocks/walls/5/image_part_105"
+					 
+				}
+			},
+			"105":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_106",
+					"east": "blockhole:blocks/walls/1/image_part_106",
+					"south": "blockhole:blocks/walls/2/image_part_106",
+					"west": "blockhole:blocks/walls/3/image_part_106",
+					"up": "blockhole:blocks/walls/4/image_part_106",
+					"down": "blockhole:blocks/walls/5/image_part_106"
+					 
+				}
+			},
+			"106":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_107",
+					"east": "blockhole:blocks/walls/1/image_part_107",
+					"south": "blockhole:blocks/walls/2/image_part_107",
+					"west": "blockhole:blocks/walls/3/image_part_107",
+					"up": "blockhole:blocks/walls/4/image_part_107",
+					"down": "blockhole:blocks/walls/5/image_part_107"
+					 
+				}
+			},
+			"107":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_108",
+					"east": "blockhole:blocks/walls/1/image_part_108",
+					"south": "blockhole:blocks/walls/2/image_part_108",
+					"west": "blockhole:blocks/walls/3/image_part_108",
+					"up": "blockhole:blocks/walls/4/image_part_108",
+					"down": "blockhole:blocks/walls/5/image_part_108"
+					 
+				}
+			},
+			"108":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_109",
+					"east": "blockhole:blocks/walls/1/image_part_109",
+					"south": "blockhole:blocks/walls/2/image_part_109",
+					"west": "blockhole:blocks/walls/3/image_part_109",
+					"up": "blockhole:blocks/walls/4/image_part_109",
+					"down": "blockhole:blocks/walls/5/image_part_109"
+					 
+				}
+			},
+			"109":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_110",
+					"east": "blockhole:blocks/walls/1/image_part_110",
+					"south": "blockhole:blocks/walls/2/image_part_110",
+					"west": "blockhole:blocks/walls/3/image_part_110",
+					"up": "blockhole:blocks/walls/4/image_part_110",
+					"down": "blockhole:blocks/walls/5/image_part_110"
+					 
+				}
+			},
+			"110":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_111",
+					"east": "blockhole:blocks/walls/1/image_part_111",
+					"south": "blockhole:blocks/walls/2/image_part_111",
+					"west": "blockhole:blocks/walls/3/image_part_111",
+					"up": "blockhole:blocks/walls/4/image_part_111",
+					"down": "blockhole:blocks/walls/5/image_part_111"
+					 
+				}
+			},
+			"111":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_112",
+					"east": "blockhole:blocks/walls/1/image_part_112",
+					"south": "blockhole:blocks/walls/2/image_part_112",
+					"west": "blockhole:blocks/walls/3/image_part_112",
+					"up": "blockhole:blocks/walls/4/image_part_112",
+					"down": "blockhole:blocks/walls/5/image_part_112"
+					 
+				}
+			},
+			"112":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_113",
+					"east": "blockhole:blocks/walls/1/image_part_113",
+					"south": "blockhole:blocks/walls/2/image_part_113",
+					"west": "blockhole:blocks/walls/3/image_part_113",
+					"up": "blockhole:blocks/walls/4/image_part_113",
+					"down": "blockhole:blocks/walls/5/image_part_113"
+					 
+				}
+			},
+			"113":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_114",
+					"east": "blockhole:blocks/walls/1/image_part_114",
+					"south": "blockhole:blocks/walls/2/image_part_114",
+					"west": "blockhole:blocks/walls/3/image_part_114",
+					"up": "blockhole:blocks/walls/4/image_part_114",
+					"down": "blockhole:blocks/walls/5/image_part_114"
+					 
+				}
+			},
+			"114":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_115",
+					"east": "blockhole:blocks/walls/1/image_part_115",
+					"south": "blockhole:blocks/walls/2/image_part_115",
+					"west": "blockhole:blocks/walls/3/image_part_115",
+					"up": "blockhole:blocks/walls/4/image_part_115",
+					"down": "blockhole:blocks/walls/5/image_part_115"
+					 
+				}
+			},
+			"115":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_116",
+					"east": "blockhole:blocks/walls/1/image_part_116",
+					"south": "blockhole:blocks/walls/2/image_part_116",
+					"west": "blockhole:blocks/walls/3/image_part_116",
+					"up": "blockhole:blocks/walls/4/image_part_116",
+					"down": "blockhole:blocks/walls/5/image_part_116"
+					 
+				}
+			},
+			"116":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_117",
+					"east": "blockhole:blocks/walls/1/image_part_117",
+					"south": "blockhole:blocks/walls/2/image_part_117",
+					"west": "blockhole:blocks/walls/3/image_part_117",
+					"up": "blockhole:blocks/walls/4/image_part_117",
+					"down": "blockhole:blocks/walls/5/image_part_117"
+					 
+				}
+			},
+			"117":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_118",
+					"east": "blockhole:blocks/walls/1/image_part_118",
+					"south": "blockhole:blocks/walls/2/image_part_118",
+					"west": "blockhole:blocks/walls/3/image_part_118",
+					"up": "blockhole:blocks/walls/4/image_part_118",
+					"down": "blockhole:blocks/walls/5/image_part_118"
+					 
+				}
+			},
+			"118":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_119",
+					"east": "blockhole:blocks/walls/1/image_part_119",
+					"south": "blockhole:blocks/walls/2/image_part_119",
+					"west": "blockhole:blocks/walls/3/image_part_119",
+					"up": "blockhole:blocks/walls/4/image_part_119",
+					"down": "blockhole:blocks/walls/5/image_part_119"
+					 
+				}
+			},
+			"119":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_120",
+					"east": "blockhole:blocks/walls/1/image_part_120",
+					"south": "blockhole:blocks/walls/2/image_part_120",
+					"west": "blockhole:blocks/walls/3/image_part_120",
+					"up": "blockhole:blocks/walls/4/image_part_120",
+					"down": "blockhole:blocks/walls/5/image_part_120"
+					 
+				}
+			},
+			"120":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_121",
+					"east": "blockhole:blocks/walls/1/image_part_121",
+					"south": "blockhole:blocks/walls/2/image_part_121",
+					"west": "blockhole:blocks/walls/3/image_part_121",
+					"up": "blockhole:blocks/walls/4/image_part_121",
+					"down": "blockhole:blocks/walls/5/image_part_121"
+					 
+				}
+			},
+			"121":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_122",
+					"east": "blockhole:blocks/walls/1/image_part_122",
+					"south": "blockhole:blocks/walls/2/image_part_122",
+					"west": "blockhole:blocks/walls/3/image_part_122",
+					"up": "blockhole:blocks/walls/4/image_part_122",
+					"down": "blockhole:blocks/walls/5/image_part_122"
+					 
+				}
+			},
+			"122":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_123",
+					"east": "blockhole:blocks/walls/1/image_part_123",
+					"south": "blockhole:blocks/walls/2/image_part_123",
+					"west": "blockhole:blocks/walls/3/image_part_123",
+					"up": "blockhole:blocks/walls/4/image_part_123",
+					"down": "blockhole:blocks/walls/5/image_part_123"
+					 
+				}
+			},
+			"123":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_124",
+					"east": "blockhole:blocks/walls/1/image_part_124",
+					"south": "blockhole:blocks/walls/2/image_part_124",
+					"west": "blockhole:blocks/walls/3/image_part_124",
+					"up": "blockhole:blocks/walls/4/image_part_124",
+					"down": "blockhole:blocks/walls/5/image_part_124"
+					 
+				}
+			},
+			"124":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_125",
+					"east": "blockhole:blocks/walls/1/image_part_125",
+					"south": "blockhole:blocks/walls/2/image_part_125",
+					"west": "blockhole:blocks/walls/3/image_part_125",
+					"up": "blockhole:blocks/walls/4/image_part_125",
+					"down": "blockhole:blocks/walls/5/image_part_125"
+					 
+				}
+			},
+			"125":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_126",
+					"east": "blockhole:blocks/walls/1/image_part_126",
+					"south": "blockhole:blocks/walls/2/image_part_126",
+					"west": "blockhole:blocks/walls/3/image_part_126",
+					"up": "blockhole:blocks/walls/4/image_part_126",
+					"down": "blockhole:blocks/walls/5/image_part_126"
+					 
+				}
+			},
+			"126":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_127",
+					"east": "blockhole:blocks/walls/1/image_part_127",
+					"south": "blockhole:blocks/walls/2/image_part_127",
+					"west": "blockhole:blocks/walls/3/image_part_127",
+					"up": "blockhole:blocks/walls/4/image_part_127",
+					"down": "blockhole:blocks/walls/5/image_part_127"
+					 
+				}
+			},
+			"127":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_128",
+					"east": "blockhole:blocks/walls/1/image_part_128",
+					"south": "blockhole:blocks/walls/2/image_part_128",
+					"west": "blockhole:blocks/walls/3/image_part_128",
+					"up": "blockhole:blocks/walls/4/image_part_128",
+					"down": "blockhole:blocks/walls/5/image_part_128"
+					 
+				}
+			},
+			"128":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_129",
+					"east": "blockhole:blocks/walls/1/image_part_129",
+					"south": "blockhole:blocks/walls/2/image_part_129",
+					"west": "blockhole:blocks/walls/3/image_part_129",
+					"up": "blockhole:blocks/walls/4/image_part_129",
+					"down": "blockhole:blocks/walls/5/image_part_129"
+					 
+				}
+			},
+			"129":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_130",
+					"east": "blockhole:blocks/walls/1/image_part_130",
+					"south": "blockhole:blocks/walls/2/image_part_130",
+					"west": "blockhole:blocks/walls/3/image_part_130",
+					"up": "blockhole:blocks/walls/4/image_part_130",
+					"down": "blockhole:blocks/walls/5/image_part_130"
+					 
+				}
+			},
+			"130":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_131",
+					"east": "blockhole:blocks/walls/1/image_part_131",
+					"south": "blockhole:blocks/walls/2/image_part_131",
+					"west": "blockhole:blocks/walls/3/image_part_131",
+					"up": "blockhole:blocks/walls/4/image_part_131",
+					"down": "blockhole:blocks/walls/5/image_part_131"
+					 
+				}
+			},
+			"131":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_132",
+					"east": "blockhole:blocks/walls/1/image_part_132",
+					"south": "blockhole:blocks/walls/2/image_part_132",
+					"west": "blockhole:blocks/walls/3/image_part_132",
+					"up": "blockhole:blocks/walls/4/image_part_132",
+					"down": "blockhole:blocks/walls/5/image_part_132"
+					 
+				}
+			},
+			"132":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_133",
+					"east": "blockhole:blocks/walls/1/image_part_133",
+					"south": "blockhole:blocks/walls/2/image_part_133",
+					"west": "blockhole:blocks/walls/3/image_part_133",
+					"up": "blockhole:blocks/walls/4/image_part_133",
+					"down": "blockhole:blocks/walls/5/image_part_133"
+					 
+				}
+			},
+			"133":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_134",
+					"east": "blockhole:blocks/walls/1/image_part_134",
+					"south": "blockhole:blocks/walls/2/image_part_134",
+					"west": "blockhole:blocks/walls/3/image_part_134",
+					"up": "blockhole:blocks/walls/4/image_part_134",
+					"down": "blockhole:blocks/walls/5/image_part_134"
+					 
+				}
+			},
+			"134":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_135",
+					"east": "blockhole:blocks/walls/1/image_part_135",
+					"south": "blockhole:blocks/walls/2/image_part_135",
+					"west": "blockhole:blocks/walls/3/image_part_135",
+					"up": "blockhole:blocks/walls/4/image_part_135",
+					"down": "blockhole:blocks/walls/5/image_part_135"
+					 
+				}
+			},
+			"135":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_136",
+					"east": "blockhole:blocks/walls/1/image_part_136",
+					"south": "blockhole:blocks/walls/2/image_part_136",
+					"west": "blockhole:blocks/walls/3/image_part_136",
+					"up": "blockhole:blocks/walls/4/image_part_136",
+					"down": "blockhole:blocks/walls/5/image_part_136"
+					 
+				}
+			},
+			"136":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_137",
+					"east": "blockhole:blocks/walls/1/image_part_137",
+					"south": "blockhole:blocks/walls/2/image_part_137",
+					"west": "blockhole:blocks/walls/3/image_part_137",
+					"up": "blockhole:blocks/walls/4/image_part_137",
+					"down": "blockhole:blocks/walls/5/image_part_137"
+					 
+				}
+			},
+			"137":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_138",
+					"east": "blockhole:blocks/walls/1/image_part_138",
+					"south": "blockhole:blocks/walls/2/image_part_138",
+					"west": "blockhole:blocks/walls/3/image_part_138",
+					"up": "blockhole:blocks/walls/4/image_part_138",
+					"down": "blockhole:blocks/walls/5/image_part_138"
+					 
+				}
+			},
+			"138":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_139",
+					"east": "blockhole:blocks/walls/1/image_part_139",
+					"south": "blockhole:blocks/walls/2/image_part_139",
+					"west": "blockhole:blocks/walls/3/image_part_139",
+					"up": "blockhole:blocks/walls/4/image_part_139",
+					"down": "blockhole:blocks/walls/5/image_part_139"
+					 
+				}
+			},
+			"139":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_140",
+					"east": "blockhole:blocks/walls/1/image_part_140",
+					"south": "blockhole:blocks/walls/2/image_part_140",
+					"west": "blockhole:blocks/walls/3/image_part_140",
+					"up": "blockhole:blocks/walls/4/image_part_140",
+					"down": "blockhole:blocks/walls/5/image_part_140"
+					 
+				}
+			},
+			"140":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_141",
+					"east": "blockhole:blocks/walls/1/image_part_141",
+					"south": "blockhole:blocks/walls/2/image_part_141",
+					"west": "blockhole:blocks/walls/3/image_part_141",
+					"up": "blockhole:blocks/walls/4/image_part_141",
+					"down": "blockhole:blocks/walls/5/image_part_141"
+					 
+				}
+			},
+			"141":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_142",
+					"east": "blockhole:blocks/walls/1/image_part_142",
+					"south": "blockhole:blocks/walls/2/image_part_142",
+					"west": "blockhole:blocks/walls/3/image_part_142",
+					"up": "blockhole:blocks/walls/4/image_part_142",
+					"down": "blockhole:blocks/walls/5/image_part_142"
+					 
+				}
+			},
+			"142":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_143",
+					"east": "blockhole:blocks/walls/1/image_part_143",
+					"south": "blockhole:blocks/walls/2/image_part_143",
+					"west": "blockhole:blocks/walls/3/image_part_143",
+					"up": "blockhole:blocks/walls/4/image_part_143",
+					"down": "blockhole:blocks/walls/5/image_part_143"
+					 
+				}
+			},
+			"143":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_144",
+					"east": "blockhole:blocks/walls/1/image_part_144",
+					"south": "blockhole:blocks/walls/2/image_part_144",
+					"west": "blockhole:blocks/walls/3/image_part_144",
+					"up": "blockhole:blocks/walls/4/image_part_144",
+					"down": "blockhole:blocks/walls/5/image_part_144"
+					 
+				}
+			},
+			"144":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_145",
+					"east": "blockhole:blocks/walls/1/image_part_145",
+					"south": "blockhole:blocks/walls/2/image_part_145",
+					"west": "blockhole:blocks/walls/3/image_part_145",
+					"up": "blockhole:blocks/walls/4/image_part_145",
+					"down": "blockhole:blocks/walls/5/image_part_145"
+					 
+				}
+			},
+			"145":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_146",
+					"east": "blockhole:blocks/walls/1/image_part_146",
+					"south": "blockhole:blocks/walls/2/image_part_146",
+					"west": "blockhole:blocks/walls/3/image_part_146",
+					"up": "blockhole:blocks/walls/4/image_part_146",
+					"down": "blockhole:blocks/walls/5/image_part_146"
+					 
+				}
+			},
+			"146":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_147",
+					"east": "blockhole:blocks/walls/1/image_part_147",
+					"south": "blockhole:blocks/walls/2/image_part_147",
+					"west": "blockhole:blocks/walls/3/image_part_147",
+					"up": "blockhole:blocks/walls/4/image_part_147",
+					"down": "blockhole:blocks/walls/5/image_part_147"
+					 
+				}
+			},
+			"147":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_148",
+					"east": "blockhole:blocks/walls/1/image_part_148",
+					"south": "blockhole:blocks/walls/2/image_part_148",
+					"west": "blockhole:blocks/walls/3/image_part_148",
+					"up": "blockhole:blocks/walls/4/image_part_148",
+					"down": "blockhole:blocks/walls/5/image_part_148"
+					 
+				}
+			},
+			"148":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_149",
+					"east": "blockhole:blocks/walls/1/image_part_149",
+					"south": "blockhole:blocks/walls/2/image_part_149",
+					"west": "blockhole:blocks/walls/3/image_part_149",
+					"up": "blockhole:blocks/walls/4/image_part_149",
+					"down": "blockhole:blocks/walls/5/image_part_149"
+					 
+				}
+			},
+			"149":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_150",
+					"east": "blockhole:blocks/walls/1/image_part_150",
+					"south": "blockhole:blocks/walls/2/image_part_150",
+					"west": "blockhole:blocks/walls/3/image_part_150",
+					"up": "blockhole:blocks/walls/4/image_part_150",
+					"down": "blockhole:blocks/walls/5/image_part_150"
+					 
+				}
+			},
+			"150":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_151",
+					"east": "blockhole:blocks/walls/1/image_part_151",
+					"south": "blockhole:blocks/walls/2/image_part_151",
+					"west": "blockhole:blocks/walls/3/image_part_151",
+					"up": "blockhole:blocks/walls/4/image_part_151",
+					"down": "blockhole:blocks/walls/5/image_part_151"
+					 
+				}
+			},
+			"151":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_152",
+					"east": "blockhole:blocks/walls/1/image_part_152",
+					"south": "blockhole:blocks/walls/2/image_part_152",
+					"west": "blockhole:blocks/walls/3/image_part_152",
+					"up": "blockhole:blocks/walls/4/image_part_152",
+					"down": "blockhole:blocks/walls/5/image_part_152"
+					 
+				}
+			},
+			"152":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_153",
+					"east": "blockhole:blocks/walls/1/image_part_153",
+					"south": "blockhole:blocks/walls/2/image_part_153",
+					"west": "blockhole:blocks/walls/3/image_part_153",
+					"up": "blockhole:blocks/walls/4/image_part_153",
+					"down": "blockhole:blocks/walls/5/image_part_153"
+					 
+				}
+			},
+			"153":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_154",
+					"east": "blockhole:blocks/walls/1/image_part_154",
+					"south": "blockhole:blocks/walls/2/image_part_154",
+					"west": "blockhole:blocks/walls/3/image_part_154",
+					"up": "blockhole:blocks/walls/4/image_part_154",
+					"down": "blockhole:blocks/walls/5/image_part_154"
+					 
+				}
+			},
+			"154":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_155",
+					"east": "blockhole:blocks/walls/1/image_part_155",
+					"south": "blockhole:blocks/walls/2/image_part_155",
+					"west": "blockhole:blocks/walls/3/image_part_155",
+					"up": "blockhole:blocks/walls/4/image_part_155",
+					"down": "blockhole:blocks/walls/5/image_part_155"
+					 
+				}
+			},
+			"155":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_156",
+					"east": "blockhole:blocks/walls/1/image_part_156",
+					"south": "blockhole:blocks/walls/2/image_part_156",
+					"west": "blockhole:blocks/walls/3/image_part_156",
+					"up": "blockhole:blocks/walls/4/image_part_156",
+					"down": "blockhole:blocks/walls/5/image_part_156"
+					 
+				}
+			},
+			"156":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_157",
+					"east": "blockhole:blocks/walls/1/image_part_157",
+					"south": "blockhole:blocks/walls/2/image_part_157",
+					"west": "blockhole:blocks/walls/3/image_part_157",
+					"up": "blockhole:blocks/walls/4/image_part_157",
+					"down": "blockhole:blocks/walls/5/image_part_157"
+					 
+				}
+			},
+			"157":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_158",
+					"east": "blockhole:blocks/walls/1/image_part_158",
+					"south": "blockhole:blocks/walls/2/image_part_158",
+					"west": "blockhole:blocks/walls/3/image_part_158",
+					"up": "blockhole:blocks/walls/4/image_part_158",
+					"down": "blockhole:blocks/walls/5/image_part_158"
+					 
+				}
+			},
+			"158":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_159",
+					"east": "blockhole:blocks/walls/1/image_part_159",
+					"south": "blockhole:blocks/walls/2/image_part_159",
+					"west": "blockhole:blocks/walls/3/image_part_159",
+					"up": "blockhole:blocks/walls/4/image_part_159",
+					"down": "blockhole:blocks/walls/5/image_part_159"
+					
+				}
+			},
+			"159":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_160",
+					"east": "blockhole:blocks/walls/1/image_part_160",
+					"south": "blockhole:blocks/walls/2/image_part_160",
+					"west": "blockhole:blocks/walls/3/image_part_160",
+					"up": "blockhole:blocks/walls/4/image_part_160",
+					"down": "blockhole:blocks/walls/5/image_part_160"
+					 
+				}
+			},
+			"160":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_161",
+					"east": "blockhole:blocks/walls/1/image_part_161",
+					"south": "blockhole:blocks/walls/2/image_part_161",
+					"west": "blockhole:blocks/walls/3/image_part_161",
+					"up": "blockhole:blocks/walls/4/image_part_161",
+					"down": "blockhole:blocks/walls/5/image_part_161"
+					 
+				}
+			},
+			"161":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_162",
+					"east": "blockhole:blocks/walls/1/image_part_162",
+					"south": "blockhole:blocks/walls/2/image_part_162",
+					"west": "blockhole:blocks/walls/3/image_part_162",
+					"up": "blockhole:blocks/walls/4/image_part_162",
+					"down": "blockhole:blocks/walls/5/image_part_162"
+					 
+				}
+			},
+			"162":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_163",
+					"east": "blockhole:blocks/walls/1/image_part_163",
+					"south": "blockhole:blocks/walls/2/image_part_163",
+					"west": "blockhole:blocks/walls/3/image_part_163",
+					"up": "blockhole:blocks/walls/4/image_part_163",
+					"down": "blockhole:blocks/walls/5/image_part_163"
+					 
+				}
+			},
+			"163":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_164",
+					"east": "blockhole:blocks/walls/1/image_part_164",
+					"south": "blockhole:blocks/walls/2/image_part_164",
+					"west": "blockhole:blocks/walls/3/image_part_164",
+					"up": "blockhole:blocks/walls/4/image_part_164",
+					"down": "blockhole:blocks/walls/5/image_part_164"
+					 
+				}
+			},
+			"164":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_165",
+					"east": "blockhole:blocks/walls/1/image_part_165",
+					"south": "blockhole:blocks/walls/2/image_part_165",
+					"west": "blockhole:blocks/walls/3/image_part_165",
+					"up": "blockhole:blocks/walls/4/image_part_165",
+					"down": "blockhole:blocks/walls/5/image_part_165"
+					 
+				}
+			},
+			"165":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_166",
+					"east": "blockhole:blocks/walls/1/image_part_166",
+					"south": "blockhole:blocks/walls/2/image_part_166",
+					"west": "blockhole:blocks/walls/3/image_part_166",
+					"up": "blockhole:blocks/walls/4/image_part_166",
+					"down": "blockhole:blocks/walls/5/image_part_166"
+					 
+				}
+			},
+			"166":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_167",
+					"east": "blockhole:blocks/walls/1/image_part_167",
+					"south": "blockhole:blocks/walls/2/image_part_167",
+					"west": "blockhole:blocks/walls/3/image_part_167",
+					"up": "blockhole:blocks/walls/4/image_part_167",
+					"down": "blockhole:blocks/walls/5/image_part_167"
+					 
+				}
+			},
+			"167":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_168",
+					"east": "blockhole:blocks/walls/1/image_part_168",
+					"south": "blockhole:blocks/walls/2/image_part_168",
+					"west": "blockhole:blocks/walls/3/image_part_168",
+					"up": "blockhole:blocks/walls/4/image_part_168",
+					"down": "blockhole:blocks/walls/5/image_part_168"
+					 
+				}
+			},
+			"168":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_169",
+					"east": "blockhole:blocks/walls/1/image_part_169",
+					"south": "blockhole:blocks/walls/2/image_part_169",
+					"west": "blockhole:blocks/walls/3/image_part_169",
+					"up": "blockhole:blocks/walls/4/image_part_169",
+					"down": "blockhole:blocks/walls/5/image_part_169"
+					 
+				}
+			},
+			"169":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_170",
+					"east": "blockhole:blocks/walls/1/image_part_170",
+					"south": "blockhole:blocks/walls/2/image_part_170",
+					"west": "blockhole:blocks/walls/3/image_part_170",
+					"up": "blockhole:blocks/walls/4/image_part_170",
+					"down": "blockhole:blocks/walls/5/image_part_170"
+					 
+				}
+			},
+			"170":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_171",
+					"east": "blockhole:blocks/walls/1/image_part_171",
+					"south": "blockhole:blocks/walls/2/image_part_171",
+					"west": "blockhole:blocks/walls/3/image_part_171",
+					"up": "blockhole:blocks/walls/4/image_part_171",
+					"down": "blockhole:blocks/walls/5/image_part_171"
+					 
+				}
+			},
+			"171":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_172",
+					"east": "blockhole:blocks/walls/1/image_part_172",
+					"south": "blockhole:blocks/walls/2/image_part_172",
+					"west": "blockhole:blocks/walls/3/image_part_172",
+					"up": "blockhole:blocks/walls/4/image_part_172",
+					"down": "blockhole:blocks/walls/5/image_part_172"
+					 
+				}
+			},
+			"172":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_173",
+					"east": "blockhole:blocks/walls/1/image_part_173",
+					"south": "blockhole:blocks/walls/2/image_part_173",
+					"west": "blockhole:blocks/walls/3/image_part_173",
+					"up": "blockhole:blocks/walls/4/image_part_173",
+					"down": "blockhole:blocks/walls/5/image_part_173"
+					 
+				}
+			},
+			"173":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_174",
+					"east": "blockhole:blocks/walls/1/image_part_174",
+					"south": "blockhole:blocks/walls/2/image_part_174",
+					"west": "blockhole:blocks/walls/3/image_part_174",
+					"up": "blockhole:blocks/walls/4/image_part_174",
+					"down": "blockhole:blocks/walls/5/image_part_174"
+					 
+				}
+			},
+			"174":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_175",
+					"east": "blockhole:blocks/walls/1/image_part_175",
+					"south": "blockhole:blocks/walls/2/image_part_175",
+					"west": "blockhole:blocks/walls/3/image_part_175",
+					"up": "blockhole:blocks/walls/4/image_part_175",
+					"down": "blockhole:blocks/walls/5/image_part_175"
+					 
+				}
+			},
+			"175":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_176",
+					"east": "blockhole:blocks/walls/1/image_part_176",
+					"south": "blockhole:blocks/walls/2/image_part_176",
+					"west": "blockhole:blocks/walls/3/image_part_176",
+					"up": "blockhole:blocks/walls/4/image_part_176",
+					"down": "blockhole:blocks/walls/5/image_part_176"
+					 
+				}
+			},
+			"176":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_177",
+					"east": "blockhole:blocks/walls/1/image_part_177",
+					"south": "blockhole:blocks/walls/2/image_part_177",
+					"west": "blockhole:blocks/walls/3/image_part_177",
+					"up": "blockhole:blocks/walls/4/image_part_177",
+					"down": "blockhole:blocks/walls/5/image_part_177"
+					 
+				}
+			},
+			"177":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_178",
+					"east": "blockhole:blocks/walls/1/image_part_178",
+					"south": "blockhole:blocks/walls/2/image_part_178",
+					"west": "blockhole:blocks/walls/3/image_part_178",
+					"up": "blockhole:blocks/walls/4/image_part_178",
+					"down": "blockhole:blocks/walls/5/image_part_178"
+					 
+				}
+			},
+			"178":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_179",
+					"east": "blockhole:blocks/walls/1/image_part_179",
+					"south": "blockhole:blocks/walls/2/image_part_179",
+					"west": "blockhole:blocks/walls/3/image_part_179",
+					"up": "blockhole:blocks/walls/4/image_part_179",
+					"down": "blockhole:blocks/walls/5/image_part_179"
+					 
+				}
+			},
+			"179":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_180",
+					"east": "blockhole:blocks/walls/1/image_part_180",
+					"south": "blockhole:blocks/walls/2/image_part_180",
+					"west": "blockhole:blocks/walls/3/image_part_180",
+					"up": "blockhole:blocks/walls/4/image_part_180",
+					"down": "blockhole:blocks/walls/5/image_part_180"
+
+				}
+			},
+			"180":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_181",
+					"east": "blockhole:blocks/walls/1/image_part_181",
+					"south": "blockhole:blocks/walls/2/image_part_181",
+					"west": "blockhole:blocks/walls/3/image_part_181",
+					"up": "blockhole:blocks/walls/4/image_part_181",
+					"down": "blockhole:blocks/walls/5/image_part_181"
+					 
+				}
+			},
+			"181":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_182",
+					"east": "blockhole:blocks/walls/1/image_part_182",
+					"south": "blockhole:blocks/walls/2/image_part_182",
+					"west": "blockhole:blocks/walls/3/image_part_182",
+					"up": "blockhole:blocks/walls/4/image_part_182",
+					"down": "blockhole:blocks/walls/5/image_part_182"
+					 
+				}
+			},
+			"182":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_183",
+					"east": "blockhole:blocks/walls/1/image_part_183",
+					"south": "blockhole:blocks/walls/2/image_part_183",
+					"west": "blockhole:blocks/walls/3/image_part_183",
+					"up": "blockhole:blocks/walls/4/image_part_183",
+					"down": "blockhole:blocks/walls/5/image_part_183"
+					 
+				}
+			},
+			"183":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_184",
+					"east": "blockhole:blocks/walls/1/image_part_184",
+					"south": "blockhole:blocks/walls/2/image_part_184",
+					"west": "blockhole:blocks/walls/3/image_part_184",
+					"up": "blockhole:blocks/walls/4/image_part_184",
+					"down": "blockhole:blocks/walls/5/image_part_184"
+					 
+				}
+			},
+			"184":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_185",
+					"east": "blockhole:blocks/walls/1/image_part_185",
+					"south": "blockhole:blocks/walls/2/image_part_185",
+					"west": "blockhole:blocks/walls/3/image_part_185",
+					"up": "blockhole:blocks/walls/4/image_part_185",
+					"down": "blockhole:blocks/walls/5/image_part_185"
+					 
+				}
+			},
+			"185":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_186",
+					"east": "blockhole:blocks/walls/1/image_part_186",
+					"south": "blockhole:blocks/walls/2/image_part_186",
+					"west": "blockhole:blocks/walls/3/image_part_186",
+					"up": "blockhole:blocks/walls/4/image_part_186",
+					"down": "blockhole:blocks/walls/5/image_part_186"
+					 
+				}
+			},
+			"186":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_187",
+					"east": "blockhole:blocks/walls/1/image_part_187",
+					"south": "blockhole:blocks/walls/2/image_part_187",
+					"west": "blockhole:blocks/walls/3/image_part_187",
+					"up": "blockhole:blocks/walls/4/image_part_187",
+					"down": "blockhole:blocks/walls/5/image_part_187"
+					 
+				}
+			},
+			"187":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_188",
+					"east": "blockhole:blocks/walls/1/image_part_188",
+					"south": "blockhole:blocks/walls/2/image_part_188",
+					"west": "blockhole:blocks/walls/3/image_part_188",
+					"up": "blockhole:blocks/walls/4/image_part_188",
+					"down": "blockhole:blocks/walls/5/image_part_188"
+					 
+				}
+			},
+			"188":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_189",
+					"east": "blockhole:blocks/walls/1/image_part_189",
+					"south": "blockhole:blocks/walls/2/image_part_189",
+					"west": "blockhole:blocks/walls/3/image_part_189",
+					"up": "blockhole:blocks/walls/4/image_part_189",
+					"down": "blockhole:blocks/walls/5/image_part_189"
+					 
+				}
+			},
+			"189":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_190",
+					"east": "blockhole:blocks/walls/1/image_part_190",
+					"south": "blockhole:blocks/walls/2/image_part_190",
+					"west": "blockhole:blocks/walls/3/image_part_190",
+					"up": "blockhole:blocks/walls/4/image_part_190",
+					"down": "blockhole:blocks/walls/5/image_part_190"
+					 
+				}
+			},
+			"190":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_191",
+					"east": "blockhole:blocks/walls/1/image_part_191",
+					"south": "blockhole:blocks/walls/2/image_part_191",
+					"west": "blockhole:blocks/walls/3/image_part_191",
+					"up": "blockhole:blocks/walls/4/image_part_191",
+					"down": "blockhole:blocks/walls/5/image_part_191"
+					 
+				}
+			},
+			"191":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_192",
+					"east": "blockhole:blocks/walls/1/image_part_192",
+					"south": "blockhole:blocks/walls/2/image_part_192",
+					"west": "blockhole:blocks/walls/3/image_part_192",
+					"up": "blockhole:blocks/walls/4/image_part_192",
+					"down": "blockhole:blocks/walls/5/image_part_192"
+					 
+				}
+			},
+			"192":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_193",
+					"east": "blockhole:blocks/walls/1/image_part_193",
+					"south": "blockhole:blocks/walls/2/image_part_193",
+					"west": "blockhole:blocks/walls/3/image_part_193",
+					"up": "blockhole:blocks/walls/4/image_part_193",
+					"down": "blockhole:blocks/walls/5/image_part_193"
+					 
+				}
+			},
+			"193":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_194",
+					"east": "blockhole:blocks/walls/1/image_part_194",
+					"south": "blockhole:blocks/walls/2/image_part_194",
+					"west": "blockhole:blocks/walls/3/image_part_194",
+					"up": "blockhole:blocks/walls/4/image_part_194",
+					"down": "blockhole:blocks/walls/5/image_part_194"
+					 
+				}
+			},
+			"194":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_195",
+					"east": "blockhole:blocks/walls/1/image_part_195",
+					"south": "blockhole:blocks/walls/2/image_part_195",
+					"west": "blockhole:blocks/walls/3/image_part_195",
+					"up": "blockhole:blocks/walls/4/image_part_195",
+					"down": "blockhole:blocks/walls/5/image_part_195"
+					 
+				}
+			},
+			"195":
+			{
+				"textures":
+				{
+					"north": "blockhole:blocks/walls/0/image_part_196",
+					"east": "blockhole:blocks/walls/1/image_part_196",
+					"south": "blockhole:blocks/walls/2/image_part_196",
+					"west": "blockhole:blocks/walls/3/image_part_196",
+					"up": "blockhole:blocks/walls/4/image_part_196",
+					"down": "blockhole:blocks/walls/5/image_part_196"
+					 
+				}
+			}
+		}
 	}
 }

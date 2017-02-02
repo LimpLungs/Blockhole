@@ -2,8 +2,11 @@ package com.limplungs.blockhole.dimensions;
 
 import java.util.List;
 
+import com.limplungs.blockhole.blocks.BlockBlockholeWall;
 import com.limplungs.blockhole.blocks.BlockList;
+import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -42,55 +45,43 @@ public class ChunkProviderSingularity implements IChunkGenerator
 		if (x == 0 && z == 0)
 		{
 			int i = 0;
-			int k = 0;
 			int j = 0;
+			int k = 0;
 
-			for (j = 0; j < 16; j++)
-			{
-				i = 0;
-				k = 0;
-				
-				for (i = 0; i < 16; i++)
-				{
-					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
-				}
-				
-				k = 15;
-				
-				for (i = 0; i < 16; i++)
-				{
-					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
-				}
-				
-				i = 0;
-				k = 0;
-				
-				for (k = 0; k < 16; k++)
-				{
-					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
-				}
-				
-				i = 15;
-				
-				for (k = 0; k < 16; k++)
-				{
-					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
-				}
-			}
-			
-			i = 0;
-			j = 0;
-			k = 0;
-			
-			for (j = 0; j < 16; j += 15)
+			for (j = 0; j < 16; j+=15)
 			{
 				for (i = 1; i < 15; i++)
 				{
 					for (k = 1; k < 15; k++)
-					{
+					{  
 						primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
 					}
 				}
+			}
+			
+			i = 0; j = 0; k = 0;
+			
+			for (j = 1; j < 15; j++)
+			{
+				k = 0;
+				
+				for (i = 1; i < 15; i++)
+					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
+				
+				k = 15;
+				
+				for (i = 1; i < 15; i++)
+					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
+				
+				i = 0;
+				
+				for (k = 1; k < 15; k++)
+					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
+				
+				i = 15;
+				
+				for (k = 1; k < 15; k++)
+					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
 			}
 		}
 		
@@ -138,4 +129,6 @@ public class ChunkProviderSingularity implements IChunkGenerator
 		
 	}
 
+	
+	
 }

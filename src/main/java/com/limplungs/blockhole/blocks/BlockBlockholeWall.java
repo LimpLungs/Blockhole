@@ -1,29 +1,103 @@
 package com.limplungs.blockhole.blocks;
 
+import java.util.List;
+
 import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
 
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBlockholeWall extends BlockBasic implements ITileEntityProvider
+public class BlockBlockholeWall extends BlockBasic
 {
-
+	public static final PropertyInteger INDEX = PropertyInteger.create("index", 0, 195);
+	
 	public BlockBlockholeWall(BlockData blockdata) 
 	{
 		super(blockdata);
 		this.setBlockUnbreakable();
+		this.setResistance(4096F);
+		this.setLightLevel(1.0F);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(INDEX, 0));
 	}
+	
+	@Override
+	protected BlockStateContainer createBlockState() 
+	{
+		return new BlockStateContainer(this, new IProperty[]{INDEX});
+	}
+
+	
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) 
+	{
+		return new TileEntityBlockholeWall();
+	}
+	
+	@Override
+	public boolean hasTileEntity(IBlockState state) 
+	{
+		return true;
+	}
+	
+	
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) 
+	{
+		int i = 0;
+		
+		if (pos.getX() == 0)
+			i = (14 - pos.getY()) * 14 + (14 - pos.getZ());
+		if (pos.getX() == 15)
+			i = (14 - pos.getY()) * 14 + (pos.getZ()-1);
+		if (pos.getZ() == 0)
+			i = (14 - pos.getY()) * 14 + (pos.getX()-1);
+		if (pos.getZ() == 15)
+		i = (14 - pos.getY()) * 14 + (14 - pos.getX());
+		if (pos.getY() == 0)
+			i = (pos.getZ() - 1) * 14 + (pos.getX() - 1);
+		if (pos.getY() == 15)
+			i = (14 - pos.getZ()) * 14 + (pos.getX() - 1);
+		
+		if (i <= 196 && i >= 0)
+			return state.withProperty(INDEX, i);
+		
+		else
+			return state.withProperty(INDEX, 0);
+	}
+	
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state) 
+	{
+		//state.
+	}
+	
+	@Override
+	public int getMetaFromState(IBlockState state) 
+	{
+		return 0;
+	}
+	
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) 
+	{
+		return this.getDefaultState().withProperty(INDEX, 0);
+	}
+
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
@@ -36,20 +110,29 @@ public class BlockBlockholeWall extends BlockBasic implements ITileEntityProvide
 		return false;
 	}
 	
+	
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) 
+	{
+		return EnumBlockRenderType.MODEL;
+	}
+	
+	
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) 
 	{
 		return new ItemStack(Blocks.BEDROCK);
 	}
-
+	
+	
 	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) 
+	public boolean isOpaqueCube(IBlockState state) 
 	{
-		return new TileEntityBlockholeWall();
+		return true;
 	}
 	
 	@Override
-	public boolean isFullyOpaque(IBlockState state) 
+	public boolean isFullCube(IBlockState state) 
 	{
 		return true;
 	}
@@ -61,70 +144,25 @@ public class BlockBlockholeWall extends BlockBasic implements ITileEntityProvide
 	}
 	
 	@Override
-	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) 
-	{
-		return true;
-	}
-	
-	@Override
-	public void onBlockDestroyedByExplosion(World world, BlockPos pos, Explosion explosionIn) 
-	{
-		super.onBlockDestroyedByExplosion(world, pos, explosionIn);
-		
-		TileEntityBlockholeWall tile = (TileEntityBlockholeWall)world.getTileEntity(pos);
-		
-		world.setBlockState(pos, BlockList.BLOCKHOLE_WALL.getDefaultState());
-		
-		world.setTileEntity(pos, tile);
-	}
-	
-	@Override
 	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) 
 	{
-		super.onBlockDestroyedByPlayer(world, pos, state);
-		
-		TileEntityBlockholeWall tile = (TileEntityBlockholeWall)world.getTileEntity(pos);
-		
-		world.setBlockState(pos, BlockList.BLOCKHOLE_WALL.getDefaultState());
-		
-		world.setTileEntity(pos, tile);
-	}
-	
-	@Override
-	public void onBlockExploded(World world, BlockPos pos, Explosion explosion) {
-		
-		super.onBlockExploded(world, pos, explosion);
-
-		TileEntityBlockholeWall tile = (TileEntityBlockholeWall)world.getTileEntity(pos);
-		
-		world.setBlockState(pos, BlockList.BLOCKHOLE_WALL.getDefaultState());
-		
-		world.setTileEntity(pos, tile);
 	}
 	
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) 
 	{
-		super.onBlockHarvested(world, pos, state, player);
-
-		TileEntityBlockholeWall tile = (TileEntityBlockholeWall)world.getTileEntity(pos);
-		
-		world.setBlockState(pos, BlockList.BLOCKHOLE_WALL.getDefaultState());
-		
-		world.setTileEntity(pos, tile);
 	}
 	
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) 
 	{ 
-		super.removedByPlayer(state, world, pos, player, willHarvest);
-
-		TileEntityBlockholeWall tile = (TileEntityBlockholeWall)world.getTileEntity(pos);
-		
-		world.setBlockState(pos, BlockList.BLOCKHOLE_WALL.getDefaultState());
-		
-		world.setTileEntity(pos, tile);
-		
 		return false;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) 
+	{
+		tooltip.add("If you somehow got one of these blocks,\nDO NOT PLACE IT!\n");
+		tooltip.add("If accidentally placed, remove it with\n/setblock x y z minecraft:air");
 	}
 }

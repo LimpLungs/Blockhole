@@ -127,7 +127,7 @@ public class WorldProviderSingularity extends WorldProvider
     	{
     		float f1 = 1.0F - (float)i / 15.0F;
     		this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 1.0F + 0.0F;
-    		this.lightBrightnessTable[i] *= .99F;
+    		this.lightBrightnessTable[i] *= .5F;
     	}
     }
 }

@@ -7,28 +7,28 @@ import net.minecraft.world.WorldServer;
 public class TeleporterSingularity extends Teleporter
 {
 	
-	public TeleporterSingularity(WorldServer worldIn) 
+	public TeleporterSingularity(WorldServer world) 
 	{
-		super(worldIn);
+		super(world);
 	}
 
 	@Override
-	public boolean placeInExistingPortal(Entity entityIn, float rotationYaw) 
+	public boolean placeInExistingPortal(Entity entity, float rotationYaw) 
 	{
-		entityIn.setPosition(8.5,2,8.5);
+		entity.setPosition(8.5,2,8.5);
 		return false;
 	}
 	
 	@Override
-	public boolean makePortal(Entity entityIn) 
+	public boolean makePortal(Entity entity) 
 	{
-		entityIn.setPosition(8.5,2,8.5);
+		entity.setPosition(8.5,2,8.5);
 		return false;
 	}
 	
 	@Override
-	public void placeInPortal(Entity entityIn, float rotationYaw) 
+	public void placeInPortal(Entity entity, float rotationYaw) 
 	{
-		entityIn.setPosition(8.5,2,8.5);
+		entity.setPosition(8.5,2,8.5);
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockList 
 {
@@ -37,6 +38,7 @@ public class BlockList
 		POWDERKEG = new BlockPowderKeg(DATA_POWDERKEG);
 		BLOCKHOLE = new BlockBlockhole(DATA_BLOCKHOLE);
 		BLOCKHOLE_WALL = new BlockBlockholeWall(DATA_BLOCKHOLEWALL);
+		
 	}
 
 	
@@ -49,5 +51,6 @@ public class BlockList
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(TELEPORTER), 0, new ModelResourceLocation(Blockhole.MODID + ":" + TELEPORTER.getName(), "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(POWDERKEG), 0, new ModelResourceLocation(Blockhole.MODID + ":" + POWDERKEG.getName(), "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(BLOCKHOLE), 0, new ModelResourceLocation(Blockhole.MODID + ":" + BLOCKHOLE.getName(), "inventory"));
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(BLOCKHOLE_WALL), 0, new ModelResourceLocation(Blockhole.MODID + ":" + BLOCKHOLE_WALL.getName(), "inventory"));
 	}
 }
