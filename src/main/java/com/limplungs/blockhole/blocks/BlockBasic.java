@@ -8,7 +8,6 @@ public class BlockBasic extends Block
 	private final String name;
 	private final BlockData data;
 	
-	@SuppressWarnings("deprecation")
 	public BlockBasic(BlockData blockdata) 
 	{
 		super(blockdata.material);
@@ -24,11 +23,7 @@ public class BlockBasic extends Block
 		
 		// Block Register
 		this.setRegistryName(blockdata.name);
-		GameRegistry.registerBlock(this); // deprecated
-		
-		// Research!!!
-		// Not sure what to do with this...
-		// GameRegistry.register(this); ????
+		GameRegistry.register(this);
 	}
 	
 	public String getName()

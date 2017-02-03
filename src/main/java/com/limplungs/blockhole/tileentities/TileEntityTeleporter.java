@@ -122,7 +122,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
     {
       super.onDataPacket(net, pkt);
       
-      if(worldObj.isRemote)
+      if(world.isRemote)
       {
         readFromNBT(pkt.getNbtCompound());
       }
@@ -206,12 +206,6 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	public void markDirty() 
 	{
 		super.markDirty();
-	}
-
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) 
-	{
-		return false;
 	}
 
 	@Override
@@ -301,6 +295,18 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	{
 		this.queue = queue;
 		this.markDirty();
+	}
+
+	@Override
+	public boolean isEmpty() 
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isUsableByPlayer(EntityPlayer player) 
+	{
+		return false;
 	}
 	
 }

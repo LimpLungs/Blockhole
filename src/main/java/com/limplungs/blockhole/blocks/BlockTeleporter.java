@@ -63,21 +63,20 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 		return BOUNDING_BOX;
 	}
 	
-	
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos) 
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) 
 	{
 		return BOUNDING_BOX;
 	}
+
 	
-	
-	@SuppressWarnings({ "unused" })
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
+		ItemStack heldItem = player.getHeldItem(hand);
+		
 		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
 		
-		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
 		ItemStack tstack = tile.getQueue().getBack();
 		
 		
@@ -87,7 +86,7 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 			if(tile.isItemValidForSlot(tile.getQueue().getSize(), heldItem))
 			{
 				tile.setInventorySlotContents(tile.getQueue().getSize(), heldItem);
-				heldItem.stackSize -= 1;
+				heldItem.setCount(heldItem.getCount() - 1);
 				player.attackEntityFrom(BlockholeDefinitions.teleporter, 1);
 				
 				return true;
@@ -105,7 +104,7 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 					
 				if (player.attemptTeleport(fin_x, tile.tp_y, fin_z))
 				{
-					heldItem.stackSize -= 1;
+					heldItem.setCount(heldItem.getCount() - 1);
 					player.attackEntityFrom(BlockholeDefinitions.teleporter, 15);
 					
 					return true;
@@ -123,10 +122,10 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 					ItemStack pstack = player.inventory.getStackInSlot(i);
 					
 					if (!world.isRemote)
-					if (pstack != null && pstack.stackSize < pstack.getMaxStackSize() && pstack.getItem() == tstack.getItem() && pstack.getMetadata() == tstack.getMetadata() && pstack.getTagCompound() == tstack.getTagCompound())
+					if (pstack != null && pstack.getCount() < pstack.getMaxStackSize() && pstack.getItem() == tstack.getItem() && pstack.getMetadata() == tstack.getMetadata() && pstack.getTagCompound() == tstack.getTagCompound())
 					{
 						tile.removeStackFromSlot(tile.getSizeInventory());
-						pstack.stackSize += 1;
+						pstack.setCount(pstack.getCount() + 1);
 						player.attackEntityFrom(BlockholeDefinitions.teleporter, 1);
 							
 						return true;
@@ -153,9 +152,8 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	}
 	
 	
-	//@SuppressWarnings("deprecation")
 	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) 
+	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) 
 	{
 		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
 		
@@ -187,4 +185,5 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 			}
 		}
 	}
+		
 }

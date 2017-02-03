@@ -13,7 +13,7 @@ public class RecipesList
 	public static void addShaped()
 	{
 		// Blockhole Teleportation Device
-		GameRegistry.addRecipe(new ItemStack(BlockList.TELEPORTER), "WWW", "IEI", "SSS", 'W', Blocks.WOODEN_SLAB, 'E', BlockList.BLOCKHOLE, 'S', Blocks.STONE);
+		//GameRegistry.addRecipe(new ItemStack(BlockList.TELEPORTER), "WWW", "IEI", "SSS", 'W', Blocks.WOODEN_SLAB, 'E', BlockList.BLOCKHOLE, 'S', Blocks.STONE);
 		
 		// Blockhole Singularity
 		GameRegistry.addRecipe(new ItemStack(BlockList.BLOCKHOLE),  "OEO", "EDE", "OEO", 'O', Blocks.OBSIDIAN,    'E', Items.ENDER_PEARL,   'D', Blocks.DIAMOND_BLOCK);

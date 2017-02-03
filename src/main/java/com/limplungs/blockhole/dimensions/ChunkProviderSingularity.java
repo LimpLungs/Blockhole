@@ -2,11 +2,7 @@ package com.limplungs.blockhole.dimensions;
 
 import java.util.List;
 
-import com.limplungs.blockhole.blocks.BlockBlockholeWall;
 import com.limplungs.blockhole.blocks.BlockList;
-import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
-
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -116,9 +112,9 @@ public class ChunkProviderSingularity implements IChunkGenerator
 	{
 		return null;
 	}
-
+	
 	@Override
-	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position) 
+	public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) 
 	{
 		return null;
 	}
@@ -128,7 +124,5 @@ public class ChunkProviderSingularity implements IChunkGenerator
 	{
 		
 	}
-
-	
 	
 }

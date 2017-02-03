@@ -58,7 +58,7 @@ public class TileEntityBlockholeWall extends TileEntity
     {
       super.onDataPacket(net, pkt);
       
-      if(worldObj.isRemote)
+      if(world.isRemote)
       {
         readFromNBT(pkt.getNbtCompound());
       }

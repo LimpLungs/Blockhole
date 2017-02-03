@@ -35,8 +35,10 @@ public class ItemTuner extends ItemBasic
 	}
 
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
+		ItemStack stack = player.getHeldItem(hand);
+		
 		if (!stack.hasTagCompound())
 		{
 			stack.setTagCompound(new NBTTagCompound());
@@ -47,8 +49,6 @@ public class ItemTuner extends ItemBasic
 		
 		if (stack.getTagCompound() != null && target != null && target instanceof BlockTeleporter)
 		{
-			BlockTeleporter block = ((BlockTeleporter)world.getBlockState(pos).getBlock());
-			
 			if (world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof TileEntityTeleporter)
 			{
 				TileEntityTeleporter tile = (TileEntityTeleporter) world.getTileEntity(pos); 
@@ -95,7 +95,7 @@ public class ItemTuner extends ItemBasic
 			
 				if (world.isRemote)
 				{
-					player.addChatMessage(new TextComponentString("XYZ: " + tile.tp_x + " " + tile.tp_y + " " + tile.tp_z));
+					player.sendMessage(new TextComponentString("XYZ: " + tile.tp_x + " " + tile.tp_y + " " + tile.tp_z));
 				}
 			}
 			
@@ -106,8 +106,10 @@ public class ItemTuner extends ItemBasic
 	}
 	
 	@Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World world, EntityPlayer player, EnumHand hand)
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
     {
+		ItemStack stack = player.getHeldItem(hand);
+		
 		if (!stack.hasTagCompound())
 		{
 			stack.setTagCompound(new NBTTagCompound());
@@ -127,15 +129,15 @@ public class ItemTuner extends ItemBasic
 			{
 				if (stack.getTagCompound().getInteger("mode") == 0)
 				{
-					player.addChatMessage(new TextComponentString("MODE: X - COORDINATE"));
+					player.sendMessage(new TextComponentString("MODE: X - COORDINATE"));
 				}
 				if (stack.getTagCompound().getInteger("mode") == 1)
 				{
-					player.addChatMessage(new TextComponentString("MODE: Y - COORDINATE"));
+					player.sendMessage(new TextComponentString("MODE: Y - COORDINATE"));
 				}
 				if (stack.getTagCompound().getInteger("mode") == 2)
 				{
-					player.addChatMessage(new TextComponentString("MODE: Z - COORDINATE"));
+					player.sendMessage(new TextComponentString("MODE: Z - COORDINATE"));
 				}
 			}
 		}

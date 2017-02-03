@@ -12,12 +12,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class WorldProviderSingularity extends WorldProvider
 {
-	
-	@Override
-	protected void createBiomeProvider() 
+	public WorldProviderSingularity() 
 	{
 		this.biomeProvider = new BiomeProviderSingle(Biomes.VOID);
-        this.isHellWorld = false;
+        this.hasSkyLight = false;
         this.hasNoSky = true;
 	}
 	
@@ -34,7 +32,7 @@ public class WorldProviderSingularity extends WorldProvider
 	
 	public IChunkGenerator createChunkGenerator()
 	{
-		return new ChunkProviderSingularity(this.worldObj);
+		return new ChunkProviderSingularity(this.world);
 	}
 
     @SideOnly(Side.CLIENT)
@@ -89,12 +87,6 @@ public class WorldProviderSingularity extends WorldProvider
     }
     
     @Override
-    public boolean getHasNoSky() 
-    {
-    	return this.hasNoSky;
-    }
-    
-    @Override
     public double getVoidFogYFactor() 
     {
     	return 0.03125;
@@ -121,8 +113,6 @@ public class WorldProviderSingularity extends WorldProvider
     @Override
     protected void generateLightBrightnessTable() 
     {
-    	float f = 0.0F;
-
     	for (int i = 0; i <= 15; ++i)
     	{
     		float f1 = 1.0F - (float)i / 15.0F;

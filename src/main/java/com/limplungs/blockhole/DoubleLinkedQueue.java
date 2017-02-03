@@ -235,7 +235,7 @@ public class DoubleLinkedQueue
 			
 			if(itemtag != null && !itemtag.hasNoTags())
 			{
-				insert_back(ItemStack.loadItemStackFromNBT(itemtag), nbttag);
+				insert_back(new ItemStack(itemtag), nbttag);
 			}
 		}
 	}

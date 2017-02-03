@@ -12,7 +12,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Blockhole
 {
     public static final String MODID = "blockhole";
-    public static final String VERSION = "1.0alpha6";
+    public static final String VERSION = "1.0alpha7";
     
     //Ideas
     //Blockhole Teleporter
@@ -39,6 +40,7 @@ public class Blockhole
     	BlockholeDefinitions.initialize();
     	
     	BlockList.registerBlocks();
+    	BlockList.registerItemBlocks();
     	ItemList.registerItems();
     	TileEntityList.registerTileEntities();
     	
@@ -62,20 +64,21 @@ public class Blockhole
 			
 			
 			// Render Manager
-			EntityRegistry.registerModEntity(EntityPowderKeg.class, "entityPowderKeg", 10, "blockhole", 100, 1, false);
+			ResourceLocation rlpowderkeg = new ResourceLocation(MODID, "powderkeg");
+			EntityRegistry.registerModEntity(rlpowderkeg, EntityPowderKeg.class, "entityPowderKeg", 1, Blockhole.MODID, 100, 1, true);
 			
 			RenderManager factory = Minecraft.getMinecraft().getRenderManager();
 			RenderingRegistry.registerEntityRenderingHandler(EntityPowderKeg.class, new RenderPowderKeg(factory));
 		}
 	}
-	
+
 	public static CreativeTabs tabBlockhole = new CreativeTabs("tabBlockhole")
 	{
 		@Override
 		@SideOnly(Side.CLIENT)
-		public Item getTabIconItem()
+		public ItemStack getTabIconItem()
 		{
-			return Item.getItemFromBlock(BlockList.TELEPORTER);
+			return new ItemStack(BlockList.BLOCKHOLE);
 		}
 	};
 }

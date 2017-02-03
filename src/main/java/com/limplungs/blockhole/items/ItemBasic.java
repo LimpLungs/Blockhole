@@ -7,7 +7,6 @@ public class ItemBasic extends Item
 {
 	private final String name;
 	
-	@SuppressWarnings("deprecation")
 	public ItemBasic(ItemData itemdata)
 	{
 		// Item Data
@@ -18,7 +17,7 @@ public class ItemBasic extends Item
 		
 		// Item Register
 		this.setRegistryName(itemdata.name);
-		GameRegistry.registerItem(this); // deprecated
+		GameRegistry.register(this);
 	}
 	
 	public String getName()

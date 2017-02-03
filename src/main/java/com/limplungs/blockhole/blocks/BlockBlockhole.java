@@ -75,14 +75,14 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	
 	
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, World world, BlockPos pos) 
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) 
 	{
 		return BOUNDING_BOX;
 	}
 	
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) 
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
 		TileEntityBlockhole tile = (TileEntityBlockhole)world.getTileEntity(pos);
 		

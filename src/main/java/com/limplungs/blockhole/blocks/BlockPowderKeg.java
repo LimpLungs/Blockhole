@@ -1,7 +1,5 @@
 package com.limplungs.blockhole.blocks;
 
-import javax.annotation.Nullable;
-
 import com.limplungs.blockhole.entities.EntityPowderKeg;
 
 import net.minecraft.block.Block;
@@ -34,9 +32,20 @@ public class BlockPowderKeg extends BlockBasic
         this.setDefaultState(this.blockState.getBaseState().withProperty(EXPLODE, Boolean.valueOf(false)));
     }
 
-    /**
-     * Called after the block is set in the Chunk data, but before the Tile Entity is set
-     */
+    public void explode(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase igniter)
+    {
+        if (!worldIn.isRemote)
+        {
+            if (((Boolean)state.getValue(EXPLODE)).booleanValue())
+            {
+            	EntityPowderKeg entitypowderkeg = new EntityPowderKeg(worldIn, (double)((float)pos.getX() + 0.5F), (double)pos.getY(), (double)((float)pos.getZ() + 0.5F), igniter);
+                worldIn.spawnEntity(entitypowderkeg);
+                worldIn.playSound((EntityPlayer)null, entitypowderkeg.posX, entitypowderkeg.posY, entitypowderkeg.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            }
+        }
+    }
+
+    @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
     {
         super.onBlockAdded(worldIn, pos, state);
@@ -48,12 +57,8 @@ public class BlockPowderKeg extends BlockBasic
         }
     }
 
-    /**
-     * Called when a neighboring block was changed and marks that this state should perform any checks during a neighbor
-     * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
-     * block, etc.
-     */
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn)
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         if (worldIn.isBlockPowered(pos))
         {
@@ -62,67 +67,51 @@ public class BlockPowderKeg extends BlockBasic
         }
     }
 
-    /**
-     * Called when this Block is destroyed by an Explosion
-     */
+    @Override
     public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn)
     {
         if (!worldIn.isRemote)
         {
             EntityPowderKeg entitypowderkeg = new EntityPowderKeg(worldIn, (double)((float)pos.getX() + 0.5F), (double)pos.getY(), (double)((float)pos.getZ() + 0.5F), explosionIn.getExplosivePlacedBy());
             entitypowderkeg.setFuse((short)(worldIn.rand.nextInt(entitypowderkeg.getFuse() / 4) + entitypowderkeg.getFuse() / 8));
-            worldIn.spawnEntityInWorld(entitypowderkeg);
+            worldIn.spawnEntity(entitypowderkeg);
         }
     }
 
-    /**
-     * Called when a player destroys this Block
-     */
+    @Override
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state)
     {
         this.explode(worldIn, pos, state, (EntityLivingBase)null);
     }
 
-    public void explode(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase igniter)
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (!worldIn.isRemote)
-        {
-            if (((Boolean)state.getValue(EXPLODE)).booleanValue())
-            {
-            	EntityPowderKeg entitypowderkeg = new EntityPowderKeg(worldIn, (double)((float)pos.getX() + 0.5F), (double)pos.getY(), (double)((float)pos.getZ() + 0.5F), igniter);
-                worldIn.spawnEntityInWorld(entitypowderkeg);
-                worldIn.playSound((EntityPlayer)null, entitypowderkeg.posX, entitypowderkeg.posY, entitypowderkeg.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            }
-        }
-    }
+        ItemStack itemstack = playerIn.getHeldItem(hand);
 
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
-        if (heldItem != null && (heldItem.getItem() == Items.FLINT_AND_STEEL || heldItem.getItem() == Items.FIRE_CHARGE))
+        if (!itemstack.isEmpty() && (itemstack.getItem() == Items.FLINT_AND_STEEL || itemstack.getItem() == Items.FIRE_CHARGE))
         {
             this.explode(worldIn, pos, state.withProperty(EXPLODE, Boolean.valueOf(true)), playerIn);
             worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
 
-            if (heldItem.getItem() == Items.FLINT_AND_STEEL)
+            if (itemstack.getItem() == Items.FLINT_AND_STEEL)
             {
-                heldItem.damageItem(1, playerIn);
+                itemstack.damageItem(1, playerIn);
             }
             else if (!playerIn.capabilities.isCreativeMode)
             {
-                --heldItem.stackSize;
+                itemstack.shrink(1);
             }
 
             return true;
         }
         else
         {
-            return super.onBlockActivated(worldIn, pos, state, playerIn, hand, heldItem, side, hitX, hitY, hitZ);
+            return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
         }
     }
 
-    /**
-     * Called When an Entity Collided with the Block
-     */
+    @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
         if (!worldIn.isRemote && entityIn instanceof EntityArrow)
@@ -137,30 +126,27 @@ public class BlockPowderKeg extends BlockBasic
         }
     }
 
-    /**
-     * Return whether this block can drop from an explosion.
-     */
+    @Override
     public boolean canDropFromExplosion(Explosion explosionIn)
     {
         return false;
     }
 
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
+    
+    @Override
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(EXPLODE, Boolean.valueOf((meta & 1) > 0));
     }
 
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
+    
+    @Override
     public int getMetaFromState(IBlockState state)
     {
         return ((Boolean)state.getValue(EXPLODE)).booleanValue() ? 1 : 0;
     }
 
+    @Override
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {EXPLODE});
