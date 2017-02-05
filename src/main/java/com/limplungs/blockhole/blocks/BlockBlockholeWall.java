@@ -2,6 +2,7 @@ package com.limplungs.blockhole.blocks;
 
 import java.util.List;
 
+import com.limplungs.blockhole.dimensions.TeleporterSingularity;
 import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
 
 import net.minecraft.block.properties.IProperty;
@@ -9,6 +10,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class BlockBlockholeWall extends BlockBasic
 {
@@ -103,7 +106,16 @@ public class BlockBlockholeWall extends BlockBasic
 	{
 		if (player.isSneaking())
 		{
+			TileEntityBlockholeWall tile = (TileEntityBlockholeWall)world.getTileEntity(pos);
 			
+			if (tile.getDimensionID() != -999)
+			{
+				if (player instanceof EntityPlayerMP && world instanceof WorldServer)
+				{
+					player.getServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP)player, tile.getDimensionID(), new TeleporterSingularity((WorldServer)world, player.dimension, tile.getTeleportLocation()));
+					return true;
+				}
+			}
 		}
 		
 		return false;

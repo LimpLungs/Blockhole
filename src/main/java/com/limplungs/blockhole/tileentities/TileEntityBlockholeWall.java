@@ -5,21 +5,28 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityBlockholeWall extends TileEntity
+public class TileEntityBlockholeWall extends TileEntity implements ITickable
 {
 	private int dimID = -999;
+	private BlockPos teleportLocation = new BlockPos(0,0,0);
 	
 	public TileEntityBlockholeWall()
 	{
+		
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
 	{
 		compound.setInteger("dimID", this.dimID);
+		compound.setInteger("locateX", this.teleportLocation.getX());
+		compound.setInteger("locateY", this.teleportLocation.getY());
+		compound.setInteger("locateZ", this.teleportLocation.getZ());
 		
 		return super.writeToNBT(compound);
 	}
@@ -30,6 +37,8 @@ public class TileEntityBlockholeWall extends TileEntity
 		super.readFromNBT(compound);
 		
 		this.dimID = compound.getInteger("dimID");
+		
+		this.teleportLocation = new BlockPos(compound.getInteger("locateX"), compound.getInteger("locateY"), compound.getInteger("locateZ"));
 	}
     
     @Override
@@ -104,6 +113,84 @@ public class TileEntityBlockholeWall extends TileEntity
 	public NBTTagCompound serializeNBT() 
 	{
 		return null;
+	}
+	
+	void updateDimensionInfo()
+	{
+		if (dimID == -999 || (this.getTeleportLocation().getX() == 0 && this.getTeleportLocation().getY() == 0 && this.getTeleportLocation().getZ() == 0))
+		{
+			BlockPos up = new BlockPos(this.pos.getX(), this.pos.getY() + 1, this.pos.getZ());
+			BlockPos down = new BlockPos(this.pos.getX(), this.pos.getY() - 1, this.pos.getZ());
+			BlockPos east = new BlockPos(this.pos.getX() + 1, this.pos.getY(), this.pos.getZ());
+			BlockPos west = new BlockPos(this.pos.getX() - 1, this.pos.getY(), this.pos.getZ());
+			BlockPos north = new BlockPos(this.pos.getX(), this.pos.getY(), this.pos.getZ() + 1);
+			BlockPos south = new BlockPos(this.pos.getX(), this.pos.getY(), this.pos.getZ() - 1);
+			
+			// up
+			if (this.world.getTileEntity(up) instanceof TileEntityBlockholeWall
+					&& ((TileEntityBlockholeWall)this.world.getTileEntity(up)).getDimensionID() != -999)
+			{
+				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(up)).getDimensionID());
+				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(up)).getTeleportLocation());
+			}
+			
+			// down
+			else if (this.world.getTileEntity(down) instanceof TileEntityBlockholeWall
+					&& ((TileEntityBlockholeWall)this.world.getTileEntity(down)).getDimensionID() != -999)
+			{
+				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(down)).getDimensionID());
+				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(down)).getTeleportLocation());
+			}
+			
+			// east
+			else if (this.world.getTileEntity(east) instanceof TileEntityBlockholeWall
+					&& ((TileEntityBlockholeWall)this.world.getTileEntity(east)).getDimensionID() != -999)
+			{
+				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(east)).getDimensionID());
+				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(east)).getTeleportLocation());
+			}
+			
+			// west
+			else if (this.world.getTileEntity(west) instanceof TileEntityBlockholeWall
+					&& ((TileEntityBlockholeWall)this.world.getTileEntity(west)).getDimensionID() != -999)
+			{
+				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(west)).getDimensionID());
+				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(west)).getTeleportLocation());
+			}
+			
+			// north
+			else if (this.world.getTileEntity(north) instanceof TileEntityBlockholeWall
+					&& ((TileEntityBlockholeWall)this.world.getTileEntity(north)).getDimensionID() != -999)
+			{
+				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(north)).getDimensionID());
+				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(north)).getTeleportLocation());
+			}
+			
+			// south
+			else if (this.world.getTileEntity(south) instanceof TileEntityBlockholeWall
+					&& ((TileEntityBlockholeWall)this.world.getTileEntity(south)).getDimensionID() != -999)
+			{
+				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(south)).getDimensionID());
+				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(south)).getTeleportLocation());
+			}
+		}
+	}
+
+	@Override
+	public void update() 
+	{
+		this.updateDimensionInfo();
+	}
+
+	public BlockPos getTeleportLocation() 
+	{
+		return this.teleportLocation;
+	}
+	
+	public void setTeleportLocation(BlockPos tp)
+	{
+		this.teleportLocation = tp;
+		this.markDirty();
 	}
 	
 }

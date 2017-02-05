@@ -6,6 +6,7 @@ import java.util.List;
 import com.limplungs.blockhole.dimensions.DimensionList;
 import com.limplungs.blockhole.dimensions.TeleporterSingularity;
 import com.limplungs.blockhole.tileentities.TileEntityBlockhole;
+import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
@@ -39,7 +40,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 		
 		if (tile.getDimensionID() == -999)
 		{
-			tile.setDimensionID(DimensionList.registerNewDimension());
+			tile.setDimensionID(DimensionList.registerNewSingularity());
 		}
 		
         return tile;
@@ -88,7 +89,56 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 		
 		if (player instanceof EntityPlayerMP && world instanceof WorldServer)
 		{
-			player.getServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP)player, tile.getDimensionID(), new TeleporterSingularity((WorldServer)world));
+			int previous = player.dimension;
+			BlockPos location = player.getPosition();
+			
+			player.getServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP)player, tile.getDimensionID(), new TeleporterSingularity((WorldServer)world, player.dimension, new BlockPos(8.5,2,8.5)));
+			
+			for (int i = 0; i < player.getServer().worlds.length; i++)
+				if (player.getServer().worlds[i].getPlayerEntityByUUID(player.getUniqueID()) != null)
+				{
+					World current = player.getServer().worlds[i];
+					TileEntityBlockholeWall one = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(0,1,1));
+					TileEntityBlockholeWall two = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(15,1,1));
+					TileEntityBlockholeWall three = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(1,1,0));
+					TileEntityBlockholeWall four = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(1,1,15));
+					TileEntityBlockholeWall up = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(1,15,1));
+					TileEntityBlockholeWall down = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(1,0,1));
+
+					if (one != null)
+					{
+						one.setDimensionID(previous);
+						one.setTeleportLocation(location);
+					}
+					if (two != null)
+					{
+						two.setDimensionID(previous);
+						two.setTeleportLocation(location);
+					}
+					if (three != null)
+					{
+						three.setDimensionID(previous);
+						three.setTeleportLocation(location);
+					}
+					
+					if (four != null)
+					{
+						four.setDimensionID(previous);
+						four.setTeleportLocation(location);
+					}
+					
+					if (up != null)
+					{
+						up.setDimensionID(previous);
+						up.setTeleportLocation(location);
+					}
+					
+					if (down != null)
+					{
+						down.setDimensionID(previous);
+						down.setTeleportLocation(location);
+					}
+				}
 			
 			return true;
 		}
@@ -150,4 +200,6 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 			}
 		}
 	}
+	
+	
 }

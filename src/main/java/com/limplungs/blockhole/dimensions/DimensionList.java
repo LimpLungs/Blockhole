@@ -7,7 +7,7 @@ public class DimensionList
 {
 	public static int SINGULARITY_ID = 277301;
 	
-	public static int registerNewDimension()
+	public static int registerNewSingularity()
 	{
 		int id = DimensionManager.getNextFreeDimId();
 		
