@@ -16,18 +16,19 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 {
-	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(.375f, .625f, .375f, .625f, .375f, .625f);
-	
 	public BlockBlockhole(BlockData blockdata) 
 	{
 		super(blockdata);
@@ -46,6 +47,11 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
         return tile;
     }
 
+	@Override
+	public boolean isFullyOpaque(IBlockState state) 
+	{
+		return false;
+	}
 	
 	@Override
 	public boolean isFullCube(IBlockState state)
@@ -62,89 +68,25 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	
 	
 	@Override
+	public BlockRenderLayer getBlockLayer() 
+	{
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+	
+	
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state) 
+	{
+		return EnumBlockRenderType.MODEL;
+	}
+	
+	
+	@Override
 	public boolean canProvidePower(IBlockState state) 
 	{
 		return false;
 	}
 	
-	
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess blockAccess, BlockPos pos) 
-	{
-		return BOUNDING_BOX;
-	}
-	
-	
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) 
-	{
-		return BOUNDING_BOX;
-	}
-	
-	
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
-	{
-		TileEntityBlockhole tile = (TileEntityBlockhole)world.getTileEntity(pos);
-		
-		if (player instanceof EntityPlayerMP && world instanceof WorldServer)
-		{
-			int previous = player.dimension;
-			BlockPos location = player.getPosition();
-			
-			player.getServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP)player, tile.getDimensionID(), new TeleporterSingularity((WorldServer)world, player.dimension, new BlockPos(8.5,2,8.5)));
-			
-			for (int i = 0; i < player.getServer().worlds.length; i++)
-				if (player.getServer().worlds[i].getPlayerEntityByUUID(player.getUniqueID()) != null)
-				{
-					World current = player.getServer().worlds[i];
-					TileEntityBlockholeWall one = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(0,1,1));
-					TileEntityBlockholeWall two = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(15,1,1));
-					TileEntityBlockholeWall three = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(1,1,0));
-					TileEntityBlockholeWall four = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(1,1,15));
-					TileEntityBlockholeWall up = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(1,15,1));
-					TileEntityBlockholeWall down = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(1,0,1));
-
-					if (one != null)
-					{
-						one.setDimensionID(previous);
-						one.setTeleportLocation(location);
-					}
-					if (two != null)
-					{
-						two.setDimensionID(previous);
-						two.setTeleportLocation(location);
-					}
-					if (three != null)
-					{
-						three.setDimensionID(previous);
-						three.setTeleportLocation(location);
-					}
-					
-					if (four != null)
-					{
-						four.setDimensionID(previous);
-						four.setTeleportLocation(location);
-					}
-					
-					if (up != null)
-					{
-						up.setDimensionID(previous);
-						up.setTeleportLocation(location);
-					}
-					
-					if (down != null)
-					{
-						down.setDimensionID(previous);
-						down.setTeleportLocation(location);
-					}
-				}
-			
-			return true;
-		}
-		
-		return false;
-	}
 	
 	// Forge Trick to drop with NBT
 	@Override
@@ -184,6 +126,8 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	    world.setBlockToAir(pos);
 	}
 	
+	
+	
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		
@@ -201,5 +145,110 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 		}
 	}
 	
+	// End of forge trick
+	
+
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
+	{
+		TileEntityBlockhole tile = (TileEntityBlockhole)world.getTileEntity(pos);
+		
+		if (player instanceof EntityPlayerMP && world instanceof WorldServer)
+		{
+			int previous = player.dimension;
+			BlockPos location = player.getPosition();
+			
+			player.getServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP)player, tile.getDimensionID(), new TeleporterSingularity((WorldServer)world, player.dimension, new BlockPos(8.5,2,8.5)));
+			
+			for (int num = 0; num < player.getServer().worlds.length; num++)
+				if (player.getServer().worlds[num].getPlayerEntityByUUID(player.getUniqueID()) != null)
+				{
+					World current = player.getServer().worlds[num];
+					TileEntityBlockholeWall wall;
+					
+					int i = 0;
+					int j = 0;
+					int k = 0;
+
+					for (j = 0; j < 16; j+=15)
+					{
+						for (i = 1; i < 15; i++)
+						{
+							for (k = 1; k < 15; k++)
+							{  
+								wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
+
+								if (wall != null)
+								{
+									wall.setDimensionID(previous);
+									wall.setTeleportLocation(location);
+								}
+							}
+						}
+					}
+					
+					i = 0; j = 0; k = 0;
+					
+					for (j = 1; j < 15; j++)
+					{
+						k = 0;
+						
+						for (i = 1; i < 15; i++)
+						{
+							wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
+
+							if (wall != null)
+							{
+								wall.setDimensionID(previous);
+								wall.setTeleportLocation(location);
+							}
+						}
+						
+						k = 15;
+						
+						for (i = 1; i < 15; i++)
+						{
+							wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
+
+							if (wall != null)
+							{
+								wall.setDimensionID(previous);
+								wall.setTeleportLocation(location);
+							}
+						}
+						
+						i = 0;
+						
+						for (k = 1; k < 15; k++)
+						{
+							wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
+
+							if (wall != null)
+							{
+								wall.setDimensionID(previous);
+								wall.setTeleportLocation(location);
+							}
+						}
+						
+						i = 15;
+						
+						for (k = 1; k < 15; k++)
+						{
+							wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
+
+							if (wall != null)
+							{
+								wall.setDimensionID(previous);
+								wall.setTeleportLocation(location);
+							}
+						}
+					}
+				}
+			
+			return true;
+		}
+		
+		return false;
+	}
 	
 }

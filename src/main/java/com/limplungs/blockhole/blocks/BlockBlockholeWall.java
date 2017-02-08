@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -55,6 +56,17 @@ public class BlockBlockholeWall extends BlockBasic
 		return true;
 	}
 	
+	@Override
+	public boolean isFullyOpaque(IBlockState state) 
+	{
+		return false;
+	}
+	
+	@Override
+	public BlockRenderLayer getBlockLayer() 
+	{
+		return BlockRenderLayer.TRANSLUCENT;
+	}
 	
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) 

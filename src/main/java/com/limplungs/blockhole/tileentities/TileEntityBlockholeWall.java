@@ -5,12 +5,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityBlockholeWall extends TileEntity implements ITickable
+public class TileEntityBlockholeWall extends TileEntity
 {
 	private int dimID = -999;
 	private BlockPos teleportLocation = new BlockPos(0,0,0);
@@ -174,12 +173,6 @@ public class TileEntityBlockholeWall extends TileEntity implements ITickable
 				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(south)).getTeleportLocation());
 			}
 		}
-	}
-
-	@Override
-	public void update() 
-	{
-		this.updateDimensionInfo();
 	}
 
 	public BlockPos getTeleportLocation() 
