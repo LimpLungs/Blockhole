@@ -15,11 +15,14 @@ public class RecipesList
 		// Blockhole Teleportation Device
 		//GameRegistry.addRecipe(new ItemStack(BlockList.TELEPORTER), "WWW", "IEI", "SSS", 'W', Blocks.WOODEN_SLAB, 'E', BlockList.BLOCKHOLE, 'S', Blocks.STONE);
 		
+		// Ender Diamond
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemList.ENDER_DIAMOND), Items.ENDER_PEARL, Items.DIAMOND, Items.GHAST_TEAR);
+		
 		// Blockhole Singularity
-		GameRegistry.addRecipe(new ItemStack(BlockList.BLOCKHOLE),  "OEO", "EDE", "OEO", 'O', Blocks.OBSIDIAN,    'E', Items.ENDER_PEARL,   'D', Blocks.DIAMOND_BLOCK);
+		GameRegistry.addRecipe(new ItemStack(BlockList.BLOCKHOLE), "OEO", "EDE", "OEO", 'O', Blocks.OBSIDIAN, 'E', Items.ENDER_PEARL, 'D', Blocks.DIAMOND_BLOCK);
 
 		// Tuner
-		GameRegistry.addRecipe(new ItemStack(ItemList.TUNER),       " E ", "NSN", " S ", 'E', Items.ENDER_PEARL,  'N', Items.GOLD_INGOT,    'S', Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(ItemList.TUNER), "E ", " S", 'E', ItemList.ENDER_DIAMOND, 'S', Items.STICK);
 		 
 		
 		// Block Powder Keg

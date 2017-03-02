@@ -10,13 +10,15 @@ public class ItemList
 	/**
 	 *  Item Data
 	 */
+	private static ItemData DATA_ENDER_DIAMOND = new ItemData(64, Blockhole.tabBlockhole, "enderdiamond");
 	private static ItemData DATA_TUNER = new ItemData(64, Blockhole.tabBlockhole, "tuner");
 	
 	
 	/**
 	 *  Items
 	 */
-	public static ItemBasic TUNER;
+	public static ItemBasic ENDER_DIAMOND;
+	public static ItemTuner TUNER;
 	
 	
 	/**
@@ -25,6 +27,7 @@ public class ItemList
 	 */
 	public static void registerItems()
 	{
+		ENDER_DIAMOND = new ItemBasic(DATA_ENDER_DIAMOND);
 		TUNER = new ItemTuner(DATA_TUNER);
 	}
 
@@ -35,6 +38,7 @@ public class ItemList
 	 */
 	public static void renderItems(RenderItem renderItem) 
 	{
+		renderItem.getItemModelMesher().register(ENDER_DIAMOND, 0, new ModelResourceLocation(Blockhole.MODID + ":" + ENDER_DIAMOND.getName(), "inventory"));
 		renderItem.getItemModelMesher().register(TUNER, 0, new ModelResourceLocation(Blockhole.MODID + ":" + TUNER.getName(), "inventory"));	
 	}
 }

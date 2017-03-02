@@ -1,6 +1,8 @@
 package com.limplungs.blockhole.items;
 
+import com.limplungs.blockhole.blocks.BlockBlockholeWall;
 import com.limplungs.blockhole.blocks.BlockTeleporter;
+import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
 import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
 
 import net.minecraft.block.Block;
@@ -102,6 +104,29 @@ public class ItemTuner extends ItemBasic
 			return EnumActionResult.SUCCESS;
 		}
 		
+		if (stack.getTagCompound() != null && target != null && target instanceof BlockBlockholeWall)
+		{
+			if (world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof TileEntityBlockholeWall)
+			{
+				TileEntityBlockholeWall tile = (TileEntityBlockholeWall) world.getTileEntity(pos);
+				
+				if (stack.getTagCompound().getInteger("mode") == 3)
+				{
+					if (!player.isSneaking())
+					{
+						tile.setTransport(!tile.getTransport());
+					}
+
+					if (world.isRemote)
+					{
+						player.sendMessage(new TextComponentString("Interdimensional Transport: " + tile.getTransport()));
+					}
+					
+					return EnumActionResult.SUCCESS;
+				}
+			}
+		}
+		
 		return EnumActionResult.FAIL;
 	}
 	
@@ -118,9 +143,9 @@ public class ItemTuner extends ItemBasic
 		
 		if (stack.getTagCompound() != null)
 		{
-			if (stack.getTagCompound().getInteger("mode") == 2)
+			if (stack.getTagCompound().getInteger("mode") == 3)
 			{
-				stack.getTagCompound().setInteger("mode", stack.getTagCompound().getInteger("mode") - 3);
+				stack.getTagCompound().setInteger("mode", stack.getTagCompound().getInteger("mode") - 4);
 			}
 		
 			stack.getTagCompound().setInteger("mode", stack.getTagCompound().getInteger("mode") + 1);
@@ -138,6 +163,10 @@ public class ItemTuner extends ItemBasic
 				if (stack.getTagCompound().getInteger("mode") == 2)
 				{
 					player.sendMessage(new TextComponentString("MODE: Z - COORDINATE"));
+				}
+				if (stack.getTagCompound().getInteger("mode") == 3)
+				{
+					player.sendMessage(new TextComponentString("MODE: Manipulate"));
 				}
 			}
 		}

@@ -2,6 +2,8 @@ itemGroup.tabBlockhole=Blockhole
 
 item.blockhole_tuner.name=Tuning Stick
 
+item.blockhole_enderdiamond.name=Ender Diamond
+
 tile.blockhole_teleporter.name=Blockhole Teleportation Device
 tile.blockhole_powderkeg.name=Block Powder Keg
 tile.blockhole_blockhole.name=Blockhole Singularity

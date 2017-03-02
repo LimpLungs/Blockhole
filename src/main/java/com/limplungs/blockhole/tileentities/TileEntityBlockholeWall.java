@@ -13,6 +13,7 @@ public class TileEntityBlockholeWall extends TileEntity
 {
 	private int dimID = -999;
 	private BlockPos teleportLocation = new BlockPos(0,0,0);
+	private boolean transport = false;
 	
 	public TileEntityBlockholeWall()
 	{
@@ -27,6 +28,8 @@ public class TileEntityBlockholeWall extends TileEntity
 		compound.setInteger("locateY", this.teleportLocation.getY());
 		compound.setInteger("locateZ", this.teleportLocation.getZ());
 		
+		compound.setBoolean("transport", this.transport);
+		
 		return super.writeToNBT(compound);
 	}
 	
@@ -38,6 +41,8 @@ public class TileEntityBlockholeWall extends TileEntity
 		this.dimID = compound.getInteger("dimID");
 		
 		this.teleportLocation = new BlockPos(compound.getInteger("locateX"), compound.getInteger("locateY"), compound.getInteger("locateZ"));
+		
+		this.transport = compound.getBoolean("transport");
 	}
     
     @Override
@@ -185,5 +190,16 @@ public class TileEntityBlockholeWall extends TileEntity
 		this.teleportLocation = tp;
 		this.markDirty();
 	}
+
+
+	public boolean getTransport() 
+	{
+		return this.transport;
+	}
 	
+	public void setTransport(boolean transport)
+	{
+		this.transport = transport;
+		this.markDirty();
+	}
 }
