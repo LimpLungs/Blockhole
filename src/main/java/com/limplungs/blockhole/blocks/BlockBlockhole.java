@@ -180,6 +180,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 								{
 									wall.setDimensionID(previous);
 									wall.setTeleportLocation(location);
+									wall.setBlockholeLocation(pos);
 								}
 							}
 						}
@@ -199,6 +200,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 							{
 								wall.setDimensionID(previous);
 								wall.setTeleportLocation(location);
+								wall.setBlockholeLocation(pos);
 							}
 						}
 						
@@ -212,6 +214,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 							{
 								wall.setDimensionID(previous);
 								wall.setTeleportLocation(location);
+								wall.setBlockholeLocation(pos);
 							}
 						}
 						
@@ -225,6 +228,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 							{
 								wall.setDimensionID(previous);
 								wall.setTeleportLocation(location);
+								wall.setBlockholeLocation(pos);
 							}
 						}
 						
@@ -238,6 +242,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 							{
 								wall.setDimensionID(previous);
 								wall.setTeleportLocation(location);
+								wall.setBlockholeLocation(pos);
 							}
 						}
 					}
