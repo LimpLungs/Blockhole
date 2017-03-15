@@ -164,17 +164,17 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 					World current = player.getServer().worlds[num];
 					TileEntityBlockholeWall wall;
 					
-					int i = 0;
-					int j = 0;
-					int k = 0;
+					int x = 0;
+					int y = 0;
+					int z = 0;
 
-					for (j = 0; j < 16; j+=15)
+					for (z = 0; z < 16; z+=15)
 					{
-						for (i = 1; i < 15; i++)
+						for (y = 1; y < 15; y++)
 						{
-							for (k = 1; k < 15; k++)
-							{  
-								wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
+							for (x = 1; x < 15; x++)
+							{
+								wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(x,y,z));
 
 								if (wall != null)
 								{
@@ -185,64 +185,39 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 							}
 						}
 					}
-					
-					i = 0; j = 0; k = 0;
-					
-					for (j = 1; j < 15; j++)
+
+					for (x = 0; x < 16; x+=15)
 					{
-						k = 0;
-						
-						for (i = 1; i < 15; i++)
+						for (y = 1; y < 15; y++)
 						{
-							wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
-
-							if (wall != null)
+							for (z = 1; z < 15; z++)
 							{
-								wall.setDimensionID(previous);
-								wall.setTeleportLocation(location);
-								wall.setBlockholeLocation(pos);
+								wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(x,y,z));
+
+								if (wall != null)
+								{
+									wall.setDimensionID(previous);
+									wall.setTeleportLocation(location);
+									wall.setBlockholeLocation(pos);
+								}
 							}
 						}
-						
-						k = 15;
-						
-						for (i = 1; i < 15; i++)
-						{
-							wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
+					}
 
-							if (wall != null)
-							{
-								wall.setDimensionID(previous);
-								wall.setTeleportLocation(location);
-								wall.setBlockholeLocation(pos);
-							}
-						}
-						
-						i = 0;
-						
-						for (k = 1; k < 15; k++)
+					for (y = 0; y < 16; y+=15)
+					{
+						for (x = 1; x < 15; x++)
 						{
-							wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
-
-							if (wall != null)
+							for (z = 1; z < 15; z++)
 							{
-								wall.setDimensionID(previous);
-								wall.setTeleportLocation(location);
-								wall.setBlockholeLocation(pos);
-							}
-						}
-						
-						i = 15;
-						
-						for (k = 1; k < 15; k++)
-						{
-							wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(i,j,k));
+								wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(x,y,z));
 
-							if (wall != null)
-							{
-								wall.setDimensionID(previous);
-								wall.setTeleportLocation(location);
-								wall.setBlockholeLocation(pos);
+								if (wall != null)
+								{
+									wall.setDimensionID(previous);
+									wall.setTeleportLocation(location);
+									wall.setBlockholeLocation(pos);
+								}
 							}
 						}
 					}

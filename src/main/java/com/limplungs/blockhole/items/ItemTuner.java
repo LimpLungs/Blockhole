@@ -114,7 +114,7 @@ public class ItemTuner extends ItemBasic
 				{
 					if (!player.isSneaking())
 					{
-						tile.setTransport(!tile.getTransport());
+						tile.flipTransport();
 					}
 
 					if (world.isRemote)

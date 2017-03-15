@@ -14,9 +14,10 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityBlockholeWall extends TileEntity implements IInventory
+public class TileEntityBlockholeWall extends TileEntity implements ISidedInventory
 {
 	private int dimID = -999;
+	
 	private BlockPos blockholeLocation = new BlockPos(0,0,0);
 	private BlockPos teleportLocation = new BlockPos(0,0,0);
 	private boolean transport = false;
@@ -53,7 +54,7 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 		
 		this.teleportLocation = new BlockPos(compound.getInteger("locateX"), compound.getInteger("locateY"), compound.getInteger("locateZ"));
 		this.blockholeLocation = new BlockPos(compound.getInteger("blockX"), compound.getInteger("blockY"), compound.getInteger("blockZ"));
-	
+		
 		this.transport = compound.getBoolean("transport");
 	}
     
@@ -131,6 +132,7 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 		return null;
 	}
 	
+	// Might be useless now with new code
 	void updateDimensionInfo()
 	{
 		if (dimID == -999 || (this.getTeleportLocation().getX() == 0 && this.getTeleportLocation().getY() == 0 && this.getTeleportLocation().getZ() == 0))
@@ -225,6 +227,80 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 		this.transport = transport;
 		this.markDirty();
 	}
+	
+	public void flipTransport()
+	{
+		this.setTransport(!this.getTransport());
+		
+		int x = this.pos.getX();
+		int y = this.pos.getY();
+		int z = this.pos.getZ();
+		
+		if (x == 0 || x == 15)
+		{
+			for (int j = 1; j < 15; j++)
+			{
+				for (int k = 1; k < 15; k++)
+				{
+					TileEntity tile = this.world.getTileEntity(new BlockPos(x,j,k));
+					
+					if (tile != null && tile != this && tile instanceof TileEntityBlockholeWall)
+					{
+						TileEntityBlockholeWall wall = (TileEntityBlockholeWall)tile;
+						
+						if (wall.getTransport())
+						{
+							wall.setTransport(!wall.getTransport());;
+						}
+					}
+				}
+			}
+		}
+		
+		if (y == 0 || y == 15)
+		{
+			for (int i = 1; i < 15; i++)
+			{
+				for (int k = 1; k < 15; k++)
+				{
+					TileEntity tile = this.world.getTileEntity(new BlockPos(i,y,k));
+
+					if (tile != null && tile != this && tile instanceof TileEntityBlockholeWall)
+					{
+						TileEntityBlockholeWall wall = (TileEntityBlockholeWall)tile;
+
+						if (wall.getTransport())
+						{
+							wall.setTransport(!wall.getTransport());;
+						}
+					}
+				}
+			}
+		}
+		
+		if (z == 0 || z == 15)
+		{
+			for (int i = 1; i < 15; i++)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					TileEntity tile = this.world.getTileEntity(new BlockPos(i,j,z));
+
+					if (tile != null && tile != this && tile instanceof TileEntityBlockholeWall)
+					{
+						TileEntityBlockholeWall wall = (TileEntityBlockholeWall)tile;
+
+						if (wall.getTransport())
+						{
+							wall.setTransport(!wall.getTransport());;
+						}
+					}
+				}
+			}
+		}
+		
+		this.markDirty();
+	}
 
 	
 	
@@ -250,10 +326,17 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 	
 	@Override
 	public int getSizeInventory() 
+
 	{
-		// if IInventory or ISidedInventory is adjacent, check it's function.
+		if (!this.transport)
+		{
+			return 0;
+		}
 		
-		if (DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) != null && DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) instanceof TileEntityBlockhole)
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
 		{
 			int x1 = this.blockholeLocation.getX();
 			int y1 = this.blockholeLocation.getY();
@@ -275,12 +358,14 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				z1 += 1;
 			
 			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
 					
-			if (DimensionManager.getWorld(this.dimID).getTileEntity(target) != null)
+			if (tile != null && tile instanceof IInventory)
 			{
-				IInventory tile = (IInventory)DimensionManager.getWorld(this.dimID).getTileEntity(target);
+				IInventory inv = (IInventory)tile;
 						
-				if (tile instanceof ISidedInventory)
+				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
 							
@@ -288,7 +373,7 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				}
 				else
 				{
-					return tile.getSizeInventory();
+					return inv.getSizeInventory();
 				}
 			}
 			
@@ -299,11 +384,19 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 	}
 
 	@Override
+
 	public boolean isEmpty() 
+
 	{
-		// if IInventory or ISidedInventory is adjacent, check it's function.
+		if (!this.transport)
+		{
+			return false;
+		}
 		
-		if (DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) != null && DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) instanceof TileEntityBlockhole)
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
 		{
 			int x1 = this.blockholeLocation.getX();
 			int y1 = this.blockholeLocation.getY();
@@ -325,12 +418,14 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				z1 += 1;
 			
 			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
 					
-			if (DimensionManager.getWorld(this.dimID).getTileEntity(target) != null)
+			if (tile != null && tile instanceof IInventory)
 			{
-				IInventory tile = (IInventory)DimensionManager.getWorld(this.dimID).getTileEntity(target);
+				IInventory inv = (IInventory)tile;
 						
-				if (tile instanceof ISidedInventory)
+				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
 							
@@ -338,7 +433,7 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				}
 				else
 				{
-					return tile.isEmpty();
+					return inv.isEmpty();
 				}
 			}
 			
@@ -351,9 +446,15 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 	@Override
 	public ItemStack getStackInSlot(int index) 
 	{
-		// if IInventory or ISidedInventory is adjacent, check it's function.
+		if (!this.transport)
+		{
+			return null;
+		}
 		
-		if (DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) != null && DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) instanceof TileEntityBlockhole)
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
 		{
 			int x1 = this.blockholeLocation.getX();
 			int y1 = this.blockholeLocation.getY();
@@ -375,12 +476,14 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				z1 += 1;
 			
 			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
 					
-			if (DimensionManager.getWorld(this.dimID).getTileEntity(target) != null)
+			if (tile != null && tile instanceof IInventory)
 			{
-				IInventory tile = (IInventory)DimensionManager.getWorld(this.dimID).getTileEntity(target);
+				IInventory inv = (IInventory)tile;
 						
-				if (tile instanceof ISidedInventory)
+				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
 							
@@ -388,22 +491,28 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				}
 				else
 				{
-					return tile.getStackInSlot(index);
+					return inv.getStackInSlot(index);
 				}
 			}
-			
-			return null;
+
+			return ItemStack.EMPTY;
 		}
 		
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int index, int count) 
 	{
-		// if IInventory or ISidedInventory is adjacent, check it's function.
+		if (!this.transport)
+		{
+			return null;
+		}
 		
-		if (DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) != null && DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) instanceof TileEntityBlockhole)
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
 		{
 			int x1 = this.blockholeLocation.getX();
 			int y1 = this.blockholeLocation.getY();
@@ -425,12 +534,14 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				z1 += 1;
 			
 			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
 					
-			if (DimensionManager.getWorld(this.dimID).getTileEntity(target) != null)
+			if (tile != null && tile instanceof IInventory)
 			{
-				IInventory tile = (IInventory)DimensionManager.getWorld(this.dimID).getTileEntity(target);
+				IInventory inv = (IInventory)tile;
 						
-				if (tile instanceof ISidedInventory)
+				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
 							
@@ -438,22 +549,28 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				}
 				else
 				{
-					return tile.decrStackSize(index, count);
+					return inv.decrStackSize(index, count);
 				}
 			}
-			
-			return null;
+
+			return ItemStack.EMPTY;
 		}
-		
-		return null;
+
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) 
 	{
-		// if IInventory or ISidedInventory is adjacent, check it's function.
+		if (!this.transport)
+		{
+			return null;
+		}
 		
-		if (DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) != null && DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) instanceof TileEntityBlockhole)
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
 		{
 			int x1 = this.blockholeLocation.getX();
 			int y1 = this.blockholeLocation.getY();
@@ -475,12 +592,14 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				z1 += 1;
 			
 			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
 					
-			if (DimensionManager.getWorld(this.dimID).getTileEntity(target) != null)
+			if (tile != null && tile instanceof IInventory)
 			{
-				IInventory tile = (IInventory)DimensionManager.getWorld(this.dimID).getTileEntity(target);
+				IInventory inv = (IInventory)tile;
 						
-				if (tile instanceof ISidedInventory)
+				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
 							
@@ -488,22 +607,28 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				}
 				else
 				{
-					return tile.removeStackFromSlot(index);
+					return inv.removeStackFromSlot(index);
 				}
 			}
-			
-			return null;
+
+			return ItemStack.EMPTY;
 		}
-		
-		return null;
+
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) 
 	{
-		// if IInventory or ISidedInventory is adjacent, check it's function.
+		if (!this.transport)
+		{
+			return;
+		}
 		
-		if (DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) != null && DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) instanceof TileEntityBlockhole)
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
 		{
 			int x1 = this.blockholeLocation.getX();
 			int y1 = this.blockholeLocation.getY();
@@ -525,12 +650,14 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				z1 += 1;
 			
 			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
 					
-			if (DimensionManager.getWorld(this.dimID).getTileEntity(target) != null)
+			if (tile != null && tile instanceof IInventory)
 			{
-				IInventory tile = (IInventory)DimensionManager.getWorld(this.dimID).getTileEntity(target);
+				IInventory inv = (IInventory)tile;
 						
-				if (tile instanceof ISidedInventory)
+				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
 							
@@ -538,7 +665,7 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				}
 				else
 				{
-					tile.setInventorySlotContents(index, stack);
+					inv.setInventorySlotContents(index, stack);
 				}
 			}
 		}
@@ -547,9 +674,15 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 	@Override
 	public int getInventoryStackLimit() 
 	{
-		// if IInventory or ISidedInventory is adjacent, check it's function.
+		if (!this.transport)
+		{
+			return 0;
+		}
 		
-		if (DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) != null && DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) instanceof TileEntityBlockhole)
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
 		{
 			int x1 = this.blockholeLocation.getX();
 			int y1 = this.blockholeLocation.getY();
@@ -571,12 +704,14 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				z1 += 1;
 			
 			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
 					
-			if (DimensionManager.getWorld(this.dimID).getTileEntity(target) != null)
+			if (tile != null && tile instanceof IInventory)
 			{
-				IInventory tile = (IInventory)DimensionManager.getWorld(this.dimID).getTileEntity(target);
+				IInventory inv = (IInventory)tile;
 						
-				if (tile instanceof ISidedInventory)
+				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
 							
@@ -584,7 +719,7 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				}
 				else
 				{
-					return tile.getInventoryStackLimit();
+					return inv.getInventoryStackLimit();
 				}
 			}
 			
@@ -597,9 +732,15 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) 
 	{
-		// if IInventory or ISidedInventory is adjacent, check it's function.
+		if (!this.transport)
+		{
+			return false;
+		}
 		
-		if (DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) != null && DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation) instanceof TileEntityBlockhole)
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
 		{
 			int x1 = this.blockholeLocation.getX();
 			int y1 = this.blockholeLocation.getY();
@@ -621,12 +762,14 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				z1 += 1;
 			
 			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
 					
-			if (DimensionManager.getWorld(this.dimID).getTileEntity(target) != null)
+			if (tile != null && tile instanceof IInventory)
 			{
-				IInventory tile = (IInventory)DimensionManager.getWorld(this.dimID).getTileEntity(target);
+				IInventory inv = (IInventory)tile;
 						
-				if (tile instanceof ISidedInventory)
+				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
 							
@@ -634,7 +777,181 @@ public class TileEntityBlockholeWall extends TileEntity implements IInventory
 				}
 				else
 				{
-					return tile.isItemValidForSlot(index, stack);
+					return inv.isItemValidForSlot(index, stack);
+				}
+			}
+			
+			return false;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public int[] getSlotsForFace(EnumFacing inputSide) 
+	{
+		if (!this.transport)
+		{
+			return new int[0];
+		}
+		
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		{
+			int x1 = this.blockholeLocation.getX();
+			int y1 = this.blockholeLocation.getY();
+			int z1 = this.blockholeLocation.getZ();
+					
+			if (this.pos.getX() == 0)
+				x1 -= 1;
+			if (this.pos.getX() == 15)
+				x1 += 1;
+					
+			if (this.pos.getY() == 0)
+				y1 -= 1;
+			if (this.pos.getY() == 15)
+				y1 += 1;
+					
+			if (this.pos.getZ() == 0)
+				z1 -= 1;
+			if (this.pos.getZ() == 15)
+				z1 += 1;
+			
+			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
+					
+			if (tile != null && tile instanceof IInventory)
+			{
+				IInventory inv = (IInventory)tile;
+						
+				if (inv instanceof ISidedInventory)
+				{
+					ISidedInventory side = (ISidedInventory)tile;
+							
+					return side.getSlotsForFace(inputSide);
+				}
+				else
+				{
+					return new int[inv.getSizeInventory()];
+				}
+			}
+			
+			return new int[0];
+		}
+
+		return new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int index, ItemStack stack, EnumFacing direction) 
+	{
+		if (!this.transport)
+		{
+			return false;
+		}
+		
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		{
+			int x1 = this.blockholeLocation.getX();
+			int y1 = this.blockholeLocation.getY();
+			int z1 = this.blockholeLocation.getZ();
+					
+			if (this.pos.getX() == 0)
+				x1 -= 1;
+			if (this.pos.getX() == 15)
+				x1 += 1;
+					
+			if (this.pos.getY() == 0)
+				y1 -= 1;
+			if (this.pos.getY() == 15)
+				y1 += 1;
+					
+			if (this.pos.getZ() == 0)
+				z1 -= 1;
+			if (this.pos.getZ() == 15)
+				z1 += 1;
+			
+			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
+					
+			if (tile != null && tile instanceof IInventory)
+			{
+				IInventory inv = (IInventory)tile;
+						
+				if (inv instanceof ISidedInventory)
+				{
+					ISidedInventory side = (ISidedInventory)tile;
+							
+					return side.canInsertItem(index, stack, direction);
+				}
+				else
+				{
+					return inv.isItemValidForSlot(index, stack);
+				}
+			}
+			
+			return false;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int index, ItemStack stack, EnumFacing direction) 
+	{
+		if (!this.transport)
+		{
+			return false;
+		}
+		
+		// if IInventory or ISidedInventory is adjacent, check it's function.
+		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		
+		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		{
+			int x1 = this.blockholeLocation.getX();
+			int y1 = this.blockholeLocation.getY();
+			int z1 = this.blockholeLocation.getZ();
+					
+			if (this.pos.getX() == 0)
+				x1 -= 1;
+			if (this.pos.getX() == 15)
+				x1 += 1;
+					
+			if (this.pos.getY() == 0)
+				y1 -= 1;
+			if (this.pos.getY() == 15)
+				y1 += 1;
+					
+			if (this.pos.getZ() == 0)
+				z1 -= 1;
+			if (this.pos.getZ() == 15)
+				z1 += 1;
+			
+			BlockPos target = new BlockPos(x1,y1,z1);
+			
+			TileEntity tile = DimensionManager.getWorld(this.dimID).getTileEntity(target);
+					
+			if (tile != null && tile instanceof IInventory)
+			{
+				IInventory inv = (IInventory)tile;
+						
+				if (inv instanceof ISidedInventory)
+				{
+					ISidedInventory side = (ISidedInventory)tile;
+							
+					return side.canExtractItem(index, stack, direction);
+				}
+				else
+				{
+					return true;
 				}
 			}
 			
