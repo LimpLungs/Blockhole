@@ -1,5 +1,9 @@
 package com.limplungs.blockhole.items;
 
+import java.util.List;
+
+import org.lwjgl.input.Keyboard;
+
 import com.limplungs.blockhole.blocks.BlockBlockholeWall;
 import com.limplungs.blockhole.blocks.BlockTeleporter;
 import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
@@ -150,27 +154,41 @@ public class ItemTuner extends ItemBasic
 		
 			stack.getTagCompound().setInteger("mode", stack.getTagCompound().getInteger("mode") + 1);
 			
-			if (world.isRemote)
-			{
-				if (stack.getTagCompound().getInteger("mode") == 0)
-				{
-					player.sendMessage(new TextComponentString("MODE: X - COORDINATE"));
-				}
-				if (stack.getTagCompound().getInteger("mode") == 1)
-				{
-					player.sendMessage(new TextComponentString("MODE: Y - COORDINATE"));
-				}
-				if (stack.getTagCompound().getInteger("mode") == 2)
-				{
-					player.sendMessage(new TextComponentString("MODE: Z - COORDINATE"));
-				}
-				if (stack.getTagCompound().getInteger("mode") == 3)
-				{
-					player.sendMessage(new TextComponentString("MODE: Manipulate"));
-				}
-			}
 		}
 		
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
     }
+	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) 
+	{
+		super.addInformation(stack, player, tooltip, advanced);
+		
+		if (!stack.hasTagCompound())
+		{
+			stack.setTagCompound(new NBTTagCompound());
+			stack.getTagCompound().setInteger("mode", 0);
+		}
+		
+		tooltip.add("Used to manipulate blackhole objects. Mode[SHIFT], Controls[ALT]");
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+		{
+			if (stack.getTagCompound().getInteger("mode") == 0)
+				tooltip.add("X-Coord:\n  - To be determined.");
+			if (stack.getTagCompound().getInteger("mode") == 1)
+				tooltip.add("Y-Coord:\n  - To be determined.");
+			if (stack.getTagCompound().getInteger("mode") == 2)
+				tooltip.add("Z-Coord:\n  - To be determined.");
+			if (stack.getTagCompound().getInteger("mode") == 3)
+				tooltip.add("Manipulate: Blockhole Walls\n   - switch transfer mode.");
+		}
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_LMENU) || Keyboard.isKeyDown(Keyboard.KEY_RMENU))
+		{
+			tooltip.add("Right click to change mode.");
+			tooltip.add("Manipulate: Right Click flips transfer");
+			tooltip.add("              Shift Right Click displays transfer.");
+		}
+	}
 }

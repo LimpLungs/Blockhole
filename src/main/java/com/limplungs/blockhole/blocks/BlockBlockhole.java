@@ -162,6 +162,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 				if (player.getServer().worlds[num].getPlayerEntityByUUID(player.getUniqueID()) != null)
 				{
 					World current = player.getServer().worlds[num];
+					
 					TileEntityBlockholeWall wall;
 					
 					int x = 0;

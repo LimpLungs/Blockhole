@@ -33,7 +33,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 	{
 		if (this.getDimensionID() != -999)
 		{
-			compound.setInteger("dimID", this.dimID);
+			compound.setInteger("dimID", this.getDimensionID());
 		}
 		
 		compound.setInteger("currDirection", this.currDirection);
@@ -163,17 +163,25 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 
 			if (blockSide == EnumFacing.EAST)
+				this.currDirection = 1;
+			else if (blockSide == EnumFacing.WEST)
+				this.currDirection = 3;
+			else if (blockSide == EnumFacing.SOUTH)
+				this.currDirection = 2;
+			else if (blockSide == EnumFacing.NORTH)
+				this.currDirection = 0;
+			else if (blockSide == EnumFacing.DOWN)
+				this.currDirection = 5;
+			else if (blockSide == EnumFacing.UP)
 				this.currDirection = 4;
 			
-			else this.currDirection = 0;
-			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -211,6 +219,206 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					}
 				}
 			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSlotsForFace(blockSide);
+									}
+									else
+									{
+										return new int[inv.getSizeInventory()];
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSlotsForFace(blockSide);
+									}
+									else
+									{
+										return new int[inv.getSizeInventory()];
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSlotsForFace(blockSide);
+									}
+									else
+									{
+										return new int[inv.getSizeInventory()];
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSlotsForFace(blockSide);
+									}
+									else
+									{
+										return new int[inv.getSizeInventory()];
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSlotsForFace(blockSide);
+									}
+									else
+									{
+										return new int[inv.getSizeInventory()];
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		
 		return new int[0];
@@ -223,17 +431,25 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
-			
-			if (direction == EnumFacing.WEST)
+
+			if (direction == EnumFacing.EAST)
+				this.currDirection = 1;
+			else if (direction == EnumFacing.WEST)
+				this.currDirection = 3;
+			else if (direction == EnumFacing.SOUTH)
+				this.currDirection = 2;
+			else if (direction == EnumFacing.NORTH)
+				this.currDirection = 0;
+			else if (direction == EnumFacing.DOWN)
+				this.currDirection = 5;
+			else if (direction == EnumFacing.UP)
 				this.currDirection = 4;
 			
-			else this.currDirection = 0;
-			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -247,9 +463,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canInsertItem(index, stack, direction);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canInsertItem(index, stack, direction);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canInsertItem(index, stack, direction);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canInsertItem(index, stack, direction);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canInsertItem(index, stack, direction);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -283,17 +699,25 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
-			
-			if (direction == EnumFacing.WEST)
+
+			if (direction == EnumFacing.EAST)
+				this.currDirection = 1;
+			else if (direction == EnumFacing.WEST)
+				this.currDirection = 3;
+			else if (direction == EnumFacing.SOUTH)
+				this.currDirection = 2;
+			else if (direction == EnumFacing.NORTH)
+				this.currDirection = 0;
+			else if (direction == EnumFacing.DOWN)
+				this.currDirection = 5;
+			else if (direction == EnumFacing.UP)
 				this.currDirection = 4;
 			
-			else this.currDirection = 0;
-			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -307,9 +731,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canExtractItem(index, stack, direction);
+									}
+									else
+									{
+										return true;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canExtractItem(index, stack, direction);
+									}
+									else
+									{
+										return true;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canExtractItem(index, stack, direction);
+									}
+									else
+									{
+										return true;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canExtractItem(index, stack, direction);
+									}
+									else
+									{
+										return true;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.canExtractItem(index, stack, direction);
+									}
+									else
+									{
+										return true;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -336,7 +960,6 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		return false;
 	}
 	
-	// EAST = 5, WEST = 4, SOUTH = 3, NORTH = 2, UP = 1, DOWN = 0
 	@Override
 	public int getSizeInventory() 
 	{
@@ -344,12 +967,12 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -363,9 +986,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSizeInventory();
+									}
+									else
+									{
+										return inv.getSizeInventory();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSizeInventory();
+									}
+									else
+									{
+										return inv.getSizeInventory();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSizeInventory();
+									}
+									else
+									{
+										return inv.getSizeInventory();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSizeInventory();
+									}
+									else
+									{
+										return inv.getSizeInventory();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getSizeInventory();
+									}
+									else
+									{
+										return inv.getSizeInventory();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -391,7 +1214,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		return 0;
 	}
-
+	
 	@Override
 	public boolean isEmpty()
 	{
@@ -399,21 +1222,18 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
 					for (int k = 1; k < 15; k++)
 					{
-						if (this.currDirection == 0)
-							tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
-						else
-							tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
+						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
 						if (tile != null && tile instanceof TileEntityBlockholeWall)
 						{
@@ -421,12 +1241,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
-								if (this.currDirection == 0)
-									target = dimWorld.getTileEntity(new BlockPos(1,j,k));
-								else
-									target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isEmpty();
+									}
+									else
+									{
+										return inv.isEmpty();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isEmpty();
+									}
+									else
+									{
+										return inv.isEmpty();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isEmpty();
+									}
+									else
+									{
+										return inv.isEmpty();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isEmpty();
+									}
+									else
+									{
+										return inv.isEmpty();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isEmpty();
+									}
+									else
+									{
+										return inv.isEmpty();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -460,12 +1477,12 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -479,9 +1496,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getStackInSlot(index);
+									}
+									else
+									{
+										return inv.getStackInSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getStackInSlot(index);
+									}
+									else
+									{
+										return inv.getStackInSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getStackInSlot(index);
+									}
+									else
+									{
+										return inv.getStackInSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getStackInSlot(index);
+									}
+									else
+									{
+										return inv.getStackInSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getStackInSlot(index);
+									}
+									else
+									{
+										return inv.getStackInSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -515,12 +1732,12 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -534,9 +1751,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.decrStackSize(index, count);
+									}
+									else
+									{
+										return inv.decrStackSize(index, count);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.decrStackSize(index, count);
+									}
+									else
+									{
+										return inv.decrStackSize(index, count);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.decrStackSize(index, count);
+									}
+									else
+									{
+										return inv.decrStackSize(index, count);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.decrStackSize(index, count);
+									}
+									else
+									{
+										return inv.decrStackSize(index, count);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.decrStackSize(index, count);
+									}
+									else
+									{
+										return inv.decrStackSize(index, count);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -570,12 +1987,12 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -589,9 +2006,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.removeStackFromSlot(index);
+									}
+									else
+									{
+										return inv.removeStackFromSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.removeStackFromSlot(index);
+									}
+									else
+									{
+										return inv.removeStackFromSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.removeStackFromSlot(index);
+									}
+									else
+									{
+										return inv.removeStackFromSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.removeStackFromSlot(index);
+									}
+									else
+									{
+										return inv.removeStackFromSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.removeStackFromSlot(index);
+									}
+									else
+									{
+										return inv.removeStackFromSlot(index);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -625,12 +2242,12 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -644,9 +2261,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										side.setInventorySlotContents(index, stack);
+									}
+									else
+									{
+										inv.setInventorySlotContents(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										side.setInventorySlotContents(index, stack);
+									}
+									else
+									{
+										inv.setInventorySlotContents(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										side.setInventorySlotContents(index, stack);
+									}
+									else
+									{
+										inv.setInventorySlotContents(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										side.setInventorySlotContents(index, stack);
+									}
+									else
+									{
+										inv.setInventorySlotContents(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										side.setInventorySlotContents(index, stack);
+									}
+									else
+									{
+										inv.setInventorySlotContents(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -678,12 +2495,12 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -697,9 +2514,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getInventoryStackLimit();
+									}
+									else
+									{
+										return inv.getInventoryStackLimit();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getInventoryStackLimit();
+									}
+									else
+									{
+										return inv.getInventoryStackLimit();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getInventoryStackLimit();
+									}
+									else
+									{
+										return inv.getInventoryStackLimit();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getInventoryStackLimit();
+									}
+									else
+									{
+										return inv.getInventoryStackLimit();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.getInventoryStackLimit();
+									}
+									else
+									{
+										return inv.getInventoryStackLimit();
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
@@ -733,12 +2750,12 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		
 		if (this.getDimensionID() != -999)
 		{
-			WorldServer dimWorld = DimensionManager.getWorld(this.dimID);
+			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
 			TileEntityBlockholeWall wall;
 			
 			// West direction - east block side input
-			if (dimWorld != null && this.currDirection == 4)
+			if (dimWorld != null && this.currDirection == 1)
 			{
 				for (int j = 1; j < 15; j++)
 				{
@@ -752,9 +2769,209 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 							
 							if (wall.getTransport())
 							{
-								TileEntity target; 
+								TileEntity target;
 								
 								target = dimWorld.getTileEntity(new BlockPos(14,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isItemValidForSlot(index, stack);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// East direction - west block side input
+			else if (dimWorld != null && this.currDirection == 3)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(1,j,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isItemValidForSlot(index, stack);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// North direction - South block side input
+			else if (dimWorld != null && this.currDirection == 2)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,14));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isItemValidForSlot(index, stack);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// South direction - North block side input
+			else if (dimWorld != null && this.currDirection == 0)
+			{
+				for (int j = 1; j < 15; j++)
+				{
+					for (int i = 1; i < 15; i++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,j,1));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isItemValidForSlot(index, stack);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Up direction - Down block side input
+			else if (dimWorld != null && this.currDirection == 5)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,1,k));
+								
+								if (target != null && target instanceof IInventory)
+								{
+									IInventory inv = (IInventory)target;
+									
+									if (inv instanceof ISidedInventory)
+									{
+										ISidedInventory side = (ISidedInventory)tile;
+												
+										return side.isItemValidForSlot(index, stack);
+									}
+									else
+									{
+										return inv.isItemValidForSlot(index, stack);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			// Down direction - Up block side input
+			else if (dimWorld != null && this.currDirection == 4)
+			{
+				for (int i = 1; i < 15; i++)
+				{
+					for (int k = 1; k < 15; k++)
+					{
+						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
+						
+						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						{
+							wall = (TileEntityBlockholeWall)tile;
+							
+							if (wall.getTransport())
+							{
+								TileEntity target;
+								
+								target = dimWorld.getTileEntity(new BlockPos(i,14,k));
 								
 								if (target != null && target instanceof IInventory)
 								{
