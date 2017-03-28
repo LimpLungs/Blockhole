@@ -46,6 +46,9 @@ public class Blockhole
     	
 		DimensionType.register("SINGULARITY", "_singularity", DimensionList.SINGULARITY_ID, WorldProviderSingularity.class, true);
     	
+		
+		RecipesList.registerIRecipes();
+    	RecipesList.addShapeless();
     	RecipesList.addShaped();
 	}
 

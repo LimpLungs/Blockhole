@@ -18,13 +18,13 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	
 	public TileEntityTeleporter()
 	{
-		
+		queue = new DoubleLinkedQueue(this);
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
 	{
-		getQueue().writeNBT(compound);
+		this.getQueue().writeNBT(compound);
 		
 		return super.writeToNBT(compound);
 	}
@@ -34,7 +34,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	{
 		super.readFromNBT(compound);
 		
-		getQueue().readNBT(compound);
+		this.getQueue().readNBT(compound);
 	}
 	
 	public void setCoordinate(int xyz, int value)
@@ -59,7 +59,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
     public final SPacketUpdateTileEntity getUpdatePacket()
     {
       NBTTagCompound tag = new NBTTagCompound();
-      writeToNBT(tag);    
+      this.writeToNBT(tag);    
       return new SPacketUpdateTileEntity(getPos(), 0, tag);
     }
     
@@ -71,7 +71,6 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
       if(world.isRemote)
       {
         this.readFromNBT(pkt.getNbtCompound());
-        this.getQueue().readNBT(pkt.getNbtCompound());
       }
     }
 
@@ -86,7 +85,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	{
 		this.markDirty();
 
-		return getQueue().getBack();
+		return this.getQueue().getBack();
 	}
 
 	@Override
@@ -94,7 +93,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	{
 		this.markDirty();
 	
-		return getQueue().pop_back();
+		return this.getQueue().pop_back();
 	}
 
 	/**
@@ -105,7 +104,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	{
 		this.markDirty();
 		
-		return getQueue().pop_back();
+		return this.getQueue().pop_back();
 	}
 
 	/**
@@ -215,7 +214,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 
 	public DoubleLinkedQueue getQueue() 
 	{
-		return queue;
+		return this.queue;
 	}
 
 	public void setQueue(DoubleLinkedQueue queue) 

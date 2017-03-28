@@ -7,16 +7,29 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class RecipesList 
 {
+	public static void registerIRecipes()
+	{
+		RecipeSorter.register("copyNBT", RecipeCopyBlockhole.class, Category.SHAPELESS, "after:minecraft:shapeless");
+	}
+	
+	public static void addShapeless()
+	{
+		// Ender Diamond
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemList.ENDER_DIAMOND), Items.ENDER_PEARL, Items.DIAMOND, Items.GHAST_TEAR);
+		
+		// Blockhole NBT Copy
+		GameRegistry.addRecipe(new RecipeCopyBlockhole());
+	}
+	
 	public static void addShaped()
 	{
 		// Blockhole Teleportation Device
 		GameRegistry.addRecipe(new ItemStack(BlockList.TELEPORTER), "I I", "IBI", "OOO", 'I', Blocks.IRON_BLOCK, 'B', BlockList.BLOCKHOLE, 'O', Blocks.OBSIDIAN);
-		
-		// Ender Diamond
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemList.ENDER_DIAMOND), Items.ENDER_PEARL, Items.DIAMOND, Items.GHAST_TEAR);
 		
 		// Blockhole Singularity
 		GameRegistry.addRecipe(new ItemStack(BlockList.BLOCKHOLE), "OEO", "EDE", "OEO", 'O', Blocks.OBSIDIAN, 'E', Items.ENDER_PEARL, 'D', Blocks.DIAMOND_BLOCK);
@@ -37,5 +50,8 @@ public class RecipesList
 		GameRegistry.addRecipe(new ItemStack(BlockList.POWDERKEG), "SGS", "SCS", "SSS", 'S', Items.STICK, 'G', new ItemStack(Items.COAL, 1, 1), 'C', Items.GUNPOWDER);
 		GameRegistry.addRecipe(new ItemStack(BlockList.POWDERKEG), "SGS", "SCS", "SSS", 'S', Items.STICK, 'G', new ItemStack(Items.COAL, 1, 1), 'C', new ItemStack(Items.COAL, 1, 0));
 		GameRegistry.addRecipe(new ItemStack(BlockList.POWDERKEG), "SGS", "SCS", "SSS", 'S', Items.STICK, 'G', new ItemStack(Items.COAL, 1, 1), 'C', new ItemStack(Items.COAL, 1, 1));
+		
 	}
+	
+	
 }

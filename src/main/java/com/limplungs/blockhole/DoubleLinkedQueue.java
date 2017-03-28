@@ -140,18 +140,12 @@ public class DoubleLinkedQueue
 	
 	public void writeNBT(NBTTagCompound compound) 
 	{
-		this.tile.markDirty();
-		
-		
 	}
 	
 	
 	
 	public void readNBT(NBTTagCompound compound)
 	{
-		this.tile.markDirty();
-		
-		
 	}
 	
 
