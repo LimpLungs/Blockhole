@@ -1,8 +1,5 @@
 package com.limplungs.blockhole;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import com.limplungs.blockhole.blocks.BlockList;
 
 import net.minecraft.inventory.InventoryCrafting;

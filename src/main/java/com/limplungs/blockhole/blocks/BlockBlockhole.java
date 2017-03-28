@@ -21,6 +21,7 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -83,6 +84,26 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	public boolean canProvidePower(IBlockState state) 
 	{
 		return false;
+	}
+	
+	
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) 
+	{
+		TileEntityBlockhole tile = (TileEntityBlockhole)world.getTileEntity(pos);
+		
+		if (tile != null)
+		{
+			ItemStack stack = new ItemStack(BlockList.BLOCKHOLE, 1);
+			
+			stack.setTagCompound(new NBTTagCompound());
+			
+			tile.writeToNBT(stack.getTagCompound());
+			
+			return stack;
+		}
+		
+		return ItemStack.EMPTY;
 	}
 	
 	
@@ -230,4 +251,12 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 		return false;
 	}
 	
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) 
+	{
+		super.addInformation(stack, player, tooltip, advanced);
+		
+		if (stack.hasTagCompound())
+			tooltip.add("Dimension: " + stack.getTagCompound().getInteger("dimID"));
+	}
 }
