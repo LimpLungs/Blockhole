@@ -13,7 +13,7 @@ public class RecipesList
 	public static void addShaped()
 	{
 		// Blockhole Teleportation Device
-		//GameRegistry.addRecipe(new ItemStack(BlockList.TELEPORTER), "WWW", "IEI", "SSS", 'W', Blocks.WOODEN_SLAB, 'E', BlockList.BLOCKHOLE, 'S', Blocks.STONE);
+		GameRegistry.addRecipe(new ItemStack(BlockList.TELEPORTER), "I I", "IBI", "OOO", 'I', Blocks.IRON_BLOCK, 'B', BlockList.BLOCKHOLE, 'O', Blocks.OBSIDIAN);
 		
 		// Ender Diamond
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemList.ENDER_DIAMOND), Items.ENDER_PEARL, Items.DIAMOND, Items.GHAST_TEAR);

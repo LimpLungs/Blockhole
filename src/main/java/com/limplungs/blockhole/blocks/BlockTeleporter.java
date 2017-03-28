@@ -12,6 +12,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -34,19 +36,24 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
     {
         return new TileEntityTeleporter();
     }
-
 	
 	@Override
 	public boolean isFullCube(IBlockState state)
 	{
-		return false;
+		return true;
+	}
+	
+	@Override
+	public BlockRenderLayer getBlockLayer() 
+	{
+		return BlockRenderLayer.TRANSLUCENT;
 	}
 	
 	
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public EnumBlockRenderType getRenderType(IBlockState state) 
 	{
-		return false;
+		return EnumBlockRenderType.MODEL;
 	}
 	
 	
@@ -77,77 +84,6 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 		
 		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
 		
-		ItemStack tstack = tile.getQueue().getBack();
-		
-		
-		// Item Held
-		if (heldItem != null)
-		{
-			if(tile.isItemValidForSlot(tile.getQueue().getSize(), heldItem))
-			{
-				tile.setInventorySlotContents(tile.getQueue().getSize(), heldItem);
-				heldItem.setCount(heldItem.getCount() - 1);
-				player.attackEntityFrom(BlockholeDefinitions.teleporter, 1);
-				
-				return true;
-			}
-			
-			if (heldItem.getItem() == Items.ENDER_PEARL)
-			{
-				double fin_x = .5; 
-				double fin_z = .5; 
-				
-				if (tile.tp_x != 0)
-					fin_x = tile.tp_x + (tile.tp_x / Math.abs(tile.tp_x) * .5);
-				if (tile.tp_z != 0)
-					fin_z = tile.tp_z + (tile.tp_z / Math.abs(tile.tp_z) * .5);
-					
-				if (player.attemptTeleport(fin_x, tile.tp_y, fin_z))
-				{
-					heldItem.setCount(heldItem.getCount() - 1);
-					player.attackEntityFrom(BlockholeDefinitions.teleporter, 15);
-					
-					return true;
-				}
-			}
-		}
-		
-		// Item Not Held
-		if (heldItem == null || (!(heldItem.getItem() instanceof ItemBlock) && heldItem.getItem() != ItemList.TUNER))
-		{
-			if (tstack != null)
-			{
-				for (int i = 0; i < player.inventory.getSizeInventory(); i++)
-				{
-					ItemStack pstack = player.inventory.getStackInSlot(i);
-					
-					if (!world.isRemote)
-					if (pstack != null && pstack.getCount() < pstack.getMaxStackSize() && pstack.getItem() == tstack.getItem() && pstack.getMetadata() == tstack.getMetadata() && pstack.getTagCompound() == tstack.getTagCompound())
-					{
-						tile.removeStackFromSlot(tile.getSizeInventory());
-						pstack.setCount(pstack.getCount() + 1);
-						player.attackEntityFrom(BlockholeDefinitions.teleporter, 1);
-							
-						return true;
-					}
-				}
-			
-				for (int i = 0; i < player.inventory.getSizeInventory(); i++)
-				{
-					ItemStack pstack = player.inventory.getStackInSlot(i);
-
-					if (!world.isRemote)	
-					if (pstack == null)
-					{
-						player.inventory.setInventorySlotContents(i, tile.removeStackFromSlot(tile.getSizeInventory()));
-						player.attackEntityFrom(BlockholeDefinitions.teleporter, 1);
-						
-						return true;
-					}
-				}
-			}
-		}
-		
 		return false;
 	}
 	
@@ -155,35 +91,8 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) 
 	{
-		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
-		
-		if (!world.isRemote)
-		{
-			tile = (TileEntityTeleporter)world.getTileEntity(pos);
-		}	
 		
 		
-		BlockPos tploc = new BlockPos(tile.tp_x, tile.tp_y, tile.tp_z);
-		
-		if (pos != tploc)
-		{
-			if (world.isBlockIndirectlyGettingPowered(pos) > 0)
-			{
-				if (tile.isOn == false)
-				{
-					//world.setBlockState(tploc, Block.getBlockFromItem(stack.getItem()).getStateFromMeta(stack.getMetadata()));
-					
-					tile.isOn = true;
-				}
-			}
-			else if (world.isBlockIndirectlyGettingPowered(pos) == 0)
-			{
-				if (tile.isOn == true)
-				{
-					tile.isOn = false;
-				}
-			}
-		}
 	}
 		
 }

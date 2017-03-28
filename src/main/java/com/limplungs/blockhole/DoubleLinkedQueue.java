@@ -10,234 +10,148 @@ public class DoubleLinkedQueue
 	private Node headptr;
 	private Node tailptr;
 	private int size;
-	TileEntityTeleporter tile;
+	private TileEntityTeleporter tile;
 	
 	public DoubleLinkedQueue(TileEntityTeleporter tile)
 	{
-		headptr = null;
-		tailptr = headptr;
-		size = 0;
-		
-		this.tile = tile;
+		this.headptr = null;
+		this.tailptr = null;
+		this.size    = 0;
+		this.tile    = tile;
 	}
 	
-	public Node insert_front(ItemStack item, NBTTagCompound compound)
-	{
-		Node temp = new Node();
-		temp.item = item;
-		
-		if (item.hasTagCompound())
-			temp.nbt = item.getTagCompound();
-		else
-			temp.nbt = compound;
-		
-		// empty list
-		if (headptr == null && tailptr == null)
-		{
-			temp.back = null;
-			temp.next = null;
-			tailptr = temp;
-			headptr = tailptr;
-		}
-		// one or more
-		else if (headptr != null && tailptr != null)
-		{
-			temp.next = headptr;
-			temp.back = null;
-			
-			headptr.back = temp;
-			headptr = temp;
-		}
 	
-		size += 1;
-		
+	public ItemStack insert_front(ItemStack data)
+	{
 		this.tile.markDirty();
 		
-		return headptr;
-	}
-
-	public Node insert_back(ItemStack item, NBTTagCompound compound)
-	{
-		Node temp = new Node();
-		temp.item = item;
-		
-		if (item.hasTagCompound())
-			temp.nbt = item.getTagCompound();
-		else
-			temp.nbt = compound;
-		
-		// empty list
 		if (headptr == null && tailptr == null)
 		{
-			temp.next = null;
-			temp.back = null;
-			headptr = temp;
+			headptr = new Node(data, null, null);
 			tailptr = headptr;
 		}
-		// one or more
-		else if (headptr != null && tailptr != null)
+		else
 		{
-			temp.next = null;
-			temp.back = tailptr;
+			Node temp = headptr;
 			
-			tailptr.next = temp;
-			tailptr = temp;
+			headptr = new Node(data, temp, null);
 		}
 		
-		size += 1;
+		this.addSize();
 		
-		this.tile.markDirty();
-		
-		return tailptr;
+		return headptr.getData();
 	}
+
+	
+	
+	
+	public ItemStack insert_back(ItemStack data)
+	{
+		this.tile.markDirty();
+
+		if (tailptr == null && headptr == null)
+		{
+			tailptr = new Node(data, null, null);
+			headptr = tailptr;
+		}
+		else
+		{
+			Node temp = tailptr;
+			
+			tailptr = new Node(data, null, temp);
+		}
+		
+		this.addSize();
+		
+		return tailptr.getData();
+	}
+	
+	
+	
 	
 	public ItemStack pop_front()
 	{
-		if (headptr == null)
-		{
-			return null;
-		}
+		if (headptr == null && tailptr == null)
+			return ItemStack.EMPTY;
+
+		this.tile.markDirty();
 		
 		Node temp = headptr;
 		
-		headptr = headptr.next;
-		
-		if (headptr != null)
+		if (headptr == tailptr)
 		{
-			headptr.back = null;
+			headptr = null;
+			tailptr = null;
+		}
+		else
+		{
+			headptr = headptr.next;
 		}
 		
-		if (headptr == null)
-		{
-			tailptr = headptr;
-		}
+		this.subSize();
 		
-		size--;
-		
-		if (temp.nbt != null)
-		{
-			temp.item.setTagCompound(temp.nbt);
-		}
-		
-		this.tile.markDirty();
-		
-		return temp.item;
+		return temp.getData();
 	}
+	
+	
+	
 	
 	public ItemStack pop_back()
 	{
-		if (tailptr == null)
-		{
-			return null;
-		}
+		if (tailptr == null && headptr == null)
+			return ItemStack.EMPTY;
+
+		this.tile.markDirty();
 		
 		Node temp = tailptr;
 		
-		tailptr = tailptr.back;
-		
-		if (tailptr != null)
+		if (tailptr == headptr)
 		{
-			tailptr.next = null;
+			tailptr = null;
+			headptr = null;
+		}
+		else
+		{
+			tailptr = tailptr.back;
 		}
 		
-		if (tailptr == null)
-		{
-			headptr = tailptr;
-		}
+		this.subSize();
 		
-		size--;
-		
-		if (temp.nbt != null)
-		{
-			temp.item.setTagCompound(temp.nbt);
-		}
-		
-		this.tile.markDirty();
-		
-		return temp.item;
+		return temp.getData();
 	}
+	
+	
+	
 	
 	public ItemStack getFront()
 	{
-		if (headptr == null)
-		{
-			return null;
-		}
-		
-		Node temp = headptr;
-
-		if (temp.nbt != null)
-		{
-			temp.item.setTagCompound(temp.nbt);
-		}
-		
-		this.tile.markDirty();
-		
-		return headptr.item;
+		return this.headptr.getData();
 	}
 	
 
+	
 	
 	public ItemStack getBack()
 	{
-		if (tailptr == null)
-		{
-			return null;
-		}
-		
-		Node temp = tailptr;
-
-		if (temp.nbt != null)
-		{
-			temp.item.setTagCompound(temp.nbt);
-		}
-
-		this.tile.markDirty();
-		
-		return temp.item;
+		return this.tailptr.getData();
 	}
 	
 
-	/**
-	 * 
-	 * @param compound - NBTTagCompound used for storing queue NBT data for writing in the Tile Entity.
-	 */
+	
 	public void writeNBT(NBTTagCompound compound) 
 	{
-		compound.setInteger("size", size);
+		this.tile.markDirty();
 		
-		Node node = headptr;
 		
-		if (headptr != null)
-		{
-			for (int i = 0; i < getSize(); i++)
-			{
-				compound.setTag("item" + i, node.item.writeToNBT(new NBTTagCompound()));
-				compound.setTag("nbt" + i, node.item.writeToNBT(new NBTTagCompound()));
-			
-				node = node.next;
-			}
-		}
 	}
 	
-	/**
-	 * 
-	 * @param compound - NBTTagCompound used for storing queue NBT data for reading in the Tile Entity.
-	 */
+	
+	
 	public void readNBT(NBTTagCompound compound)
 	{
-		int tempsize = compound.getInteger("size");
+		this.tile.markDirty();
 		
-		for (int i = 0; i < tempsize; i++)
-		{
-			NBTTagCompound itemtag = compound.getCompoundTag("item" + i);
-			NBTTagCompound nbttag = compound.getCompoundTag("nbt" + i);
-			
-			if(itemtag != null && !itemtag.hasNoTags())
-			{
-				insert_back(new ItemStack(itemtag), nbttag);
-			}
-		}
+		
 	}
 	
 
@@ -249,100 +163,40 @@ public class DoubleLinkedQueue
 	{
 		return size;
 	}
-
 	
-	/**
-	 * 
-	 * Used to retrieve the ItemStack at a specific node.
-	 * 
-	 * @param i - node you wish to remove stack from
-	 * @return
-	 */
-	public ItemStack getStackAtNode(int i) 
+	private void addSize()
 	{
-		if (getSize() == 0)
-		{
-			return null;
-		}
-		
-		if (i > getSize())
-		{
-			return null;
-		}
-		
-		Node temp = headptr;
-		
-		for (int j = 1; j < i; j++)
-		{
-			temp = temp.next;
-		}
-		
-		if (temp.nbt != null)
-		{
-			temp.item.setTagCompound(temp.nbt);
-		}
-
 		this.tile.markDirty();
 		
-		return temp.item;
+		this.size += 1;
 	}
 	
-	/**
-	 * 
-	 * Use getStackAtNode(int i) for stack retrieval.
-	 * 
-	 * @param i - node you wish to remove stack from
-	 * @return
-	 */
-	@Deprecated
-	public Node getNodeAtNode(int i) 
+	private void subSize()
 	{
-		if (getSize() == 0)
-		{
-			return null;
-		}
-		
-		if (i > getSize())
-		{
-			return null;
-		}
-		
-		Node temp = headptr;
-		
-		for (int j = 1; j < i; j++)
-		{
-			temp = temp.next;
-		}
-
 		this.tile.markDirty();
 		
-		return temp;
+		this.size -= 1;
 	}
 	
-	/**
-	 * 
-	 * NOT FULLY CODED, DO NOT USE!
-	 * Currently not useful, but changes may occur.
-	 * 
-	 * @param i - node you wish to remove stack from
-	 * @return
-	 */
-	@Deprecated
-	public ItemStack removeStackAtNode(int i)
-	{
-		Node remove = this.getNodeAtNode(i);
-
-
-		this.tile.markDirty();
-		
-		return remove.item;
-	}
 }
 
 class Node
 {
-	ItemStack item = null;
-	NBTTagCompound nbt = null;
-	Node next = null;
-	Node back = null;
+	public NBTTagCompound nbt = null;
+	private ItemStack data     = ItemStack.EMPTY;
+	public Node next          = null;
+	public Node back          = null;
+	
+	public Node(ItemStack data, Node next, Node back) 
+	{
+		this.nbt  = data.getTagCompound();
+		this.data = data;
+		this.next = next;
+		this.back = back;
+	}
+	
+	public ItemStack getData()
+	{
+		return this.data;
+	}
 }
