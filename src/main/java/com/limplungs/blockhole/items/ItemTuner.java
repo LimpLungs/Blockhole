@@ -101,7 +101,7 @@ public class ItemTuner extends ItemBasic
 			
 				if (world.isRemote)
 				{
-					player.sendMessage(new TextComponentString("XYZ: " + tile.tp_x + " " + tile.tp_y + " " + tile.tp_z));
+					//player.sendMessage(new TextComponentString("XYZ: " + tile.tp_x + " " + tile.tp_y + " " + tile.tp_z));
 				}
 			}
 			
