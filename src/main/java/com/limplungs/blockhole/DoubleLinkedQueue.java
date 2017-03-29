@@ -25,21 +25,21 @@ public class DoubleLinkedQueue
 	{
 		this.tile.markDirty();
 		
-		if (headptr == null && tailptr == null)
+		if (this.headptr == null && this.tailptr == null)
 		{
-			headptr = new Node(data, null, null);
-			tailptr = headptr;
+			this.headptr = new Node(data, null, null);
+			this.tailptr = this.headptr;
 		}
 		else
 		{
-			Node temp = headptr;
+			Node temp = this.headptr;
 			
-			headptr = new Node(data, temp, null);
+			this.headptr = new Node(data, temp, null);
 		}
 		
 		this.addSize();
 		
-		return headptr.getData();
+		return this.headptr.getData();
 	}
 
 	
@@ -49,21 +49,21 @@ public class DoubleLinkedQueue
 	{
 		this.tile.markDirty();
 
-		if (tailptr == null && headptr == null)
+		if (this.tailptr == null && this.headptr == null)
 		{
-			tailptr = new Node(data, null, null);
-			headptr = tailptr;
+			this.tailptr = new Node(data, null, null);
+			this.headptr = this.tailptr;
 		}
 		else
 		{
-			Node temp = tailptr;
+			Node temp = this.tailptr;
 			
-			tailptr = new Node(data, null, temp);
+			this.tailptr = new Node(data, null, temp);
 		}
 		
 		this.addSize();
 		
-		return tailptr.getData();
+		return this.tailptr.getData();
 	}
 	
 	
@@ -71,21 +71,21 @@ public class DoubleLinkedQueue
 	
 	public ItemStack pop_front()
 	{
-		if (headptr == null && tailptr == null)
+		if (this.headptr == null && this.tailptr == null)
 			return ItemStack.EMPTY;
 
 		this.tile.markDirty();
 		
-		Node temp = headptr;
+		Node temp = this.headptr;
 		
-		if (headptr == tailptr)
+		if (this.headptr == this.tailptr)
 		{
-			headptr = null;
-			tailptr = null;
+			this.headptr = null;
+			this.tailptr = null;
 		}
 		else
 		{
-			headptr = headptr.next;
+			this.headptr = this.headptr.next;
 		}
 		
 		this.subSize();
@@ -98,21 +98,21 @@ public class DoubleLinkedQueue
 	
 	public ItemStack pop_back()
 	{
-		if (tailptr == null && headptr == null)
+		if (this.tailptr == null && this.headptr == null)
 			return ItemStack.EMPTY;
 
 		this.tile.markDirty();
 		
-		Node temp = tailptr;
+		Node temp = this.tailptr;
 		
-		if (tailptr == headptr)
+		if (this.tailptr == this.headptr)
 		{
-			tailptr = null;
-			headptr = null;
+			this.tailptr = null;
+			this.headptr = null;
 		}
 		else
 		{
-			tailptr = tailptr.back;
+			this.tailptr = this.tailptr.back;
 		}
 		
 		this.subSize();
@@ -125,7 +125,11 @@ public class DoubleLinkedQueue
 	
 	public ItemStack getFront()
 	{
-		return this.headptr.getData();
+		if (this.tailptr == null && this.headptr == null)
+			return ItemStack.EMPTY;
+		
+		else
+			return this.headptr.getData();
 	}
 	
 
@@ -133,20 +137,59 @@ public class DoubleLinkedQueue
 	
 	public ItemStack getBack()
 	{
-		return this.tailptr.getData();
+		if (this.tailptr == null && this.headptr == null)
+			return ItemStack.EMPTY;
+		
+		else
+			return this.tailptr.getData();
 	}
+	
+	
 	
 
-	
+	/**
+	 * 
+	 * @param compound - NBTTagCompound used for storing queue NBT data for writing in the Tile Entity.
+	 */
 	public void writeNBT(NBTTagCompound compound) 
 	{
+		compound.setInteger("size", this.getSize());
+		
+		if (this.headptr != null)
+		{
+			Node node = this.headptr;
+			
+			for (int i = 0; i < this.getSize(); i++)
+			{
+				compound.setTag("item" + i, node.getData().writeToNBT(new NBTTagCompound()));
+			
+				node = node.next;
+			}
+		}
 	}
 	
 	
 	
+	
+	/**
+	 * 
+	 * @param compound - NBTTagCompound used for storing queue NBT data for reading in the Tile Entity.
+	 */
 	public void readNBT(NBTTagCompound compound)
 	{
+		int tempsize = compound.getInteger("size");
+		
+		for (int i = 0; i < tempsize; i++)
+		{
+			NBTTagCompound itemtag = compound.getCompoundTag("item" + i);
+			
+			if(itemtag != null && !itemtag.hasNoTags())
+			{
+				insert_back(new ItemStack(itemtag));
+			}
+		}
 	}
+	
 	
 
 	/**
@@ -155,7 +198,7 @@ public class DoubleLinkedQueue
 	 */
 	public int getSize() 
 	{
-		return size;
+		return this.size;
 	}
 	
 	private void addSize()

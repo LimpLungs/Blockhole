@@ -33,6 +33,8 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 		super(blockdata);
 	}
 	
+	
+	
 	@Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
@@ -46,17 +48,22 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
         return tile;
     }
 
+	
+	
 	@Override
 	public boolean isFullyOpaque(IBlockState state) 
 	{
 		return false;
 	}
 	
+	
+	
 	@Override
 	public boolean isFullCube(IBlockState state)
 	{
 		return false;
 	}
+	
 	
 	
 	@Override
@@ -66,11 +73,13 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	}
 	
 	
+	
 	@Override
 	public BlockRenderLayer getBlockLayer() 
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}
+	
 	
 	
 	@Override
@@ -80,11 +89,13 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	}
 	
 	
+	
 	@Override
 	public boolean canProvidePower(IBlockState state) 
 	{
 		return false;
 	}
+	
 	
 	
 	@Override
@@ -105,6 +116,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 		
 		return ItemStack.EMPTY;
 	}
+	
 	
 	
 	// Forge Trick to drop with NBT
@@ -130,12 +142,14 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	}
 	
 	
+	
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{
 		if (willHarvest) return true; //If it will harvest, delay deletion of the block until after getDrops
 	    return super.removedByPlayer(state, world, pos, player, willHarvest);
 	}
+	
 	
 	
 	@Override
@@ -163,10 +177,10 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 			}
 		}
 	}
-	
 	// End of forge trick
 	
 
+	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
@@ -250,6 +264,8 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 		
 		return false;
 	}
+	
+	
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) 

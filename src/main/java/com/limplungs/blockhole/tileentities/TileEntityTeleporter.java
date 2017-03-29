@@ -1,8 +1,10 @@
 package com.limplungs.blockhole.tileentities;
 
 import com.limplungs.blockhole.DoubleLinkedQueue;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -16,10 +18,29 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 {
 	private DoubleLinkedQueue queue;
 	
+	
+	
 	public TileEntityTeleporter()
 	{
 		queue = new DoubleLinkedQueue(this);
 	}
+
+	
+	
+	public DoubleLinkedQueue getQueue() 
+	{
+		return this.queue;
+	}
+
+	
+	
+	public void setQueue(DoubleLinkedQueue queue) 
+	{
+		this.queue = queue;
+		this.markDirty();
+	}
+	
+	
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
@@ -29,6 +50,8 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 		return super.writeToNBT(compound);
 	}
 	
+	
+	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) 
 	{
@@ -37,16 +60,21 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 		this.getQueue().readNBT(compound);
 	}
 	
+	
+	
 	public void setCoordinate(int xyz, int value)
 	{
 		this.markDirty();
 	}
     
+	
+	
     @Override
     public void handleUpdateTag(NBTTagCompound tag) 
     {
     	super.handleUpdateTag(tag);
     }
+    
     
     
     @Override
@@ -55,6 +83,8 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
       return this.writeToNBT(super.getUpdateTag());
     }
     
+    
+    
     @Override
     public final SPacketUpdateTileEntity getUpdatePacket()
     {
@@ -62,6 +92,8 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
       this.writeToNBT(tag);    
       return new SPacketUpdateTileEntity(getPos(), 0, tag);
     }
+    
+    
     
     @Override
     public final void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
@@ -74,165 +106,206 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
       }
     }
 
+    
+    
 	@Override
 	public int getSizeInventory() 
 	{
-		return 0;
+		return 2;
 	}
 
+	
+	
 	@Override
 	public ItemStack getStackInSlot(int index) 
 	{
-		this.markDirty();
-
-		return this.getQueue().getBack();
+		if (index == 0)
+			return this.getQueue().getBack();
+		
+		else
+			return ItemStack.EMPTY;
 	}
 
+	
+	
 	@Override
 	public ItemStack decrStackSize(int index, int count) 
 	{
 		this.markDirty();
-	
-		return this.getQueue().pop_back();
+		
+		if (index == 0 && count > 0)
+			return this.getQueue().pop_back();
+		
+		else
+			return ItemStack.EMPTY;
 	}
 
-	/**
-	 * This can only remove from the rear.
-	 */
+	
+	
 	@Override
 	public ItemStack removeStackFromSlot(int index) 
 	{
 		this.markDirty();
 		
-		return this.getQueue().pop_back();
+		if (index == 0)
+			return this.getQueue().pop_back();
+		
+		else
+			return ItemStack.EMPTY;
 	}
 
-	/**
-	 * This can only insert to the rear.
-	 */
+	
+	
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) 
 	{
+		this.markDirty();
 		
+		if (index > 0)
+			this.getQueue().insert_back(stack);
 	}
 
+	
+	
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) 
 	{
-		return false;
+		return stack.getItem() instanceof ItemBlock && index > 0 ? true : false;
 	}
 
+	
+	
 	@Override
 	public int getInventoryStackLimit() 
 	{
-		return 0;
+		return 1;
 	}
 
+	
+	
 	@Override
 	public void markDirty() 
 	{
 		super.markDirty();
 	}
 
+	
+	
 	@Override
 	public void openInventory(EntityPlayer player) 
 	{
 		
 	}
 
+	
+	
 	@Override
 	public void closeInventory(EntityPlayer player) 
 	{
 		
 	}
 
+	
+	
 	@Override
 	public int getField(int id) 
 	{
 		return 0;
 	}
 
+	
+	
 	@Override
 	public void setField(int id, int value) 
 	{
 		
 	}
 
+	
+	
 	@Override
 	public int getFieldCount() 
 	{
 		return 0;
 	}
 
+	
+	
 	@Override
 	public String getName() 
 	{
-		return null;
+		return "Blockhole Teleporter";
 	}
 
+	
+	
 	@Override
 	public boolean hasCustomName() 
 	{
 		return false;
 	}
 
+	
+	
 	@Override
 	public ITextComponent getDisplayName() 
 	{
 		return null;
 	}
 
+	
+	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) 
 	{
 		return false;
 	}
 
+	
+	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) 
 	{
 		return null;
 	}
 
+	
+	
 	@Override
 	public NBTTagCompound serializeNBT() 
 	{
 		return null;
 	}
 
+	
+	
 	@Override
 	public void deserializeNBT(NBTTagCompound nbt) 
 	{
 		
 	}
 
-	@Override
-	public void clear() 
-	{
-		
-	}
-
-	public DoubleLinkedQueue getQueue() 
-	{
-		return this.queue;
-	}
-
-	public void setQueue(DoubleLinkedQueue queue) 
-	{
-		this.queue = queue;
-		this.markDirty();
-	}
-
+	
+	
 	@Override
 	public boolean isEmpty() 
 	{
 		return this.getQueue().getSize() == 0 ? true : false;
 	}
 
+	
+	
 	@Override
 	public boolean isUsableByPlayer(EntityPlayer player) 
 	{
 		return false;
 	}
+
 	
+	
+	@Override
+	public void clear() 
+	{
+		
+	}
 }
