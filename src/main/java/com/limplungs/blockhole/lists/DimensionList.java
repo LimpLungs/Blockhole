@@ -1,4 +1,4 @@
-package com.limplungs.blockhole.dimensions;
+package com.limplungs.blockhole.lists;
 
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;

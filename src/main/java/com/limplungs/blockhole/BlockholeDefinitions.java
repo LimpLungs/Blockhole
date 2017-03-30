@@ -4,11 +4,11 @@ import net.minecraft.util.DamageSource;
 
 public class BlockholeDefinitions 
 {
-	public static DamageSource teleporter;
+	public static DamageSource blackhole;
 	
 	public static void initialize()
 	{
-		teleporter = new DamageSource("Teleporter");
-		teleporter.setDamageBypassesArmor();
+		blackhole = new DamageSource("A Blackhole");
+		blackhole.setDamageBypassesArmor();
 	}
 }

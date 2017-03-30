@@ -1,12 +1,13 @@
 package com.limplungs.blockhole;
 
-import com.limplungs.blockhole.blocks.BlockList;
-import com.limplungs.blockhole.dimensions.DimensionList;
 import com.limplungs.blockhole.dimensions.WorldProviderSingularity;
 import com.limplungs.blockhole.entities.EntityPowderKeg;
-import com.limplungs.blockhole.items.ItemList;
+import com.limplungs.blockhole.lists.BlockList;
+import com.limplungs.blockhole.lists.DimensionList;
+import com.limplungs.blockhole.lists.ItemList;
+import com.limplungs.blockhole.lists.RecipesList;
+import com.limplungs.blockhole.lists.TileEntityList;
 import com.limplungs.blockhole.render.RenderPowderKeg;
-import com.limplungs.blockhole.tileentities.TileEntityList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
@@ -15,6 +16,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -28,7 +30,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Blockhole
 {
     public static final String MODID = "blockhole";
-    public static final String VERSION = "1.0alpha12";
+    public static final String VERSION = "1.0alpha13";
+    
+    BlockholeEventHandler eventhandler = new BlockholeEventHandler();
     
     //Ideas
     //Blockhole Teleporter
@@ -37,6 +41,8 @@ public class Blockhole
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+    	MinecraftForge.EVENT_BUS.register(eventhandler);
+    	
     	BlockholeDefinitions.initialize();
     	
     	BlockList.registerBlocks();
@@ -81,7 +87,7 @@ public class Blockhole
 		@SideOnly(Side.CLIENT)
 		public ItemStack getTabIconItem()
 		{
-			return new ItemStack(BlockList.BLOCKHOLE);
+			return new ItemStack(BlockList.PORTAL);
 		}
 	};
 }

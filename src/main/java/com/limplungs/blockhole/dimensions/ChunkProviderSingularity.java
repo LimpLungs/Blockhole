@@ -2,7 +2,8 @@ package com.limplungs.blockhole.dimensions;
 
 import java.util.List;
 
-import com.limplungs.blockhole.blocks.BlockList;
+import com.limplungs.blockhole.lists.BlockList;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -50,7 +51,7 @@ public class ChunkProviderSingularity implements IChunkGenerator
 				{
 					for (k = 1; k < 15; k++)
 					{  
-						primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
+						primer.setBlockState(i, j, k, BlockList.DIMENSION_WALL.getDefaultState());
 					}
 				}
 			}
@@ -62,22 +63,22 @@ public class ChunkProviderSingularity implements IChunkGenerator
 				k = 0;
 				
 				for (i = 1; i < 15; i++)
-					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
+					primer.setBlockState(i, j, k, BlockList.DIMENSION_WALL.getDefaultState());
 				
 				k = 15;
 				
 				for (i = 1; i < 15; i++)
-					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
+					primer.setBlockState(i, j, k, BlockList.DIMENSION_WALL.getDefaultState());
 				
 				i = 0;
 				
 				for (k = 1; k < 15; k++)
-					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
+					primer.setBlockState(i, j, k, BlockList.DIMENSION_WALL.getDefaultState());
 				
 				i = 15;
 				
 				for (k = 1; k < 15; k++)
-					primer.setBlockState(i, j, k, BlockList.BLOCKHOLE_WALL.getDefaultState());
+					primer.setBlockState(i, j, k, BlockList.DIMENSION_WALL.getDefaultState());
 			}
 		}
 		

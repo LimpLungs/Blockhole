@@ -1,7 +1,6 @@
-package com.limplungs.blockhole;
+package com.limplungs.blockhole.lists;
 
-import com.limplungs.blockhole.blocks.BlockList;
-import com.limplungs.blockhole.items.ItemList;
+import com.limplungs.blockhole.RecipeCopyBlockhole;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -29,10 +28,10 @@ public class RecipesList
 	public static void addShaped()
 	{
 		// Blockhole Teleportation Device
-		GameRegistry.addRecipe(new ItemStack(BlockList.TELEPORTER), "I I", "IBI", "OOO", 'I', Blocks.IRON_BLOCK, 'B', BlockList.BLOCKHOLE, 'O', Blocks.OBSIDIAN);
+		GameRegistry.addRecipe(new ItemStack(BlockList.STORAGE), "I I", "IBI", "OOO", 'I', Blocks.IRON_BLOCK, 'B', BlockList.PORTAL, 'O', Blocks.OBSIDIAN);
 		
 		// Blockhole Singularity
-		GameRegistry.addRecipe(new ItemStack(BlockList.BLOCKHOLE), "OEO", "EDE", "OEO", 'O', Blocks.OBSIDIAN, 'E', Items.ENDER_PEARL, 'D', Blocks.DIAMOND_BLOCK);
+		GameRegistry.addRecipe(new ItemStack(BlockList.PORTAL), "OEO", "EDE", "OEO", 'O', Blocks.OBSIDIAN, 'E', Items.ENDER_PEARL, 'D', Blocks.DIAMOND_BLOCK);
 
 		// Tuner
 		GameRegistry.addRecipe(new ItemStack(ItemList.TUNER), "E ", " S", 'E', ItemList.ENDER_DIAMOND, 'S', Items.STICK);

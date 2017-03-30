@@ -1,6 +1,6 @@
 package com.limplungs.blockhole.tileentities;
 
-import com.limplungs.blockhole.dimensions.DimensionList;
+import com.limplungs.blockhole.lists.DimensionList;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -18,12 +18,12 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityBlockhole extends TileEntity implements ISidedInventory
+public class TileEntitySingularityPortal extends TileEntity implements ISidedInventory
 {
 	private int dimID = -999;
 	private int currDirection = 4;
 	
-	public TileEntityBlockhole()
+	public TileEntitySingularityPortal()
 	{
 		
 	}
@@ -165,7 +165,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 
 			if (blockSide == EnumFacing.EAST)
 				this.currDirection = 1;
@@ -189,9 +189,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -229,9 +229,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -269,9 +269,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -309,9 +309,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -349,9 +349,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -389,9 +389,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -433,7 +433,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 
 			if (direction == EnumFacing.EAST)
 				this.currDirection = 1;
@@ -457,9 +457,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -497,9 +497,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -537,9 +537,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -577,9 +577,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -617,9 +617,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -657,9 +657,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -701,7 +701,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 
 			if (direction == EnumFacing.EAST)
 				this.currDirection = 1;
@@ -725,9 +725,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -765,9 +765,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -805,9 +805,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -845,9 +845,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -885,9 +885,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -925,9 +925,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -969,7 +969,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 			
 			// West direction - east block side input
 			if (dimWorld != null && this.currDirection == 1)
@@ -980,9 +980,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1020,9 +1020,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1060,9 +1060,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1100,9 +1100,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1140,9 +1140,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1180,9 +1180,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1224,7 +1224,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 			
 			// West direction - east block side input
 			if (dimWorld != null && this.currDirection == 1)
@@ -1235,9 +1235,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1275,9 +1275,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1315,9 +1315,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1355,9 +1355,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1395,9 +1395,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1435,9 +1435,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1479,7 +1479,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 			
 			// West direction - east block side input
 			if (dimWorld != null && this.currDirection == 1)
@@ -1490,9 +1490,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1530,9 +1530,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1570,9 +1570,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1610,9 +1610,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1650,9 +1650,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1690,9 +1690,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1734,7 +1734,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 			
 			// West direction - east block side input
 			if (dimWorld != null && this.currDirection == 1)
@@ -1745,9 +1745,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1785,9 +1785,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1825,9 +1825,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1865,9 +1865,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1905,9 +1905,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1945,9 +1945,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -1989,7 +1989,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 			
 			// West direction - east block side input
 			if (dimWorld != null && this.currDirection == 1)
@@ -2000,9 +2000,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2040,9 +2040,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2080,9 +2080,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2120,9 +2120,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2160,9 +2160,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2200,9 +2200,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2244,7 +2244,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 			
 			// West direction - east block side input
 			if (dimWorld != null && this.currDirection == 1)
@@ -2255,9 +2255,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2295,9 +2295,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2335,9 +2335,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2375,9 +2375,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2415,9 +2415,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2455,9 +2455,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2497,7 +2497,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 			
 			// West direction - east block side input
 			if (dimWorld != null && this.currDirection == 1)
@@ -2508,9 +2508,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2548,9 +2548,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2588,9 +2588,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2628,9 +2628,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2668,9 +2668,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2708,9 +2708,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2752,7 +2752,7 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 		{
 			WorldServer dimWorld = DimensionManager.getWorld(this.getDimensionID());
 			TileEntity tile;
-			TileEntityBlockholeWall wall;
+			TileEntitySingularityDimensionWall wall;
 			
 			// West direction - east block side input
 			if (dimWorld != null && this.currDirection == 1)
@@ -2763,9 +2763,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(15,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2803,9 +2803,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(0,j,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2843,9 +2843,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,15));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2883,9 +2883,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,j,0));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2923,9 +2923,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,0,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{
@@ -2963,9 +2963,9 @@ public class TileEntityBlockhole extends TileEntity implements ISidedInventory
 					{
 						tile = dimWorld.getTileEntity(new BlockPos(i,15,k));
 						
-						if (tile != null && tile instanceof TileEntityBlockholeWall)
+						if (tile != null && tile instanceof TileEntitySingularityDimensionWall)
 						{
-							wall = (TileEntityBlockholeWall)tile;
+							wall = (TileEntitySingularityDimensionWall)tile;
 							
 							if (wall.getTransport())
 							{

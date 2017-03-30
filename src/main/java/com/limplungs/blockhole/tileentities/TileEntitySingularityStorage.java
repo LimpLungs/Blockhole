@@ -14,13 +14,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityTeleporter extends TileEntity implements IInventory
+public class TileEntitySingularityStorage extends TileEntity implements IInventory
 {
 	private DoubleLinkedQueue queue;
 	
 	
 	
-	public TileEntityTeleporter()
+	public TileEntitySingularityStorage()
 	{
 		queue = new DoubleLinkedQueue(this);
 	}
@@ -234,7 +234,7 @@ public class TileEntityTeleporter extends TileEntity implements IInventory
 	@Override
 	public String getName() 
 	{
-		return "Blockhole Teleporter";
+		return "Blockhole Storage";
 	}
 
 	

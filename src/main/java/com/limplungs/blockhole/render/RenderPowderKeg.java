@@ -1,7 +1,7 @@
 package com.limplungs.blockhole.render;
 
-import com.limplungs.blockhole.blocks.BlockList;
 import com.limplungs.blockhole.entities.EntityPowderKeg;
+import com.limplungs.blockhole.lists.BlockList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;

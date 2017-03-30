@@ -1,5 +1,5 @@
 {
-	"parent": "blockhole:block/blockholewall",
+	"parent": "blockhole:block/dimensionwall",
 	"display": 
     {
 		"thirdperson_righthand": 

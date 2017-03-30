@@ -14,15 +14,15 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 
-public class TileEntityBlockholeWall extends TileEntity implements ISidedInventory
+public class TileEntitySingularityDimensionWall extends TileEntity implements ISidedInventory
 {
 	private int dimID = -999;
 	
-	private BlockPos blockholeLocation = new BlockPos(0,0,0);
+	private BlockPos portalLocation = new BlockPos(0,0,0);
 	private BlockPos teleportLocation = new BlockPos(0,0,0);
 	private boolean transport = false;
 	
-	public TileEntityBlockholeWall()
+	public TileEntitySingularityDimensionWall()
 	{
 		
 	}
@@ -36,9 +36,9 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		compound.setInteger("locateY", this.teleportLocation.getY());
 		compound.setInteger("locateZ", this.teleportLocation.getZ());
 		
-		compound.setInteger("blockX", this.blockholeLocation.getX());
-		compound.setInteger("blockY", this.blockholeLocation.getY());
-		compound.setInteger("blockZ", this.blockholeLocation.getZ());
+		compound.setInteger("blockX", this.portalLocation.getX());
+		compound.setInteger("blockY", this.portalLocation.getY());
+		compound.setInteger("blockZ", this.portalLocation.getZ());
 		
 		compound.setBoolean("transport", this.transport);
 		
@@ -53,7 +53,7 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		this.dimID = compound.getInteger("dimID");
 		
 		this.teleportLocation = new BlockPos(compound.getInteger("locateX"), compound.getInteger("locateY"), compound.getInteger("locateZ"));
-		this.blockholeLocation = new BlockPos(compound.getInteger("blockX"), compound.getInteger("blockY"), compound.getInteger("blockZ"));
+		this.portalLocation = new BlockPos(compound.getInteger("blockX"), compound.getInteger("blockY"), compound.getInteger("blockZ"));
 		
 		this.transport = compound.getBoolean("transport");
 	}
@@ -145,51 +145,51 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 			BlockPos south = new BlockPos(this.pos.getX(), this.pos.getY(), this.pos.getZ() - 1);
 			
 			// up
-			if (this.world.getTileEntity(up) instanceof TileEntityBlockholeWall
-					&& ((TileEntityBlockholeWall)this.world.getTileEntity(up)).getDimensionID() != -999)
+			if (this.world.getTileEntity(up) instanceof TileEntitySingularityDimensionWall
+					&& ((TileEntitySingularityDimensionWall)this.world.getTileEntity(up)).getDimensionID() != -999)
 			{
-				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(up)).getDimensionID());
-				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(up)).getTeleportLocation());
+				this.setDimensionID(((TileEntitySingularityDimensionWall)this.world.getTileEntity(up)).getDimensionID());
+				this.setTeleportLocation(((TileEntitySingularityDimensionWall)this.world.getTileEntity(up)).getTeleportLocation());
 			}
 			
 			// down
-			else if (this.world.getTileEntity(down) instanceof TileEntityBlockholeWall
-					&& ((TileEntityBlockholeWall)this.world.getTileEntity(down)).getDimensionID() != -999)
+			else if (this.world.getTileEntity(down) instanceof TileEntitySingularityDimensionWall
+					&& ((TileEntitySingularityDimensionWall)this.world.getTileEntity(down)).getDimensionID() != -999)
 			{
-				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(down)).getDimensionID());
-				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(down)).getTeleportLocation());
+				this.setDimensionID(((TileEntitySingularityDimensionWall)this.world.getTileEntity(down)).getDimensionID());
+				this.setTeleportLocation(((TileEntitySingularityDimensionWall)this.world.getTileEntity(down)).getTeleportLocation());
 			}
 			
 			// east
-			else if (this.world.getTileEntity(east) instanceof TileEntityBlockholeWall
-					&& ((TileEntityBlockholeWall)this.world.getTileEntity(east)).getDimensionID() != -999)
+			else if (this.world.getTileEntity(east) instanceof TileEntitySingularityDimensionWall
+					&& ((TileEntitySingularityDimensionWall)this.world.getTileEntity(east)).getDimensionID() != -999)
 			{
-				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(east)).getDimensionID());
-				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(east)).getTeleportLocation());
+				this.setDimensionID(((TileEntitySingularityDimensionWall)this.world.getTileEntity(east)).getDimensionID());
+				this.setTeleportLocation(((TileEntitySingularityDimensionWall)this.world.getTileEntity(east)).getTeleportLocation());
 			}
 			
 			// west
-			else if (this.world.getTileEntity(west) instanceof TileEntityBlockholeWall
-					&& ((TileEntityBlockholeWall)this.world.getTileEntity(west)).getDimensionID() != -999)
+			else if (this.world.getTileEntity(west) instanceof TileEntitySingularityDimensionWall
+					&& ((TileEntitySingularityDimensionWall)this.world.getTileEntity(west)).getDimensionID() != -999)
 			{
-				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(west)).getDimensionID());
-				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(west)).getTeleportLocation());
+				this.setDimensionID(((TileEntitySingularityDimensionWall)this.world.getTileEntity(west)).getDimensionID());
+				this.setTeleportLocation(((TileEntitySingularityDimensionWall)this.world.getTileEntity(west)).getTeleportLocation());
 			}
 			
 			// north
-			else if (this.world.getTileEntity(north) instanceof TileEntityBlockholeWall
-					&& ((TileEntityBlockholeWall)this.world.getTileEntity(north)).getDimensionID() != -999)
+			else if (this.world.getTileEntity(north) instanceof TileEntitySingularityDimensionWall
+					&& ((TileEntitySingularityDimensionWall)this.world.getTileEntity(north)).getDimensionID() != -999)
 			{
-				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(north)).getDimensionID());
-				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(north)).getTeleportLocation());
+				this.setDimensionID(((TileEntitySingularityDimensionWall)this.world.getTileEntity(north)).getDimensionID());
+				this.setTeleportLocation(((TileEntitySingularityDimensionWall)this.world.getTileEntity(north)).getTeleportLocation());
 			}
 			
 			// south
-			else if (this.world.getTileEntity(south) instanceof TileEntityBlockholeWall
-					&& ((TileEntityBlockholeWall)this.world.getTileEntity(south)).getDimensionID() != -999)
+			else if (this.world.getTileEntity(south) instanceof TileEntitySingularityDimensionWall
+					&& ((TileEntitySingularityDimensionWall)this.world.getTileEntity(south)).getDimensionID() != -999)
 			{
-				this.setDimensionID(((TileEntityBlockholeWall)this.world.getTileEntity(south)).getDimensionID());
-				this.setTeleportLocation(((TileEntityBlockholeWall)this.world.getTileEntity(south)).getTeleportLocation());
+				this.setDimensionID(((TileEntitySingularityDimensionWall)this.world.getTileEntity(south)).getDimensionID());
+				this.setTeleportLocation(((TileEntitySingularityDimensionWall)this.world.getTileEntity(south)).getTeleportLocation());
 			}
 		}
 	}
@@ -205,14 +205,14 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		this.markDirty();
 	}
 
-	public BlockPos getBlockholeLocation() 
+	public BlockPos getPortalLocation() 
 	{
-		return this.blockholeLocation;
+		return this.portalLocation;
 	}
 	
-	public void setBlockholeLocation(BlockPos pos)
+	public void setPortalLocation(BlockPos pos)
 	{
-		this.blockholeLocation = pos;
+		this.portalLocation = pos;
 		this.markDirty();
 	}
 
@@ -244,9 +244,9 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 				{
 					TileEntity tile = this.world.getTileEntity(new BlockPos(x,j,k));
 					
-					if (tile != null && tile != this && tile instanceof TileEntityBlockholeWall)
+					if (tile != null && tile != this && tile instanceof TileEntitySingularityDimensionWall)
 					{
-						TileEntityBlockholeWall wall = (TileEntityBlockholeWall)tile;
+						TileEntitySingularityDimensionWall wall = (TileEntitySingularityDimensionWall)tile;
 						
 						if (wall.getTransport())
 						{
@@ -265,9 +265,9 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 				{
 					TileEntity tile = this.world.getTileEntity(new BlockPos(i,y,k));
 
-					if (tile != null && tile != this && tile instanceof TileEntityBlockholeWall)
+					if (tile != null && tile != this && tile instanceof TileEntitySingularityDimensionWall)
 					{
-						TileEntityBlockholeWall wall = (TileEntityBlockholeWall)tile;
+						TileEntitySingularityDimensionWall wall = (TileEntitySingularityDimensionWall)tile;
 
 						if (wall.getTransport())
 						{
@@ -286,9 +286,9 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 				{
 					TileEntity tile = this.world.getTileEntity(new BlockPos(i,j,z));
 
-					if (tile != null && tile != this && tile instanceof TileEntityBlockholeWall)
+					if (tile != null && tile != this && tile instanceof TileEntitySingularityDimensionWall)
 					{
-						TileEntityBlockholeWall wall = (TileEntityBlockholeWall)tile;
+						TileEntitySingularityDimensionWall wall = (TileEntitySingularityDimensionWall)tile;
 
 						if (wall.getTransport())
 						{
@@ -334,13 +334,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -394,13 +394,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -452,13 +452,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -510,13 +510,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -568,13 +568,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -626,13 +626,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -680,13 +680,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -738,13 +738,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -796,13 +796,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -854,13 +854,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;
@@ -912,13 +912,13 @@ public class TileEntityBlockholeWall extends TileEntity implements ISidedInvento
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
-		TileEntity blockhole = DimensionManager.getWorld(this.dimID).getTileEntity(this.blockholeLocation);
+		TileEntity portal = DimensionManager.getWorld(this.dimID).getTileEntity(this.portalLocation);
 		
-		if ( blockhole != null && blockhole instanceof TileEntityBlockhole && DimensionManager.getWorld(((TileEntityBlockhole)blockhole).getDimensionID()) == this.world)
+		if ( portal != null && portal instanceof TileEntitySingularityPortal && DimensionManager.getWorld(((TileEntitySingularityPortal)portal).getDimensionID()) == this.world)
 		{
-			int x1 = this.blockholeLocation.getX();
-			int y1 = this.blockholeLocation.getY();
-			int z1 = this.blockholeLocation.getZ();
+			int x1 = this.portalLocation.getX();
+			int y1 = this.portalLocation.getY();
+			int z1 = this.portalLocation.getZ();
 					
 			if (this.pos.getX() == 0)
 				x1 -= 1;

@@ -1,6 +1,9 @@
-package com.limplungs.blockhole.items;
+package com.limplungs.blockhole.lists;
 
 import com.limplungs.blockhole.Blockhole;
+import com.limplungs.blockhole.items.ItemBasic;
+import com.limplungs.blockhole.items.ItemData;
+import com.limplungs.blockhole.items.ItemTuner;
 
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

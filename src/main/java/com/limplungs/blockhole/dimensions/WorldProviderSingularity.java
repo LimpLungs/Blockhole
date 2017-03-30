@@ -1,5 +1,7 @@
 package com.limplungs.blockhole.dimensions;
 
+import com.limplungs.blockhole.lists.DimensionList;
+
 import net.minecraft.init.Biomes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;

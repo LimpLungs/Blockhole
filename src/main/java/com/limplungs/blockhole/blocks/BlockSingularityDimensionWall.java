@@ -3,7 +3,7 @@ package com.limplungs.blockhole.blocks;
 import java.util.List;
 
 import com.limplungs.blockhole.dimensions.TeleporterSingularity;
-import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
+import com.limplungs.blockhole.tileentities.TileEntitySingularityDimensionWall;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -24,11 +24,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class BlockBlockholeWall extends BlockBasic
+public class BlockSingularityDimensionWall extends BlockBasic
 {
 	public static final PropertyInteger INDEX = PropertyInteger.create("index", 0, 195);
 	
-	public BlockBlockholeWall(BlockData blockdata) 
+	public BlockSingularityDimensionWall(BlockData blockdata) 
 	{
 		super(blockdata);
 		this.setBlockUnbreakable();
@@ -47,7 +47,7 @@ public class BlockBlockholeWall extends BlockBasic
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
-		return new TileEntityBlockholeWall();
+		return new TileEntitySingularityDimensionWall();
 	}
 	
 	@Override
@@ -118,7 +118,7 @@ public class BlockBlockholeWall extends BlockBasic
 	{
 		if (player.isSneaking())
 		{
-			TileEntityBlockholeWall tile = (TileEntityBlockholeWall)world.getTileEntity(pos);
+			TileEntitySingularityDimensionWall tile = (TileEntitySingularityDimensionWall)world.getTileEntity(pos);
 			
 			if (tile.getDimensionID() != -999)
 			{

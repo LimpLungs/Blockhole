@@ -1,6 +1,6 @@
 package com.limplungs.blockhole.blocks;
 
-import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
+import com.limplungs.blockhole.tileentities.TileEntitySingularityStorage;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -19,13 +19,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
+public class BlockSingularityStorage extends BlockBasic implements ITileEntityProvider
 {
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0f, .6875f, 0f, 1f, 0f, 1f);
 	
 	
 	
-	public BlockTeleporter(BlockData blockdata) 
+	public BlockSingularityStorage(BlockData blockdata) 
 	{
 		super(blockdata);
 	}
@@ -35,7 +35,7 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	@Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
-        return new TileEntityTeleporter();
+        return new TileEntitySingularityStorage();
     }
 	
 	
@@ -98,7 +98,7 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
-		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
+		TileEntitySingularityStorage tile = (TileEntitySingularityStorage)world.getTileEntity(pos);
 		
 		if (tile != null)
 		{
@@ -148,14 +148,13 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) 
 	{
 		
-		
 	}
 		
 	// TODO: Get Forge Trick to work and remove breakBlock / dropping of inventory.
 	@Override
 	public void breakBlock(World world, BlockPos pos, IBlockState state) 
 	{
-		TileEntityTeleporter tile = (TileEntityTeleporter) world.getTileEntity(pos);
+		TileEntitySingularityStorage tile = (TileEntitySingularityStorage) world.getTileEntity(pos);
 		
 		if (tile != null)
 		{
@@ -197,11 +196,11 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) 
 	{
-		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
+		TileEntityBlockholeStorage tile = (TileEntityBlockholeStorage)world.getTileEntity(pos);
 		
 		if (tile != null)
 		{
-			ItemStack stack = new ItemStack(BlockList.TELEPORTER, 1);
+			ItemStack stack = new ItemStack(BlockList.STORAGE, 1);
 			
 			stack.setTagCompound(new NBTTagCompound());
 			
@@ -220,11 +219,11 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 	{
 		List<ItemStack> list = new ArrayList<ItemStack>();
 		
-		TileEntityTeleporter tile = (TileEntityTeleporter)world.getTileEntity(pos);
+		TileEntityBlockholeStorage tile = (TileEntityBlockholeStorage)world.getTileEntity(pos);
 		
 		if (tile != null)
 		{
-			ItemStack stack = new ItemStack(BlockList.TELEPORTER, 1);
+			ItemStack stack = new ItemStack(BlockList.STORAGE, 1);
 			
 			stack.setTagCompound(new NBTTagCompound());
 			
@@ -259,7 +258,7 @@ public class BlockTeleporter extends BlockBasic implements ITileEntityProvider
 		
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		
-		TileEntityTeleporter tile = (TileEntityTeleporter)worldIn.getTileEntity(pos);
+		TileEntityBlockholeStorage tile = (TileEntityBlockholeStorage)worldIn.getTileEntity(pos);
 		
 		if(tile != null) 
 		{

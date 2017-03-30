@@ -1,6 +1,6 @@
 package com.limplungs.blockhole;
 
-import com.limplungs.blockhole.tileentities.TileEntityTeleporter;
+import com.limplungs.blockhole.tileentities.TileEntitySingularityStorage;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -10,9 +10,9 @@ public class DoubleLinkedQueue
 	private Node headptr;
 	private Node tailptr;
 	private int size;
-	private TileEntityTeleporter tile;
+	private TileEntitySingularityStorage tile;
 	
-	public DoubleLinkedQueue(TileEntityTeleporter tile)
+	public DoubleLinkedQueue(TileEntitySingularityStorage tile)
 	{
 		this.headptr = null;
 		this.tailptr = null;

@@ -1,6 +1,6 @@
 package com.limplungs.blockhole;
 
-import com.limplungs.blockhole.blocks.BlockList;
+import com.limplungs.blockhole.lists.BlockList;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class RecipeCopyBlockhole implements IRecipe
 			{
 				num += 1;
 				
-				if (inv.getStackInSlot(i).getItem() != new ItemStack(BlockList.BLOCKHOLE).getItem()) 
+				if (inv.getStackInSlot(i).getItem() != new ItemStack(BlockList.PORTAL).getItem()) 
 				{
 					flag = false;
 				}
@@ -67,7 +67,7 @@ public class RecipeCopyBlockhole implements IRecipe
 	@Override
 	public ItemStack getRecipeOutput() 
 	{
-		return new ItemStack(BlockList.BLOCKHOLE, 2);
+		return new ItemStack(BlockList.PORTAL, 2);
 	}
 
 	

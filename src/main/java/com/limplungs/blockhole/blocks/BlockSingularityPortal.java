@@ -3,10 +3,11 @@ package com.limplungs.blockhole.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.limplungs.blockhole.dimensions.DimensionList;
 import com.limplungs.blockhole.dimensions.TeleporterSingularity;
-import com.limplungs.blockhole.tileentities.TileEntityBlockhole;
-import com.limplungs.blockhole.tileentities.TileEntityBlockholeWall;
+import com.limplungs.blockhole.lists.BlockList;
+import com.limplungs.blockhole.lists.DimensionList;
+import com.limplungs.blockhole.tileentities.TileEntitySingularityPortal;
+import com.limplungs.blockhole.tileentities.TileEntitySingularityDimensionWall;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
@@ -26,9 +27,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
-public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
+public class BlockSingularityPortal extends BlockBasic implements ITileEntityProvider
 {
-	public BlockBlockhole(BlockData blockdata) 
+	public BlockSingularityPortal(BlockData blockdata) 
 	{
 		super(blockdata);
 	}
@@ -38,7 +39,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	@Override
     public TileEntity createNewTileEntity(World world, int meta)
     {
-		TileEntityBlockhole tile = new TileEntityBlockhole();
+		TileEntitySingularityPortal tile = new TileEntitySingularityPortal();
 		
 		if (tile.getDimensionID() == -999)
 		{
@@ -101,11 +102,11 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) 
 	{
-		TileEntityBlockhole tile = (TileEntityBlockhole)world.getTileEntity(pos);
+		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)world.getTileEntity(pos);
 		
 		if (tile != null)
 		{
-			ItemStack stack = new ItemStack(BlockList.BLOCKHOLE, 1);
+			ItemStack stack = new ItemStack(BlockList.PORTAL, 1);
 			
 			stack.setTagCompound(new NBTTagCompound());
 			
@@ -125,11 +126,11 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	{
 		List<ItemStack> list = new ArrayList<ItemStack>();
 		
-		TileEntityBlockhole tile = (TileEntityBlockhole)world.getTileEntity(pos);
+		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)world.getTileEntity(pos);
 		
 		if (tile != null)
 		{
-			ItemStack stack = new ItemStack(BlockList.BLOCKHOLE, 1);
+			ItemStack stack = new ItemStack(BlockList.PORTAL, 1);
 			
 			stack.setTagCompound(new NBTTagCompound());
 			
@@ -166,7 +167,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 		
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		
-		TileEntityBlockhole tile = (TileEntityBlockhole)worldIn.getTileEntity(pos);
+		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)worldIn.getTileEntity(pos);
 		
 		if(tile != null) 
 		{
@@ -184,7 +185,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
-		TileEntityBlockhole tile = (TileEntityBlockhole)world.getTileEntity(pos);
+		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)world.getTileEntity(pos);
 		
 		if (player instanceof EntityPlayerMP && world instanceof WorldServer)
 		{
@@ -198,7 +199,7 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 				{
 					World current = player.getServer().worlds[num];
 					
-					TileEntityBlockholeWall wall;
+					TileEntitySingularityDimensionWall wall;
 					
 					int x = 0;
 					int y = 0;
@@ -210,13 +211,13 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 						{
 							for (x = 1; x < 15; x++)
 							{
-								wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(x,y,z));
+								wall = (TileEntitySingularityDimensionWall)current.getTileEntity(new BlockPos(x,y,z));
 
 								if (wall != null)
 								{
 									wall.setDimensionID(previous);
 									wall.setTeleportLocation(location);
-									wall.setBlockholeLocation(pos);
+									wall.setPortalLocation(pos);
 								}
 							}
 						}
@@ -228,13 +229,13 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 						{
 							for (z = 1; z < 15; z++)
 							{
-								wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(x,y,z));
+								wall = (TileEntitySingularityDimensionWall)current.getTileEntity(new BlockPos(x,y,z));
 
 								if (wall != null)
 								{
 									wall.setDimensionID(previous);
 									wall.setTeleportLocation(location);
-									wall.setBlockholeLocation(pos);
+									wall.setPortalLocation(pos);
 								}
 							}
 						}
@@ -246,13 +247,13 @@ public class BlockBlockhole extends BlockBasic implements ITileEntityProvider
 						{
 							for (z = 1; z < 15; z++)
 							{
-								wall = (TileEntityBlockholeWall)current.getTileEntity(new BlockPos(x,y,z));
+								wall = (TileEntitySingularityDimensionWall)current.getTileEntity(new BlockPos(x,y,z));
 
 								if (wall != null)
 								{
 									wall.setDimensionID(previous);
 									wall.setTeleportLocation(location);
-									wall.setBlockholeLocation(pos);
+									wall.setPortalLocation(pos);
 								}
 							}
 						}
