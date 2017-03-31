@@ -1,10 +1,18 @@
 itemGroup.tabBlockhole=Blockhole
 
-item.blockhole_tuner.name=Singularity Manipulator
+
 
 item.blockhole_enderdiamond.name=Ender Diamond
 
-tile.blockhole_powderkeg.name=Block Powder Keg
+item.blockhole_tuner.name=Singularity Manipulator
+
+
+
+tile.blockhole_enderdiamondblock.name=Ender Diamond Block
+
+tile.blockhole_singularity.name=Singularity
 tile.blockhole_storage.name=Singularity Storage
 tile.blockhole_portal.name=Singularity Portal
 tile.blockhole_dimensionwall.name=Singularity Dimension Wall
+
+tile.blockhole_powderkeg.name=Block Powder Keg

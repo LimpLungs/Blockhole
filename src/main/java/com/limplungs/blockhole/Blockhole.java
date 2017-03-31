@@ -43,19 +43,29 @@ public class Blockhole
 	{
     	MinecraftForge.EVENT_BUS.register(eventhandler);
     	
+    	
     	BlockholeDefinitions.initialize();
     	
+    	
+    	BlockList.registerBlockData();
     	BlockList.registerBlocks();
     	BlockList.registerItemBlocks();
+    	
+    	
+    	ItemList.registerItemData();
     	ItemList.registerItems();
+    	
+    	
     	TileEntityList.registerTileEntities();
+
     	
 		DimensionType.register("SINGULARITY", "_singularity", DimensionList.SINGULARITY_ID, WorldProviderSingularity.class, true);
-    	
+		
 		
 		RecipesList.registerIRecipes();
     	RecipesList.addShapeless();
     	RecipesList.addShaped();
+    	RecipesList.addExtra();
 	}
 
 	@SuppressWarnings("deprecation")

@@ -70,13 +70,11 @@ public class BlockSingularityStorage extends BlockBasic implements ITileEntityPr
 	}
 	
 	
-	
 	@Override
 	public boolean canProvidePower(IBlockState state) 
 	{
 		return false;
 	}
-	
 	
 	
 	@Override

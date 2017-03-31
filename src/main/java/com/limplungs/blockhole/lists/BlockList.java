@@ -1,6 +1,8 @@
 package com.limplungs.blockhole.lists;
 
 import com.limplungs.blockhole.Blockhole;
+import com.limplungs.blockhole.blocks.BlockBasic;
+import com.limplungs.blockhole.blocks.BlockSingularity;
 import com.limplungs.blockhole.blocks.BlockSingularityPortal;
 import com.limplungs.blockhole.blocks.BlockSingularityDimensionWall;
 import com.limplungs.blockhole.blocks.BlockData;
@@ -15,22 +17,51 @@ import net.minecraft.item.Item;
 
 public class BlockList 
 {
-	/**
-	 *  BlockData
-	 */
-	private static BlockData DATA_STORAGE = new BlockData(5F, 5F, "pickaxe", 2, "storage", Material.ROCK, Blockhole.tabBlockhole);
-	private static BlockData DATA_POWDERKEG = new BlockData(1F, 1F, "pickaxe", 0, "powderkeg", Material.CLOTH, Blockhole.tabBlockhole);
-	private static BlockData DATA_BLOCKHOLE = new BlockData(8F, 8F, "pickaxe", 0, "portal", Material.GLASS, Blockhole.tabBlockhole);
-	private static BlockData DATA_BLOCKHOLEWALL = new BlockData(100F, 100F, "pickaxe", 100, "dimensionwall", Material.GLASS, Blockhole.tabBlockhole);
+	private static BlockData DATA_ENDER_DIAMOND_BLOCK;
+	public static BlockBasic ENDER_DIAMOND_BLOCK;
+	public static ItemBlockBasic ITEMBLOCK_ENDER_DIAMOND_BLOCK;
 	
+	private static BlockData DATA_SINGULARITY;
+	public static BlockSingularity SINGULARITY;
+	public static ItemBlockBasic ITEMBLOCK_SINGULARITY;
 	
-	/**
-	 *  Blocks
-	 */
+	private static BlockData DATA_STORAGE;
 	public static BlockSingularityStorage STORAGE;
-	public static BlockPowderKeg POWDERKEG;
+	public static ItemBlockBasic ITEMBLOCK_STORAGE;
+	
+	private static BlockData DATA_PORTAL;
 	public static BlockSingularityPortal PORTAL;
+	public static ItemBlockBasic ITEMBLOCK_PORTAL;
+	
+	private static BlockData DATA_DIMENSION_WALL;
 	public static BlockSingularityDimensionWall DIMENSION_WALL;
+	public static ItemBlockBasic ITEMBLOCK_DIMENSION_WALL;
+	
+	private static BlockData DATA_POWDERKEG;
+	public static BlockPowderKeg POWDERKEG;
+	public static ItemBlockBasic ITEMBLOCK_POWDERKEG;
+	
+
+	
+	/**
+	 *  BlockData Registry
+	 *  Registered during the 'preInit' stage.
+	 */
+	public static void registerBlockData()
+	{
+		// Blocks
+		DATA_ENDER_DIAMOND_BLOCK = new BlockData(7F, 7F, "pickaxe", 3, "enderdiamondblock", Material.IRON, Blockhole.tabBlockhole);
+		
+		// Singularity
+		DATA_SINGULARITY         = new BlockData(10F, 10F, "pickaxe", 3, "singularity", Material.GLASS, Blockhole.tabBlockhole);
+		DATA_STORAGE             = new BlockData(10F, 10F, "pickaxe", 3, "storage", Material.GLASS, Blockhole.tabBlockhole);
+		DATA_PORTAL              = new BlockData(10F, 10F, "pickaxe", 3, "portal", Material.GLASS, Blockhole.tabBlockhole);
+		DATA_DIMENSION_WALL      = new BlockData(100F, 100F, "pickaxe", 100, "dimensionwall", Material.GLASS, Blockhole.tabBlockhole);
+		
+		// Extra
+		DATA_POWDERKEG           = new BlockData(1F, 1F, "pickaxe", 0, "powderkeg", Material.CLOTH, Blockhole.tabBlockhole);
+	}
+	
 	
 	
 	/**
@@ -39,25 +70,41 @@ public class BlockList
 	 */
 	public static void registerBlocks()
 	{
-		POWDERKEG = new BlockPowderKeg(DATA_POWDERKEG);
-		STORAGE = new BlockSingularityStorage(DATA_STORAGE);
-		PORTAL = new BlockSingularityPortal(DATA_BLOCKHOLE);
-		DIMENSION_WALL = new BlockSingularityDimensionWall(DATA_BLOCKHOLEWALL);
-	}
-	
-	public static ItemBlockBasic ITEMBLOCK_STORAGE;
-	public static ItemBlockBasic ITEMBLOCK_POWDERKEG;
-	public static ItemBlockBasic ITEMBLOCK_PORTAL;
-	public static ItemBlockBasic ITEMBLOCK_DIMENSION_WALL;
-	
-	public static void registerItemBlocks()
-	{
-		ITEMBLOCK_STORAGE = new ItemBlockBasic(STORAGE);
-		ITEMBLOCK_POWDERKEG = new ItemBlockBasic(POWDERKEG);
-		ITEMBLOCK_PORTAL = new ItemBlockBasic(PORTAL);
-		ITEMBLOCK_DIMENSION_WALL = new ItemBlockBasic(DIMENSION_WALL);
+		// Blocks
+		ENDER_DIAMOND_BLOCK = new BlockBasic(DATA_ENDER_DIAMOND_BLOCK);
+		
+		// Singularity
+		SINGULARITY         = new BlockSingularity(DATA_SINGULARITY);
+		STORAGE             = new BlockSingularityStorage(DATA_STORAGE);
+		PORTAL              = new BlockSingularityPortal(DATA_PORTAL);
+		DIMENSION_WALL      = new BlockSingularityDimensionWall(DATA_DIMENSION_WALL);
+		
+		// Extra
+		POWDERKEG           = new BlockPowderKeg(DATA_POWDERKEG);
 	}
 
+	
+	
+	/**
+	 *  ItemBlock Registry
+	 *  Registered during the 'preInit' stage.
+	 */
+	public static void registerItemBlocks()
+	{
+		// Blocks
+		ITEMBLOCK_ENDER_DIAMOND_BLOCK = new ItemBlockBasic(ENDER_DIAMOND_BLOCK);
+		
+		// Singularity
+		ITEMBLOCK_SINGULARITY         = new ItemBlockBasic(SINGULARITY);
+		ITEMBLOCK_STORAGE             = new ItemBlockBasic(STORAGE);
+		ITEMBLOCK_PORTAL              = new ItemBlockBasic(PORTAL);
+		ITEMBLOCK_DIMENSION_WALL      = new ItemBlockBasic(DIMENSION_WALL);
+		
+		// Extra
+		ITEMBLOCK_POWDERKEG           = new ItemBlockBasic(POWDERKEG);
+	}
+
+	
 	
 	/**
 	 *  Block Renderer
@@ -65,9 +112,16 @@ public class BlockList
 	 */
 	public static void renderBlocks(RenderItem renderItem) 
 	{
+		// Blocks
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(ENDER_DIAMOND_BLOCK), 0, new ModelResourceLocation(Blockhole.MODID + ":" + ENDER_DIAMOND_BLOCK.getName(), "inventory"));
+		
+		// Singularity
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(SINGULARITY), 0, new ModelResourceLocation(Blockhole.MODID + ":" + SINGULARITY.getName(), "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(STORAGE), 0, new ModelResourceLocation(Blockhole.MODID + ":" + STORAGE.getName(), "inventory"));
-		renderItem.getItemModelMesher().register(Item.getItemFromBlock(POWDERKEG), 0, new ModelResourceLocation(Blockhole.MODID + ":" + POWDERKEG.getName(), "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(PORTAL), 0, new ModelResourceLocation(Blockhole.MODID + ":" + PORTAL.getName(), "inventory"));
 		renderItem.getItemModelMesher().register(Item.getItemFromBlock(DIMENSION_WALL), 0, new ModelResourceLocation(Blockhole.MODID + ":" + DIMENSION_WALL.getName(), "inventory"));
+		
+		// Extra
+		renderItem.getItemModelMesher().register(Item.getItemFromBlock(POWDERKEG), 0, new ModelResourceLocation(Blockhole.MODID + ":" + POWDERKEG.getName(), "inventory"));
 	}
 }

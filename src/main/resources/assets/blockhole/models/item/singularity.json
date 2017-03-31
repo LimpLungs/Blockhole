@@ -1,24 +1,24 @@
 {
-	"parent": "blockhole:block/dimensionwall",
+	"parent": "blockhole:block/singularity",
 	"display": 
     {
 		"thirdperson_righthand": 
 		{
 			"rotation": [ 62, 41, 0 ],
 			"translation": [ 0, 0, 0 ],
-			"scale": [ 0.6, 0.6, 0.6 ]
+			"scale": [ 0.1, 0.1, 0.1 ]
 		},
 		"thirdperson_lefthand": 
 		{
 			"rotation": [ 62, 41, 0 ],
 			"translation": [ 0, 0, 0 ],
-			"scale": [ 0.6, 0.6, 0.6 ]
+			"scale": [ 0.1, 0.1, 0.1 ]
 		},
 		"ground": 
 		{
 			"rotation": [ 0, 0, 0 ],
 			"translation": [ 0, 0, 0 ],
-			"scale": [ 0.6, 0.6, 0.6 ]
+			"scale": [ 0.1, 0.1, 0.1 ]
 		},
 		"fixed": 
 		{
@@ -30,19 +30,19 @@
 		{
 			"rotation": [ 10, 48, -3 ],
 			"translation": [ -1.89, 0, 0 ],
-			"scale": [ 0.45, 0.45, 0.45 ]
+			"scale": [ 0.04, 0.04, 0.04 ]
 		},
 		"firstperson_lefthand": 
 		{
 			"rotation": [ 10, 48, -3 ],
 			"translation": [ -1.89, 0, 0 ],
-			"scale": [ 0.45, 0.45, 0.45 ]
+			"scale": [ 0.04, 0.04, 0.04 ]
 		},
 		"gui": 
 		{
 			"rotation": [ 30,225, 0 ],
 			"translation": [ 0, 0, 0 ],
-			"scale": [ 0.625, 0.625, 0.625 ]
+			"scale": [ 0.5, 0.5, 0.5 ]
 		}
 	}
 }
