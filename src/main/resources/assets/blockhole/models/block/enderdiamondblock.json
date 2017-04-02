@@ -1,6 +1,6 @@
 {
 	"parent": "block/cube_all",
 	"textures": {
-        "all": "blockhole:blocks/enderdiamondblock"
+        "all": "blockhole:blocks/enderdiamondblock3"
     }
 }

@@ -63,8 +63,13 @@ public class BlockholeEventHandler
 					
 					if (Minecraft.getMinecraft().player.isSneaking())
 					{
-						Minecraft.getMinecraft().fontRendererObj.drawString("Right Click flips transfer", 2, 12, 1666666);
-						Minecraft.getMinecraft().fontRendererObj.drawString("Shift Right Click displays transfer.", 2, 22, 1666666);
+						Minecraft.getMinecraft().fontRendererObj.drawString("Portal: ", 2, 12, 1666666);
+						Minecraft.getMinecraft().fontRendererObj.drawString("Right Click to next Singularity", 12, 22, 1666666);
+						Minecraft.getMinecraft().fontRendererObj.drawString("Shift Right to prev Singularity", 12, 32, 1666666);
+						
+						Minecraft.getMinecraft().fontRendererObj.drawString("Dimension Wall: ", 2, 42, 1666666);
+						Minecraft.getMinecraft().fontRendererObj.drawString("Right Click flips transfer", 12, 52, 1666666);
+						Minecraft.getMinecraft().fontRendererObj.drawString("Shift Right Click displays transfer.", 12, 62, 1666666);
 					}
 				}
 			}

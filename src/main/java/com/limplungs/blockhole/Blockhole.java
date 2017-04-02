@@ -43,24 +43,18 @@ public class Blockhole
 	{
     	MinecraftForge.EVENT_BUS.register(eventhandler);
     	
-    	
     	BlockholeDefinitions.initialize();
-    	
     	
     	BlockList.registerBlockData();
     	BlockList.registerBlocks();
     	BlockList.registerItemBlocks();
     	
-    	
     	ItemList.registerItemData();
     	ItemList.registerItems();
     	
-    	
     	TileEntityList.registerTileEntities();
-
     	
 		DimensionType.register("SINGULARITY", "_singularity", DimensionList.SINGULARITY_ID, WorldProviderSingularity.class, true);
-		
 		
 		RecipesList.registerIRecipes();
     	RecipesList.addShapeless();
@@ -68,21 +62,22 @@ public class Blockhole
     	RecipesList.addExtra();
 	}
 
+    
+    
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		if(event.getSide() == Side.CLIENT)
 		{
-			// Render Item
-			
+			// Render Blocks & Items
 			RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
 			
 			BlockList.renderBlocks(renderer);
 			ItemList.renderItems(renderer);
 			
 			
-			// Render Manager
+			// Render Powder Keg
 			ResourceLocation rlpowderkeg = new ResourceLocation(MODID, "powderkeg");
 			EntityRegistry.registerModEntity(rlpowderkeg, EntityPowderKeg.class, "entityPowderKeg", 1, Blockhole.MODID, 100, 1, true);
 			
@@ -91,6 +86,8 @@ public class Blockhole
 		}
 	}
 
+	
+	
 	public static CreativeTabs tabBlockhole = new CreativeTabs("tabBlockhole")
 	{
 		@Override
