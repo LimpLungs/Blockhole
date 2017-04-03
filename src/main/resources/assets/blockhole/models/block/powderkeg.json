@@ -1,6 +1,7 @@
 {
 	"parent": "block/cube_bottom_top",
-	"textures": {
+	"textures": 
+	{
         "bottom": "blockhole:blocks/powderkeg_bottom",
         "top": "blockhole:blocks/powderkeg_top",
         "side": "blockhole:blocks/powderkeg_side"

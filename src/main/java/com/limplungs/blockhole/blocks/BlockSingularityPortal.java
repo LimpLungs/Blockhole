@@ -19,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -79,15 +78,7 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
 	@Override
 	public BlockRenderLayer getBlockLayer() 
 	{
-		return BlockRenderLayer.TRANSLUCENT;
-	}
-	
-	
-	
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) 
-	{
-		return EnumBlockRenderType.MODEL;
+		return BlockRenderLayer.CUTOUT;
 	}
 	
 	

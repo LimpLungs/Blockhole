@@ -39,7 +39,7 @@ public class RecipesList
 		GameRegistry.addRecipe(new ItemStack(BlockList.SINGULARITY), "OEO", "EDE", "OEO", 'O', Blocks.OBSIDIAN, 'E', ItemList.ENDER_DIAMOND, 'D', BlockList.ENDER_DIAMOND_BLOCK);
 		
 		// Singularity Storage
-		GameRegistry.addRecipe(new ItemStack(BlockList.STORAGE), "OCO", "OSO", "OOO", 'O', Blocks.OBSIDIAN, 'S', BlockList.SINGULARITY, 'C', Blocks.CHEST);
+		GameRegistry.addRecipe(new ItemStack(BlockList.STORAGE), "OOO", "OSO", "OOO", 'O', Blocks.OBSIDIAN, 'S', BlockList.SINGULARITY);
 		
 		// Singularity Portal
 		GameRegistry.addRecipe(new ItemStack(BlockList.PORTAL), "IEI", "ESE", "IEI", 'I', Blocks.IRON_BLOCK, 'S', BlockList.SINGULARITY, 'E', Items.ENDER_PEARL);

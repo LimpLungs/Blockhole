@@ -11,20 +11,13 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockSingularityStorage extends BlockBasic implements ITileEntityProvider
 {
-	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0f, .6875f, 0f, 1f, 0f, 1f);
-	
-	
-	
 	public BlockSingularityStorage(BlockData blockdata) 
 	{
 		super(blockdata);
@@ -47,6 +40,7 @@ public class BlockSingularityStorage extends BlockBasic implements ITileEntityPr
 	}
 	
 	
+	
 	@Override
 	public boolean isOpaqueCube(IBlockState state) 
 	{
@@ -58,37 +52,15 @@ public class BlockSingularityStorage extends BlockBasic implements ITileEntityPr
 	@Override
 	public BlockRenderLayer getBlockLayer() 
 	{
-		return BlockRenderLayer.TRANSLUCENT;
+		return BlockRenderLayer.CUTOUT;
 	}
 	
-	
-	
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) 
-	{
-		return EnumBlockRenderType.MODEL;
-	}
 	
 	
 	@Override
 	public boolean canProvidePower(IBlockState state) 
 	{
 		return false;
-	}
-	
-	
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess blockAccess, BlockPos pos) 
-	{
-		return BOUNDING_BOX;
-	}
-	
-	
-	
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) 
-	{
-		return BOUNDING_BOX;
 	}
 
 	
