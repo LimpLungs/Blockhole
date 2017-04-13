@@ -63,16 +63,18 @@ public class ItemTuner extends ItemBasic
 			// Manipulate Mode
 			if (stack.getTagCompound().getInteger("mode") == 3)
 			{
-				// Dimension Wall
+				// Dimension Wall - Set transport to on / off
 				if (tile instanceof TileEntitySingularityDimensionWall)
 				{
 					TileEntitySingularityDimensionWall wall = (TileEntitySingularityDimensionWall) tile;
 					
+					// Flips transport mode on / off.
 					if (!player.isSneaking())
 					{
 						wall.flipTransport();
 					}
 
+					// Shows transport mode to player.
 					if (world.isRemote)
 					{
 						player.sendMessage(new TextComponentString("Interdimensional Transport: " + wall.getTransport()));
@@ -81,13 +83,56 @@ public class ItemTuner extends ItemBasic
 					return EnumActionResult.SUCCESS;
 				}
 				
-				// Portal
+				// Portal - change dimension number between known Singularities.
 				if (tile instanceof TileEntitySingularityPortal)
 				{
 					int dims[] = DimensionManager.getDimensions(DimensionType.getById(DimensionList.SINGULARITY_ID));
+
+					System.out.print('\n');
 					
 					for (int i = 0; i < dims.length; i++)
-						System.out.print(dims[i] + " ");
+					{
+						System.out.print(dims[i] + " ");              ///////////////////////////////// dimension will sometimes set to 1 or -999?
+					}
+					
+					for (int i = 0; i < dims.length; i++)
+					{
+						if (dims[i] == ((TileEntitySingularityPortal)tile).getDimensionID())
+						{
+							System.out.println('\n' + dims[i]);
+							System.out.println("**********");
+							
+							// Increase dimension number.
+							if (!player.isSneaking())
+							{
+								if (i < dims.length - 1)
+									((TileEntitySingularityPortal)tile).setDimensionID(dims[i] + 1);
+								else
+								{
+									((TileEntitySingularityPortal)tile).setDimensionID(dims[0]);
+								}
+							}
+							
+							// Decrease dimension number
+							else
+							{
+								if (i > 0)
+									((TileEntitySingularityPortal)tile).setDimensionID(dims[i] - 1);
+								else
+								{
+									((TileEntitySingularityPortal)tile).setDimensionID(dims[dims.length - 1]);
+								}
+							}
+							
+							// Shows new dimension ID to player.
+							if (world.isRemote)
+							{
+								player.sendMessage(new TextComponentString("Dimension set to: " + ((TileEntitySingularityPortal)tile).getDimensionID()));
+							}
+							
+							i = dims.length;
+						}
+					}
 					
 					System.out.print('\n');
 					

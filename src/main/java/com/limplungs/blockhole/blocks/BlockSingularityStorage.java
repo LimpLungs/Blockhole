@@ -2,7 +2,6 @@ package com.limplungs.blockhole.blocks;
 
 import com.limplungs.blockhole.tileentities.TileEntitySingularityStorage;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -110,14 +109,6 @@ public class BlockSingularityStorage extends BlockBasic implements ITileEntityPr
 		}
 		
 		return false;
-	}
-	
-	
-	
-	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) 
-	{
-		
 	}
 		
 	// TODO: Get Forge Trick to work and remove breakBlock / dropping of inventory.

@@ -4,11 +4,11 @@
   "name": "Blockhole",
   "description": "Filling in holes in the fabric of the universe.",
   "version": "Alpha 13",
-  "mcversion": "1.11",
+  "mcversion": "1.11.2",
   "url": "",
   "updateUrl": "",
   "authorList": ["LimpLungs"],
-  "credits": "LimpLungs,\n           Choonster for helping with the blockstates.",
+  "credits": "LimpLungs,\n          Choonster for helping with the blockstates.",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

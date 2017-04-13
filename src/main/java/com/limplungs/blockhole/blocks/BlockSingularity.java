@@ -14,14 +14,6 @@ public class BlockSingularity extends BlockBasic
 	{
 		super(blockdata);
 	}
-
-	
-	
-	@Override
-	public boolean isFullyOpaque(IBlockState state) 
-	{
-		return false;
-	}
 	
 	
 	

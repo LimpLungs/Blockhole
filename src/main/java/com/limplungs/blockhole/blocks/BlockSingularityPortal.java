@@ -41,28 +41,20 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
     {
 		TileEntitySingularityPortal tile = new TileEntitySingularityPortal();
 		
-		if (tile.getDimensionID() == -999)
+		if (tile.getDimensionID() == -999 && !world.isRemote)
 		{
 			tile.setDimensionID(DimensionList.registerNewSingularity());
 		}
 		
         return tile;
     }
-
-	
-	
-	@Override
-	public boolean isFullyOpaque(IBlockState state) 
-	{
-		return false;
-	}
 	
 	
 	
 	@Override
 	public boolean isFullCube(IBlockState state)
 	{
-		return false;
+		return true;
 	}
 	
 	

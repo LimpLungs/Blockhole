@@ -15,7 +15,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -37,6 +36,8 @@ public class BlockSingularityDimensionWall extends BlockBasic
 		this.setDefaultState(this.blockState.getBaseState().withProperty(INDEX, 0));
 	}
 	
+	
+	
 	@Override
 	protected BlockStateContainer createBlockState() 
 	{
@@ -44,11 +45,14 @@ public class BlockSingularityDimensionWall extends BlockBasic
 	}
 
 	
+	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) 
 	{
 		return new TileEntitySingularityDimensionWall();
 	}
+	
+	
 	
 	@Override
 	public boolean hasTileEntity(IBlockState state) 
@@ -56,17 +60,31 @@ public class BlockSingularityDimensionWall extends BlockBasic
 		return true;
 	}
 	
+	
+	
 	@Override
-	public boolean isFullyOpaque(IBlockState state) 
+	public boolean isOpaqueCube(IBlockState state) 
 	{
-		return false;
+		return true;
 	}
+	
+	
+	
+	@Override
+	public boolean isFullCube(IBlockState state) 
+	{
+		return true;
+	}
+	
+	
 	
 	@Override
 	public BlockRenderLayer getBlockLayer() 
 	{
 		return BlockRenderLayer.TRANSLUCENT;
 	}
+	
+	
 	
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) 
@@ -93,11 +111,15 @@ public class BlockSingularityDimensionWall extends BlockBasic
 			return state.withProperty(INDEX, 0);
 	}
 	
+	
+	
 	@Override
 	public void onBlockAdded(World world, BlockPos pos, IBlockState state) 
 	{
 		//state.
 	}
+	
+	
 	
 	@Override
 	public int getMetaFromState(IBlockState state) 
@@ -106,12 +128,14 @@ public class BlockSingularityDimensionWall extends BlockBasic
 	}
 	
 	
+	
 	@Override
 	public IBlockState getStateFromMeta(int meta) 
 	{
 		return this.getDefaultState().withProperty(INDEX, 0);
 	}
 
+	
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,  EnumFacing side, float hitX, float hitY, float hitZ) 
@@ -134,12 +158,6 @@ public class BlockSingularityDimensionWall extends BlockBasic
 	}
 	
 	
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) 
-	{
-		return EnumBlockRenderType.MODEL;
-	}
-	
 	
 	@Override
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) 
@@ -148,17 +166,6 @@ public class BlockSingularityDimensionWall extends BlockBasic
 	}
 	
 	
-	@Override
-	public boolean isOpaqueCube(IBlockState state) 
-	{
-		return true;
-	}
-	
-	@Override
-	public boolean isFullCube(IBlockState state) 
-	{
-		return true;
-	}
 	
 	@Override
 	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) 
@@ -166,21 +173,31 @@ public class BlockSingularityDimensionWall extends BlockBasic
 		return true;
 	}
 	
+	
+	
 	@Override
 	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) 
 	{
+		
 	}
+	
+	
 	
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) 
 	{
+		
 	}
+	
+	
 	
 	@Override
 	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) 
 	{ 
 		return false;
 	}
+	
+	
 	
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) 
