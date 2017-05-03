@@ -376,8 +376,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return inv.getSizeInventory();
 				}
 			}
-			
-			return 0;
 		}
 		
 		return 0;
@@ -385,8 +383,7 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 
 	@Override
 
-	public boolean isEmpty() 
-
+	public boolean isEmpty()
 	{
 		if (!this.transport)
 		{
@@ -436,8 +433,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return inv.isEmpty();
 				}
 			}
-			
-			return false;
 		}
 		
 		return false;
@@ -448,7 +443,7 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 	{
 		if (!this.transport)
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
@@ -494,8 +489,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return inv.getStackInSlot(index);
 				}
 			}
-
-			return ItemStack.EMPTY;
 		}
 		
 		return ItemStack.EMPTY;
@@ -506,7 +499,7 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 	{
 		if (!this.transport)
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
@@ -552,8 +545,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return inv.decrStackSize(index, count);
 				}
 			}
-
-			return ItemStack.EMPTY;
 		}
 
 		return ItemStack.EMPTY;
@@ -564,7 +555,7 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 	{
 		if (!this.transport)
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
 		
 		// if IInventory or ISidedInventory is adjacent, check it's function.
@@ -610,8 +601,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return inv.removeStackFromSlot(index);
 				}
 			}
-
-			return ItemStack.EMPTY;
 		}
 
 		return ItemStack.EMPTY;
@@ -722,8 +711,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return inv.getInventoryStackLimit();
 				}
 			}
-			
-			return 0;
 		}
 		
 		return 0;
@@ -780,8 +767,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return inv.isItemValidForSlot(index, stack);
 				}
 			}
-			
-			return false;
 		}
 		
 		return false;
@@ -838,8 +823,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return new int[inv.getSizeInventory()];
 				}
 			}
-			
-			return new int[0];
 		}
 
 		return new int[0];
@@ -888,7 +871,7 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 				if (inv instanceof ISidedInventory)
 				{
 					ISidedInventory side = (ISidedInventory)tile;
-							
+					
 					return side.canInsertItem(index, stack, direction);
 				}
 				else
@@ -896,8 +879,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return inv.isItemValidForSlot(index, stack);
 				}
 			}
-			
-			return false;
 		}
 		
 		return false;
@@ -954,8 +935,6 @@ public class TileEntitySingularityDimensionWall extends TileEntity implements IS
 					return true;
 				}
 			}
-			
-			return false;
 		}
 		
 		return false;

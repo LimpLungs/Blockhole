@@ -1,5 +1,7 @@
 package com.limplungs.blockhole.tileentities;
 
+import com.limplungs.blockhole.lists.DimensionList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -11,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
@@ -28,10 +31,7 @@ public class TileEntitySingularityPortal extends TileEntity implements ISidedInv
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) 
 	{
-		if (this.getDimensionID() != -999)
-		{
-			compound.setInteger("dimID", this.getDimensionID());
-		}
+		compound.setInteger("dimID", this.getDimensionID());
 		
 		compound.setInteger("currDirection", this.currDirection);
 		
@@ -45,9 +45,17 @@ public class TileEntitySingularityPortal extends TileEntity implements ISidedInv
 		
 		this.dimID = compound.getInteger("dimID");
 		
+		// Re-registers dimension when needed. (ie, world reload)
+		if (dimID != -999 && !DimensionManager.isDimensionRegistered(this.getDimensionID()))
+		{
+			DimensionManager.registerDimension(this.getDimensionID(), DimensionType.getById(DimensionList.SINGULARITY_ID));
+		}
+		
 		this.currDirection = compound.getInteger("currDirection");
 	}
     
+	
+	
     @Override
     public void handleUpdateTag(NBTTagCompound tag) 
     {
@@ -55,45 +63,53 @@ public class TileEntitySingularityPortal extends TileEntity implements ISidedInv
     }
     
     
+    
     @Override
     public NBTTagCompound getUpdateTag()
     {
-      return this.writeToNBT(super.getUpdateTag());
+    	return this.writeToNBT(super.getUpdateTag());
     }
+    
+    
     
     @Override
     public final SPacketUpdateTileEntity getUpdatePacket()
     {
-      NBTTagCompound tag = new NBTTagCompound();
-      writeToNBT(tag);    
-      return new SPacketUpdateTileEntity(getPos(), 0, tag);
+    	NBTTagCompound tag = new NBTTagCompound();
+    	writeToNBT(tag);    
+    	return new SPacketUpdateTileEntity(getPos(), 0, tag);
     }
+    
+    
     
     @Override
     public final void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
     {
-      super.onDataPacket(net, pkt);
+    	super.onDataPacket(net, pkt);
       
-      if(world.isRemote)
-      {
-        readFromNBT(pkt.getNbtCompound());
-      }
+    	if(world.isRemote)
+    	{
+    		readFromNBT(pkt.getNbtCompound());
+    	}
     }
 
+    
+    
 	public int getDimensionID() 
 	{
-		if (DimensionManager.isDimensionRegistered(this.dimID))
-			return this.dimID;
-		else
-			return -999;
+		return this.dimID;
 	}
 
+	
+	
 	public void setDimensionID(int id) 
 	{
 		this.dimID = id;
 		this.markDirty();
 	}
 
+	
+	
 	@Override
 	public void markDirty() 
 	{
@@ -107,18 +123,24 @@ public class TileEntitySingularityPortal extends TileEntity implements ISidedInv
 		return null;
 	}
 
+	
+	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) 
 	{
 		return false;
 	}
 
+	
+	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) 
 	{
 		return null;
 	}
 
+	
+	
 	@Override
 	public NBTTagCompound serializeNBT() 
 	{

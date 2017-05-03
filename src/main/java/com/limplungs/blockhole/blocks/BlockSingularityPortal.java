@@ -23,9 +23,12 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.DimensionManager;
 
 public class BlockSingularityPortal extends BlockBasic implements ITileEntityProvider
 {
@@ -38,15 +41,8 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
 	
 	@Override
     public TileEntity createNewTileEntity(World world, int meta)
-    {
-		TileEntitySingularityPortal tile = new TileEntitySingularityPortal();
-		
-		if (tile.getDimensionID() == -999 && !world.isRemote)
-		{
-			tile.setDimensionID(DimensionList.registerNewSingularity());
-		}
-		
-        return tile;
+    {	
+        return new TileEntitySingularityPortal();
     }
 	
 	
@@ -86,17 +82,41 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) 
 	{
+		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)world.getTileEntity(pos);
+		
 		// Don't allow travel when manipulating!
 		if (player.getHeldItem(hand).getItem() instanceof ItemTuner)
 		{
 			return false;
 		}
 		
-		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)world.getTileEntity(pos);
+		// Registers a new dimension if the block has not been set yet.
+		if (tile.getDimensionID() == -999)
+		{
+			if (!world.isRemote)
+			{
+				tile.setDimensionID(DimensionList.registerNewSingularity());
+			}
+			
+			// Shows new dimension ID to player.
+			if (!world.isRemote)
+			{
+				player.sendMessage(new TextComponentString("Dimension set to: " + tile.getDimensionID()));
+			}
+			
+			return true;
+		}
 		
+		// Re-registers dimension when needed. (ie, world reload)
+		if (!DimensionManager.isDimensionRegistered(tile.getDimensionID()))
+		{
+			DimensionManager.registerDimension(tile.getDimensionID(), DimensionType.getById(DimensionList.SINGULARITY_ID));
+		}
+		
+		// Teleports player to dimension.
 		if (player instanceof EntityPlayerMP && world instanceof WorldServer)
 		{
-			int previous = player.dimension;
+			int previous      = player.dimension;
 			BlockPos location = player.getPosition();
 			
 			player.getServer().getPlayerList().transferPlayerToDimension((EntityPlayerMP)player, tile.getDimensionID(), new TeleporterSingularity((WorldServer)world, player.dimension, new BlockPos(8.5,2,8.5)));
@@ -170,6 +190,7 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
 			return true;
 		}
 		
+		
 		return false;
 	}
 	
@@ -191,18 +212,13 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
 	{
 		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)world.getTileEntity(pos);
 		
-		if (tile != null)
-		{
-			ItemStack stack = new ItemStack(BlockList.PORTAL, 1);
+		ItemStack stack = new ItemStack(BlockList.PORTAL, 1);
 			
-			stack.setTagCompound(new NBTTagCompound());
+		stack.setTagCompound(new NBTTagCompound());
 			
-			tile.writeToNBT(stack.getTagCompound());
+		tile.writeToNBT(stack.getTagCompound());
 			
-			return stack;
-		}
-		
-		return ItemStack.EMPTY;
+		return stack;
 	}
 	
 
@@ -215,16 +231,13 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
 		
 		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)world.getTileEntity(pos);
 		
-		if (tile != null)
-		{
-			ItemStack stack = new ItemStack(BlockList.PORTAL, 1);
+		ItemStack stack = new ItemStack(BlockList.PORTAL, 1);
 			
-			stack.setTagCompound(new NBTTagCompound());
+		stack.setTagCompound(new NBTTagCompound());
 			
-			tile.writeToNBT(stack.getTagCompound());
+		tile.writeToNBT(stack.getTagCompound());
 			
-			list.add(stack);
-		}
+		list.add(stack);
 		
 		return list;
 	}
@@ -250,20 +263,18 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
 	
 	
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+		super.onBlockPlacedBy(world, pos, state, placer, stack);
 		
-		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)worldIn.getTileEntity(pos);
+		TileEntitySingularityPortal tile = (TileEntitySingularityPortal)world.getTileEntity(pos);
 		
-		if(tile != null) 
+		if (stack.getTagCompound() != null)
 		{
-			if (stack.getTagCompound() != null)
-			{
-		      tile.readFromNBT(stack.getTagCompound());
-		      tile.markDirty();
-			}
+		     tile.readFromNBT(stack.getTagCompound());
+		     tile.markDirty();
 		}
+		
 	}
 	// End of forge trick
 }

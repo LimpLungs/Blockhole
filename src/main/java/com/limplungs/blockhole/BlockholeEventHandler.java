@@ -9,6 +9,8 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BlockholeEventHandler 
@@ -81,5 +83,15 @@ public class BlockholeEventHandler
 		GL11.glColor4f(1,1,1,1);
 		
 		GL11.glScaled(1 / myRender, 1 / myRender, 1 / myRender);
+	}
+	
+	
+	//@SubscribeEvent
+	public void loadWorld(WorldEvent.Load event)
+	{
+		for (int i = 0; i < DimensionManager.getWorlds().length; i++)
+		{
+			System.out.println(DimensionManager.getWorlds()[i].provider.getDimension());
+		}
 	}
 }
