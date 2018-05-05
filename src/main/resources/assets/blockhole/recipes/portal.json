@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "IEI", "ESE", "IEI"
+    ],
+    "key": {
+        "I": {
+            "item": "minecraft:iron_block"
+        },
+        "E": {
+            "item": "minecraft:ender_pearl"
+        },
+        "S": {
+            "item": "blockhole:singularity"
+        }
+    },
+    "result": {
+        "item": "blockhole:portal",
+        "count": 1
+    }
+}

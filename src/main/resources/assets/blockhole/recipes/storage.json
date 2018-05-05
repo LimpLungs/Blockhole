@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "OOO", "OSO", "OOO"
+    ],
+    "key": {
+        "O": {
+            "item": "minecraft:obsidian"
+        },
+        "S": {
+            "item": "blockhole:singularity"
+        }
+    },
+    "result": {
+        "item": "blockhole:storage",
+        "count": 1
+    }
+}

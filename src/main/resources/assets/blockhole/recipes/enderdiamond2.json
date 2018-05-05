@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "blockhole:enderdiamondblock"
+        }
+    ],
+    "result": {
+        "item": "blockhole:enderdiamond",
+        "count": 9
+    }
+}
