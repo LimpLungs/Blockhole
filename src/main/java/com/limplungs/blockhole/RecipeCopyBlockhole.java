@@ -7,8 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class RecipeCopyBlockhole implements IRecipe
+public class RecipeCopyBlockhole extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 	@Override
 	public boolean matches(InventoryCrafting inv, World worldIn) 
@@ -57,12 +58,6 @@ public class RecipeCopyBlockhole implements IRecipe
 		
 		return nbtcopy;
 	}
-
-	@Override
-	public int getRecipeSize() 
-	{
-		return 2;
-	}
 	
 	@Override
 	public ItemStack getRecipeOutput() 
@@ -85,6 +80,12 @@ public class RecipeCopyBlockhole implements IRecipe
 		}
 
 		return nnlist;
+	}
+
+	@Override
+	public boolean canFit(int width, int height) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -3,6 +3,8 @@ package com.limplungs.blockhole.blocks;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.limplungs.blockhole.dimensions.TeleporterSingularity;
 import com.limplungs.blockhole.items.ItemTuner;
 import com.limplungs.blockhole.lists.BlockList;
@@ -12,6 +14,7 @@ import com.limplungs.blockhole.tileentities.TileEntitySingularityDimensionWall;
 
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -197,8 +200,8 @@ public class BlockSingularityPortal extends BlockBasic implements ITileEntityPro
 	
 	
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) 
-	{
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced)
+    {
 		super.addInformation(stack, player, tooltip, advanced);
 		
 		if (stack.hasTagCompound())

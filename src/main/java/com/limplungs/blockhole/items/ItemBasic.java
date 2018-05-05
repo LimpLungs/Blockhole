@@ -1,7 +1,6 @@
 package com.limplungs.blockhole.items;
 
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBasic extends Item
 {
@@ -17,7 +16,6 @@ public class ItemBasic extends Item
 		
 		// Item Register
 		this.setRegistryName(itemdata.name);
-		GameRegistry.register(this);
 	}
 	
 	public String getName()

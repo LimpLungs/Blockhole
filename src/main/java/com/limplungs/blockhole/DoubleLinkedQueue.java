@@ -153,10 +153,10 @@ public class DoubleLinkedQueue
 	 */
 	public void writeNBT(NBTTagCompound compound) 
 	{
-		compound.setInteger("size", this.getSize());
-		
 		if (this.headptr != null)
 		{
+			compound.setInteger("size", this.getSize());
+			
 			Node node = this.headptr;
 			
 			for (int i = 0; i < this.getSize(); i++)
@@ -165,6 +165,10 @@ public class DoubleLinkedQueue
 			
 				node = node.next;
 			}
+		}
+		else
+		{
+			compound.setInteger("size", this.getSize());
 		}
 	}
 	

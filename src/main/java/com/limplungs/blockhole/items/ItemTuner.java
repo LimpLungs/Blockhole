@@ -2,11 +2,14 @@ package com.limplungs.blockhole.items;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.limplungs.blockhole.lists.DimensionList;
 import com.limplungs.blockhole.tileentities.TileEntitySingularityDimensionWall;
 import com.limplungs.blockhole.tileentities.TileEntitySingularityPortal;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -162,8 +165,8 @@ public class ItemTuner extends ItemBasic
 	
 	
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) 
-	{
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced)
+    {
 		super.addInformation(stack, player, tooltip, advanced);
 		
 		if (!stack.hasTagCompound())

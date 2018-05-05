@@ -4,13 +4,13 @@
 
 !.gitignore
 
-!/gradle/
+!/gradle/*
 
-!/src/
+!/src/*
 
 !gradlew*
 
-!build.gradle
+!build.GRADLE
 
 !/README.md
 

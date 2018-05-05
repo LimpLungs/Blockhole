@@ -1,7 +1,6 @@
 package com.limplungs.blockhole.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlockBasic extends Block 
 {
@@ -23,7 +22,6 @@ public class BlockBasic extends Block
 		
 		// Block Register
 		this.setRegistryName(blockdata.name);
-		GameRegistry.register(this);
 	}
 	
 	public String getName()
@@ -35,5 +33,4 @@ public class BlockBasic extends Block
 	{
 		return data;
 	}
-
 }

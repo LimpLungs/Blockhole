@@ -1,5 +1,7 @@
 package com.limplungs.blockhole.lists;
 
+import java.util.ArrayList;
+
 import com.limplungs.blockhole.Blockhole;
 import com.limplungs.blockhole.items.ItemBasic;
 import com.limplungs.blockhole.items.ItemData;
@@ -7,9 +9,12 @@ import com.limplungs.blockhole.items.ItemTuner;
 
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 
 public class ItemList 
 {
+	public static ArrayList<Item> ITEMS = new ArrayList<Item>();
+	
 	private static ItemData DATA_ENDER_DIAMOND;
 	public static ItemBasic ENDER_DIAMOND;
 	
@@ -39,10 +44,10 @@ public class ItemList
 	public static void registerItems()
 	{
 		// Items
-		ENDER_DIAMOND = new ItemBasic(DATA_ENDER_DIAMOND);
+		ITEMS.add(ENDER_DIAMOND = new ItemBasic(DATA_ENDER_DIAMOND));
 		
 		// Tools
-		TUNER         = new ItemTuner(DATA_TUNER);
+		ITEMS.add(TUNER         = new ItemTuner(DATA_TUNER));
 	}
 
 	

@@ -1,5 +1,7 @@
 package com.limplungs.blockhole.lists;
 
+import java.util.ArrayList;
+
 import com.limplungs.blockhole.Blockhole;
 import com.limplungs.blockhole.blocks.BlockBasic;
 import com.limplungs.blockhole.blocks.BlockSingularity;
@@ -10,13 +12,18 @@ import com.limplungs.blockhole.blocks.BlockPowderKeg;
 import com.limplungs.blockhole.blocks.BlockSingularityStorage;
 import com.limplungs.blockhole.blocks.ItemBlockBasic;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 
 public class BlockList 
 {
+	public static ArrayList<Block> BLOCKS = new ArrayList<Block>();
+	public static ArrayList<ItemBlock> ITEMBLOCKS = new ArrayList<ItemBlock>();
+	
 	private static BlockData DATA_ENDER_DIAMOND_BLOCK;
 	public static BlockBasic ENDER_DIAMOND_BLOCK;
 	public static ItemBlockBasic ITEMBLOCK_ENDER_DIAMOND_BLOCK;
@@ -71,16 +78,16 @@ public class BlockList
 	public static void registerBlocks()
 	{
 		// Blocks
-		ENDER_DIAMOND_BLOCK = new BlockBasic(DATA_ENDER_DIAMOND_BLOCK);
+		BLOCKS.add(ENDER_DIAMOND_BLOCK = new BlockBasic(DATA_ENDER_DIAMOND_BLOCK));
 		
 		// Singularity
-		SINGULARITY         = new BlockSingularity(DATA_SINGULARITY);
-		STORAGE             = new BlockSingularityStorage(DATA_STORAGE);
-		PORTAL              = new BlockSingularityPortal(DATA_PORTAL);
-		DIMENSION_WALL      = new BlockSingularityDimensionWall(DATA_DIMENSION_WALL);
+		BLOCKS.add(SINGULARITY         = new BlockSingularity(DATA_SINGULARITY));
+		BLOCKS.add(STORAGE             = new BlockSingularityStorage(DATA_STORAGE));
+		BLOCKS.add(PORTAL              = new BlockSingularityPortal(DATA_PORTAL));
+		BLOCKS.add(DIMENSION_WALL      = new BlockSingularityDimensionWall(DATA_DIMENSION_WALL));
 		
 		// Extra
-		POWDERKEG           = new BlockPowderKeg(DATA_POWDERKEG);
+		BLOCKS.add(POWDERKEG           = new BlockPowderKeg(DATA_POWDERKEG));
 	}
 
 	
@@ -92,16 +99,16 @@ public class BlockList
 	public static void registerItemBlocks()
 	{
 		// Blocks
-		ITEMBLOCK_ENDER_DIAMOND_BLOCK = new ItemBlockBasic(ENDER_DIAMOND_BLOCK);
+		ITEMBLOCKS.add(ITEMBLOCK_ENDER_DIAMOND_BLOCK = new ItemBlockBasic(ENDER_DIAMOND_BLOCK));
 		
 		// Singularity
-		ITEMBLOCK_SINGULARITY         = new ItemBlockBasic(SINGULARITY);
-		ITEMBLOCK_STORAGE             = new ItemBlockBasic(STORAGE);
-		ITEMBLOCK_PORTAL              = new ItemBlockBasic(PORTAL);
-		ITEMBLOCK_DIMENSION_WALL      = new ItemBlockBasic(DIMENSION_WALL);
+		ITEMBLOCKS.add(ITEMBLOCK_SINGULARITY         = new ItemBlockBasic(SINGULARITY));
+		ITEMBLOCKS.add(ITEMBLOCK_STORAGE             = new ItemBlockBasic(STORAGE));
+		ITEMBLOCKS.add(ITEMBLOCK_PORTAL              = new ItemBlockBasic(PORTAL));
+		ITEMBLOCKS.add(ITEMBLOCK_DIMENSION_WALL      = new ItemBlockBasic(DIMENSION_WALL));
 		
 		// Extra
-		ITEMBLOCK_POWDERKEG           = new ItemBlockBasic(POWDERKEG);
+		ITEMBLOCKS.add(ITEMBLOCK_POWDERKEG           = new ItemBlockBasic(POWDERKEG));
 	}
 
 	

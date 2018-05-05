@@ -2,6 +2,8 @@ package com.limplungs.blockhole.blocks;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.limplungs.blockhole.dimensions.TeleporterSingularity;
 import com.limplungs.blockhole.tileentities.TileEntitySingularityDimensionWall;
 
@@ -9,6 +11,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -200,8 +203,8 @@ public class BlockSingularityDimensionWall extends BlockBasic
 	
 	
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advanced) 
-	{
+    public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced)
+    {
 		tooltip.add("If you somehow got one of these blocks,\nDO NOT PLACE IT!\n");
 		tooltip.add("If accidentally placed, remove it with\n/setblock x y z minecraft:air");
 	}

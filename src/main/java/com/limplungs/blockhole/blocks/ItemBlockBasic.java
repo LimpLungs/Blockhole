@@ -1,7 +1,6 @@
 package com.limplungs.blockhole.blocks;
 
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBlockBasic extends ItemBlock
 {
@@ -17,13 +16,10 @@ public class ItemBlockBasic extends ItemBlock
 		this.setCreativeTab(block.getData().creativeTab);
 		this.setRegistryName(block.getName());
 		
-		GameRegistry.register(this);
 	}
 
 	public String getName() 
 	{
 		return name;
 	}
-	
-	
 }
