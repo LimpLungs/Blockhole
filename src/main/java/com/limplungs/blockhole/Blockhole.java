@@ -1,5 +1,6 @@
 package com.limplungs.blockhole;
 
+import com.limplungs.blockhole.blocks.BlockPowderKeg;
 import com.limplungs.blockhole.dimensions.WorldProviderSingularity;
 import com.limplungs.blockhole.entities.EntityPowderKeg;
 import com.limplungs.blockhole.lists.BlockList;
@@ -10,12 +11,14 @@ import com.limplungs.blockhole.render.RenderPowderKeg;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -59,15 +62,28 @@ public class Blockhole
 		
 		// Registers Blocks AFTER they are populated.
     	MinecraftForge.EVENT_BUS.register(register_handler);
+		
+    	// Calling in pre-init to show render during lighting of Powder Keg. 5/5/2018 LimpLungs
+    	if(event.getSide() == Side.CLIENT)
+		{
+    		RenderingRegistry.registerEntityRenderingHandler(EntityPowderKeg.class, new IRenderFactory<EntityPowderKeg>() 
+    		{
+    			@Override
+    			public Render<EntityPowderKeg> createRenderFor(RenderManager manager) 
+    			{
+    				return new RenderPowderKeg(manager);
+    			}
+    		});
+		}
 	}
 
     
     
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		if(event.getSide() == Side.CLIENT)
+		// Renders for client
+    	if(event.getSide() == Side.CLIENT)
 		{
 			// Render Blocks & Items
 			RenderItem renderer = Minecraft.getMinecraft().getRenderItem();
@@ -75,13 +91,9 @@ public class Blockhole
 			BlockList.renderBlocks(renderer);
 			ItemList.renderItems(renderer);
 			
-			
 			// Render Powder Keg
 			ResourceLocation rlpowderkeg = new ResourceLocation(MODID, "powderkeg");
 			EntityRegistry.registerModEntity(rlpowderkeg, EntityPowderKeg.class, "entityPowderKeg", 1, Blockhole.MODID, 100, 1, true);
-			
-			RenderManager factory = Minecraft.getMinecraft().getRenderManager();
-			RenderingRegistry.registerEntityRenderingHandler(EntityPowderKeg.class, new RenderPowderKeg(factory));
 		}
 	}
 
