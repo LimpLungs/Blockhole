@@ -4,11 +4,7 @@
 
 !.gitignore
 
-!/gradle/*
-
 !/src/*
-
-!gradlew*
 
 !build.gradle
 
