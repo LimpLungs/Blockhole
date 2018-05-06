@@ -7,6 +7,9 @@ import javax.annotation.Nullable;
 import com.limplungs.blockhole.dimensions.TeleporterSingularity;
 import com.limplungs.blockhole.tileentities.TileEntitySingularityDimensionWall;
 
+import com.limplungs.limpcore.blocks.BlockBasic;
+import com.limplungs.limpcore.blocks.BlockData;
+
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;

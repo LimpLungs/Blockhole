@@ -3,9 +3,10 @@ package com.limplungs.blockhole.lists;
 import java.util.ArrayList;
 
 import com.limplungs.blockhole.Blockhole;
-import com.limplungs.blockhole.items.ItemBasic;
-import com.limplungs.blockhole.items.ItemData;
 import com.limplungs.blockhole.items.ItemTuner;
+
+import com.limplungs.limpcore.items.ItemBasic;
+import com.limplungs.limpcore.items.ItemData;
 
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -29,10 +30,10 @@ public class ItemList
 	public static void registerItemData()
 	{
 		// Items
-		DATA_ENDER_DIAMOND = new ItemData(64, Blockhole.tabBlockhole, "enderdiamond");
+		DATA_ENDER_DIAMOND = new ItemData("enderdiamond", Blockhole.MODID, 64, Blockhole.tabBlockhole);
 		
 		// Tools
-		DATA_TUNER         = new ItemData(64, Blockhole.tabBlockhole, "tuner");
+		DATA_TUNER         = new ItemData("tuner", Blockhole.MODID, 64, Blockhole.tabBlockhole);
 	}
 	
 	

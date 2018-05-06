@@ -2,6 +2,9 @@ package com.limplungs.blockhole.blocks;
 
 import com.limplungs.blockhole.tileentities.TileEntitySingularityStorage;
 
+import com.limplungs.limpcore.blocks.BlockBasic;
+import com.limplungs.limpcore.blocks.BlockData;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;

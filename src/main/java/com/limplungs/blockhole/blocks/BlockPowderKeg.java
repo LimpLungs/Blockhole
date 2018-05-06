@@ -2,6 +2,9 @@ package com.limplungs.blockhole.blocks;
 
 import com.limplungs.blockhole.entities.EntityPowderKeg;
 
+import com.limplungs.limpcore.blocks.BlockBasic;
+import com.limplungs.limpcore.blocks.BlockData;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;

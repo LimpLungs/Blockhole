@@ -8,6 +8,9 @@ import com.limplungs.blockhole.lists.DimensionList;
 import com.limplungs.blockhole.tileentities.TileEntitySingularityDimensionWall;
 import com.limplungs.blockhole.tileentities.TileEntitySingularityPortal;
 
+import com.limplungs.limpcore.items.ItemBasic;
+import com.limplungs.limpcore.items.ItemData;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;

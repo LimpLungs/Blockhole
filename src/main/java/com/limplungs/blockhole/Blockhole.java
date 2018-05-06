@@ -1,6 +1,5 @@
 package com.limplungs.blockhole;
 
-import com.limplungs.blockhole.blocks.BlockPowderKeg;
 import com.limplungs.blockhole.dimensions.WorldProviderSingularity;
 import com.limplungs.blockhole.entities.EntityPowderKeg;
 import com.limplungs.blockhole.lists.BlockList;
@@ -28,11 +27,11 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Blockhole.MODID, version = Blockhole.VERSION)
+@Mod(modid = Blockhole.MODID, version = Blockhole.VERSION, dependencies = "required-after:limpcore@[3.0.1]")
 public class Blockhole
 {
     public static final String MODID = "blockhole";
-    public static final String VERSION = "1.0alpha14";
+    public static final String VERSION = "1.0.15"; // #-> version   0-2-> alpha, beta, release    #-> build number
     
     public static BlockholeBasicEvents event_handler = new BlockholeBasicEvents();
     public static BlockholeRegisterEvents register_handler = new BlockholeRegisterEvents();

@@ -1,5 +1,8 @@
 package com.limplungs.blockhole.blocks;
 
+import com.limplungs.limpcore.blocks.BlockBasic;
+import com.limplungs.limpcore.blocks.BlockData;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;

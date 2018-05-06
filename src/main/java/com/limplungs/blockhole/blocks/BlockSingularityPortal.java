@@ -12,6 +12,9 @@ import com.limplungs.blockhole.lists.DimensionList;
 import com.limplungs.blockhole.tileentities.TileEntitySingularityPortal;
 import com.limplungs.blockhole.tileentities.TileEntitySingularityDimensionWall;
 
+import com.limplungs.limpcore.blocks.BlockBasic;
+import com.limplungs.limpcore.blocks.BlockData;
+
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;

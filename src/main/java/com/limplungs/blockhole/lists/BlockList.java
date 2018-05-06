@@ -3,14 +3,15 @@ package com.limplungs.blockhole.lists;
 import java.util.ArrayList;
 
 import com.limplungs.blockhole.Blockhole;
-import com.limplungs.blockhole.blocks.BlockBasic;
 import com.limplungs.blockhole.blocks.BlockSingularity;
 import com.limplungs.blockhole.blocks.BlockSingularityPortal;
 import com.limplungs.blockhole.blocks.BlockSingularityDimensionWall;
-import com.limplungs.blockhole.blocks.BlockData;
 import com.limplungs.blockhole.blocks.BlockPowderKeg;
 import com.limplungs.blockhole.blocks.BlockSingularityStorage;
-import com.limplungs.blockhole.blocks.ItemBlockBasic;
+
+import com.limplungs.limpcore.blocks.ItemBlockBasic;
+import com.limplungs.limpcore.blocks.BlockBasic;
+import com.limplungs.limpcore.blocks.BlockData;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -57,16 +58,16 @@ public class BlockList
 	public static void registerBlockData()
 	{
 		// Blocks
-		DATA_ENDER_DIAMOND_BLOCK = new BlockData(7F, 7F, "pickaxe", 3, "enderdiamondblock", Material.IRON, Blockhole.tabBlockhole);
+		DATA_ENDER_DIAMOND_BLOCK = new BlockData("enderdiamondblock", Blockhole.MODID, 7F, 7F, "pickaxe", 3, Material.IRON, Blockhole.tabBlockhole);
 		
 		// Singularity
-		DATA_SINGULARITY         = new BlockData(10F, 10F, "pickaxe", 3, "singularity", Material.GLASS, Blockhole.tabBlockhole);
-		DATA_STORAGE             = new BlockData(10F, 10F, "pickaxe", 3, "storage", Material.GLASS, Blockhole.tabBlockhole);
-		DATA_PORTAL              = new BlockData(10F, 10F, "pickaxe", 3, "portal", Material.GLASS, Blockhole.tabBlockhole);
-		DATA_DIMENSION_WALL      = new BlockData(100F, 100F, "pickaxe", 100, "dimensionwall", Material.GLASS, Blockhole.tabBlockhole);
+		DATA_SINGULARITY         = new BlockData("singularity", Blockhole.MODID, 10F, 10F, "pickaxe", 3, Material.GLASS, Blockhole.tabBlockhole);
+		DATA_STORAGE             = new BlockData("storage", Blockhole.MODID, 10F, 10F, "pickaxe", 3, Material.GLASS, Blockhole.tabBlockhole);
+		DATA_PORTAL              = new BlockData("portal", Blockhole.MODID, 10F, 10F, "pickaxe", 3, Material.GLASS, Blockhole.tabBlockhole);
+		DATA_DIMENSION_WALL      = new BlockData("dimensionwall", Blockhole.MODID, 100F, 100F, "pickaxe", 100, Material.GLASS, Blockhole.tabBlockhole);
 		
 		// Extra
-		DATA_POWDERKEG           = new BlockData(1F, 1F, "pickaxe", 0, "powderkeg", Material.CLOTH, Blockhole.tabBlockhole);
+		DATA_POWDERKEG           = new BlockData("powderkeg", Blockhole.MODID, 1F, 1F, "pickaxe", 0, Material.CLOTH, Blockhole.tabBlockhole);
 	}
 	
 	
